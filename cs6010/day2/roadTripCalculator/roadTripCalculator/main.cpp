@@ -27,3 +27,4 @@ int main(int argc, const char * argv[]) {
     std::cout << "\n The total cost of yout road trip in dollars is: " << totalCostOfTrip << std::endl;
     return 0;
 }
+ 
