@@ -22,7 +22,7 @@ int main(int argc, const char * argv[]) {
     std::cin >> costOfGasInDollarsPerGallon;
     //now make calculations based on the information entered
     float numberOfGallonsUsed = drivingDistanceInMiles / mpgEfficiencyOfVehicle;
-    float totalCostOfTrip = numberOfGallonsUsed / costOfGasInDollarsPerGallon;
+    float totalCostOfTrip = numberOfGallonsUsed * costOfGasInDollarsPerGallon;
     //now we will print out the toal cost of the trip
     std::cout << "\n The total cost of yout road trip in dollars is: " << totalCostOfTrip << std::endl;
     return 0;
