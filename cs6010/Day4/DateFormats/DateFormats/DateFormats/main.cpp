@@ -23,7 +23,7 @@ int main(int argc, const char * argv[]) {
     int intYear;
     
     
-    std::cout << "Please eneter a US numeric date in the format (mm/dd/yyyy): \n";
+    std::cout << "Please enter a US numeric date in the format (mm/dd/yyyy): \n";
     std::cin >> usNumericDate;
     
     //Find the location of the slashes
