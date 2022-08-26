@@ -125,7 +125,7 @@ int main(int argc, const char * argv[]) {
     
     // is a number prime or not
     int userEnteredInt = 0;
-    bool isIntPrime = true;
+    bool isIntPrime = false;
     
     std::cout << "Please enter an integer: ";
     std::cin >>userEnteredInt;
