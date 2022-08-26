@@ -9,12 +9,12 @@
 #include <cmath>
 #include <ctime>
 
-
+//this function calculates the hypotenuse
 float hypotenuseCalculator (float sideOne, float sideTwo){
     float hypotenuse = sqrt((sideOne * sideOne)+ (sideTwo * sideTwo));
     return hypotenuse;
 }
-
+//this function checks if something is capitalized
 bool isCapitalized (std::string string){
     if (isupper(string[0]) ) {
         return true;
@@ -22,7 +22,7 @@ bool isCapitalized (std::string string){
         return false;
     }
 }
-
+//this function converts a bool to a string
 std::string boolToString(bool isCapitalized){
     std::string trueString = "true";
     std::string falseString = "false";
@@ -33,7 +33,18 @@ std::string boolToString(bool isCapitalized){
         return falseString;
     }
 }
-
+//this function checks if an entered number is a prime number
+bool isPrime(int userNumber){
+    bool isPrimeNumber = true;
+    if (userNumber == 0 || userNumber == 1) {
+        isPrimeNumber = false;
+    }
+    for (int i = 2; i <= userNumber/2; i++) {
+        if(userNumber % i == 0)
+            isPrimeNumber = false;
+    }
+    return isPrimeNumber;
+}
 
 
 int main(int argc, const char * argv[]) {
@@ -111,6 +122,20 @@ int main(int argc, const char * argv[]) {
     
     
     std::cout << "Your first letter is a capital: " << trueOrFalseString << std::endl;
+    
+    // is a number prime or not
+    int userEnteredInt = 0;
+    bool isIntPrime = true;
+    
+    std::cout << "Please enter an integer: ";
+    std::cin >>userEnteredInt;
+    
+    isIntPrime = isPrime(userEnteredInt);
+    if (isIntPrime == true)
+        std::cout << "This number is a prime number!" << std::endl;
+    else
+        std::cout << "This number is NOT a prime number" << std::endl;
+    
     
     return 0;
 }
