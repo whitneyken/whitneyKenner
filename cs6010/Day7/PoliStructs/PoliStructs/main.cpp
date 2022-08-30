@@ -52,5 +52,11 @@ int main(int argc, const char * argv[]) {
     if (contains(IsFederalAndCplusers, "Nick") == true) {
         std::cout << "Failed test case 4";
     }
-    
+    if (contains(IsFederalAndCplusers, "Chase") != true) {
+        std::cout << "Failed test case 5";
+    }
+    if (contains(javacansPoliticians, "Amelia") != true) {
+        std::cout << "Failed test case 6";
+    }
+
 }
