@@ -20,13 +20,13 @@ std::vector<Card> MakeDeckOfCards(){
             c.suit = suit;
             
             if (cardNum == 11) {
-                c.cardStringValue = "J";
+                c.cardStringValue = "Jack";
             }else if (cardNum == 12){
-                c.cardStringValue = "Q";
+                c.cardStringValue = "Queen";
             }else if (cardNum == 13){
-                c.cardStringValue = "K";
+                c.cardStringValue = "King";
             }else if (cardNum == 1){
-                c.cardStringValue = "A";
+                c.cardStringValue = "Ace";
             }else{
                 c.cardStringValue = std::to_string(cardNum);
             }

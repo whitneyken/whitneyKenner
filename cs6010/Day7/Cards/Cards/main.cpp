@@ -11,11 +11,13 @@
 
 
 int main(int argc, const char * argv[]) {
-    //declare variables
+    //declare variable
     std::vector<Card> createdCardDeck;
     
+    //Make deck
     createdCardDeck = MakeDeckOfCards();
 
+    //Print deck
     printDeckOfCards(createdCardDeck);
     
 
