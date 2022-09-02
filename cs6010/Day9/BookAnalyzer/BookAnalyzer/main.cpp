@@ -18,9 +18,13 @@ int main(int argc, const char * argv[]) {
     std::vector<std::string> allTheWords;
     std::vector<std::string> titleName;
     std::vector<std::string> authorName;
+    int numWords = 0;
+    int numChars = 0;
+    std::string shortestWord;
+    std::string longestWord;
     
         
-   //These are my sample files
+   //These are my sample book files
     myFile.open("Whitney.txt", std::ios::out);
     if (myFile.is_open()) {
         myFile << "Hello world! This is my first line of code\n";
@@ -38,7 +42,7 @@ int main(int argc, const char * argv[]) {
     myFile.open("Spooky.txt", std::ios::out);
     if (myFile.is_open()) {
         myFile << "What a beautiful day in the neighborhood \n";
-        myFile << "I can't wait to repot my plants. \n";
+        //myFile << "I can't wait to repot my plants. \n";
         myFile.flush();
         myFile.close();
     }
@@ -50,7 +54,7 @@ int main(int argc, const char * argv[]) {
         myFile.close();
     }
     /* first the user enters in the name of a text file and then the word they want to find*/
-    std::cout << "Please enter the name of a file containing one of our avaiable books: \n";
+    std::cout << "Please enter the name of a file containing one of our avaiable book (including '.txt' at the end): \n";
     std::cin >> chosenBook;
     
     myFile.open(chosenBook, std::ios::in);
@@ -66,16 +70,35 @@ int main(int argc, const char * argv[]) {
     while (myFile >> singleWord) {
         allTheWords.push_back(singleWord);
     }
+    
+    //all of our functions 
     //printStringVector(allTheWords);
 
     titleName = (FindTitleVector(allTheWords));
     
     printStringVector(titleName);
     
+    std::cout << std::endl;
+    
     authorName = (FindAuthorVector(allTheWords));
     
     printStringVector(authorName);
     
+    std::cout << std::endl;
     
+    numWords = CountWords(allTheWords);
     
+    std:: cout << "The number of words is: " << numWords << "\n";
+    
+    numChars = CountChars(allTheWords);
+    
+    std:: cout << "The number of characters is: " << numChars << "\n";
+    
+    shortestWord = FindShortestWord(allTheWords);
+    
+    std::cout << "The shortest word is: " << shortestWord << " \n";
+    
+    longestWord = FindLongestWord(allTheWords);
+    
+    std::cout << "The longest word is: " << longestWord << " \n";
 }

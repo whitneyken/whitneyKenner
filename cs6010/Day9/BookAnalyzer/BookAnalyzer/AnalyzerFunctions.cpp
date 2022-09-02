@@ -38,6 +38,7 @@ std::vector<std::string> FindTitleVector (const std::vector<std::string>& input)
     }
     
 }
+//This function finds the index of the title
 int FindTitleIndex(const std::vector<std::string>& input){
     size_t indexOfTitle = -1;
     for (int i = 0; i <input.size(); i++) {
@@ -47,6 +48,7 @@ int FindTitleIndex(const std::vector<std::string>& input){
     }
     return indexOfTitle;
 }
+//This function finds the index of the author
 int FindAuthorIndex(const std::vector<std::string>& input){
     size_t indexOfAuthor = -1;
     for (int j = 0; j < input.size(); j++) {
@@ -56,6 +58,7 @@ int FindAuthorIndex(const std::vector<std::string>& input){
     }
     return indexOfAuthor;
 }
+//This function finds the index of the release date
 int FindReleaseDateIndex(const std::vector<std::string>& input){
     size_t indexOfReleaseDate = -1;
     for (int k = 0; k < input.size(); k++) {
@@ -65,6 +68,8 @@ int FindReleaseDateIndex(const std::vector<std::string>& input){
     }
     return indexOfReleaseDate;
 }
+
+//This function finds the author
 std::vector<std::string> FindAuthorVector (const std::vector<std::string>& input){
     size_t indexOfAuthor = -1;
     size_t indexOfReleaseDate = -1;
@@ -88,4 +93,42 @@ std::vector<std::string> FindAuthorVector (const std::vector<std::string>& input
         return authorName;
     }
     
+}
+//This function counts the words
+int CountWords (const std::vector<std::string>& input){
+    int wordCounter = 0;
+    for (std::string elem: input) {
+        wordCounter++;
+    }
+    return wordCounter;
+}
+//This function counts the characters
+int CountChars(const std::vector<std::string>& input){
+    int charCounter = 0;
+    for (int i = 0; i < input.size(); i++) {
+        for (int j = 0; j < input[i].size(); j++) {
+            charCounter++;
+        }
+    }
+    return charCounter;
+}
+//This function will find the shortest word in the text
+std::string FindShortestWord (const std::vector<std::string>& input){
+    std::string shortestWord = input[0];
+    for (std::string elem: input) {
+        if (shortestWord.size() > elem.size()) {
+            shortestWord = elem;
+        }
+    }
+    return shortestWord;
+}
+//This function will find the longest word in the text
+std::string FindLongestWord (const std::vector<std::string>& input){
+    std::string longestWord = input[0];
+    for (std::string elem: input) {
+        if (longestWord.size() < elem.size()) {
+            longestWord = elem;
+        }
+    }
+    return longestWord;
 }
