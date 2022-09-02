@@ -40,20 +40,6 @@ int main(int argc, const char * argv[]) {
         myFile.flush();
         myFile.close();
     }
-    myFile.open("Spooky.txt", std::ios::out);
-    if (myFile.is_open()) {
-        myFile << "What a beautiful day in the neighborhood \n";
-        myFile << "I can't wait to repot my plants. \n";
-        myFile.flush();
-        myFile.close();
-    }
-    myFile.open("Halloween.txt", std::ios::out);
-    if (myFile.is_open()) {
-        myFile << "Some important things I have to say\n";
-        myFile << "It is almost butternut squash season, the best time of yeat! \n";
-        myFile.flush();
-        myFile.close();
-    }
     
     /* first the user enters in the name of a text file and then the word they want to find*/
     std::cout << "Please enter the name of a file containing one of our avaiable book (including '.txt' at the end): \n";
@@ -69,44 +55,31 @@ int main(int argc, const char * argv[]) {
     std::cout << "Please enter a word to search for in the book: \n";
     std::cin >> wordToFind;
     
+    
     //function to get all the words
     while (myFile >> singleWord) {
         allTheWords.push_back(singleWord);
     }
     
     //all of our functions
-    
-    //printStringVector(allTheWords);
 
     titleName = (FindTitleVector(allTheWords));
-    
+   
+    std::cout << "Statistics for ";
     printStringVector(titleName);
-    
-    std::cout << std::endl;
-    
+    std::cout << " by ";
     authorName = (FindAuthorVector(allTheWords));
-    
     printStringVector(authorName);
-    
     std::cout << std::endl;
-    
     numWords = CountWords(allTheWords);
-    
-    std:: cout << "The number of words is: " << numWords << "\n";
-    
+    std:: cout << "Number of words: " << numWords << "\n";
     numChars = CountChars(allTheWords);
-    
-    std:: cout << "The number of characters is: " << numChars << "\n";
-    
+    std:: cout << "Number of characters: " << numChars << "\n";
     shortestWord = FindShortestWord(allTheWords);
-    
-    std::cout << "The shortest word is: " << shortestWord << " \n";
-    
     longestWord = FindLongestWord(allTheWords);
-    
-    std::cout << "The longest word is: " << longestWord << " \n";
-    
+    std::cout << "The shortest word is: " << "\"" << shortestWord << "\"" << ", and the longest word is: " << "\"" << longestWord << "\"" << "\n";
     keyWordInfo = FindKeyWords(allTheWords, wordToFind);
+    PrintKeyWordDetails(keyWordInfo, wordToFind, numChars);
     
     
     

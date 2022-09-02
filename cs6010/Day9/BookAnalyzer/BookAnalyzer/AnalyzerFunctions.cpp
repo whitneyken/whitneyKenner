@@ -128,20 +128,25 @@ std::string FindLongestWord (const std::vector<std::string>& input){
 std::vector<keyWord> FindKeyWords (const std::vector<std::string>& input, const std::string& word){
     std::vector<keyWord> keyWords;
     keyWord oneKeyWord;
+    int charCounter = 1;
     for (int i = 0; i < input.size(); i++) {
         if (input[i] == word) {
-            oneKeyWord.indexLocation = i;
-            oneKeyWord.threeWords = (input[i-1] + input[i] + input[i+1]);
+            oneKeyWord.charLocation = charCounter;
+            oneKeyWord.threeWords = (input[i-1] + " " + input[i] + " " + input[i+1]);
             keyWords.push_back(oneKeyWord);
+        }
+        for (int j = 0; j < input[i].size(); j++) {
+            charCounter++;
         }
     }
     return keyWords;
 }
 /* This function is to calculate and print the details of the word we searched for*/
-void PrintKeyWordDetails (const std::vector<keyWord>& input, const std::string& word, int numWords){
-    std::cout << "The word " << "'" << word << "'" << " appears " << (input.size()-1) << " times \n";
+void PrintKeyWordDetails (const std::vector<keyWord>& input, const std::string& word, int numChars){
+    keyWord k;
+    std::cout << "The word " << "\"" << word << "\"" << " appears " << (input.size()) << " times \n";
     for (int i = 0; i < input.size(); i++) {
-        std::cout << "at " << (((input.indexLocation[i])/numWords)*100) << "%: " << input.threeWords[i] << "\n";
+        std::cout << "at " << (((input[i].charLocation)*100)/numChars) << "%: " << "\"" <<  input[i].threeWords << "\"" << "\n";
     }
 }
 

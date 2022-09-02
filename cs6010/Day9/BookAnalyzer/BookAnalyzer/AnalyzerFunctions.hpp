@@ -16,7 +16,7 @@
 #include <iostream>
 
 struct keyWord {
-    int indexLocation;
+    int charLocation;
     std::string threeWords;
 };
 
