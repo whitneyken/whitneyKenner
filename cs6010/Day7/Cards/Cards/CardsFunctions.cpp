@@ -12,8 +12,8 @@
 
 //Make card deck making function
 std::vector<Card> MakeDeckOfCards(){
-    std::vector<Card> fullDeckOfCards;
-    for (int cardNum = 1; cardNum <= 14; cardNum++) {
+    std::vector<Card> deck;
+    for (int cardNum = 1; cardNum <= 13; cardNum++) {
         for (int suit = 0; suit <= 3; suit++) {
             Card c;
             c.cardValue = cardNum;
@@ -25,15 +25,15 @@ std::vector<Card> MakeDeckOfCards(){
                 c.cardStringValue = "Q";
             }else if (cardNum == 13){
                 c.cardStringValue = "K";
-            }else if (cardNum == 14){
+            }else if (cardNum == 1){
                 c.cardStringValue = "A";
             }else{
                 c.cardStringValue = std::to_string(cardNum);
             }
-            fullDeckOfCards.push_back(c);
+            deck.push_back(c);
         }
     }
-    return fullDeckOfCards;
+    return deck;
 }
 
 //This function prints the deck of cards
@@ -42,6 +42,16 @@ void printDeckOfCards(std::vector<Card> deckToPrint){
     std::vector<std::string> suits = {"Hearts","Spades","Clubs","Diamonds"};
     
     for (int num = 0; num < deckToPrint.size(); num++) {
-        std::cout << deckToPrint[num].cardStringValue << " of " << suits[deckToPrint[num].suit] << std::endl;
+        Card currentCard = deckToPrint[num];
+        
+        std::cout << currentCard.cardStringValue << " of " << suits[currentCard.suit] << std::endl;
     }
 }
+
+
+
+
+// [ {1, "A", "Heart"}  , {2, "2", "Heart"}, {3, "3", "Heart"} ]
+// Card card = deck[2]
+// cout << "the card number is" << card.cardNum << endl;
+
