@@ -22,11 +22,7 @@ std::vector<std::string> FindTitleVector (const std::vector<std::string>& input)
     std::vector<std::string> titleName;
     indexOfTitle = FindTitleIndex(input);
     indexOfAuthor = FindAuthorIndex(input);
-    if ((indexOfAuthor - indexOfTitle) > 100) {
-        stringTitleName = "Unknown title";
-        titleName.push_back(stringTitleName);
-        return titleName;
-    }else if (indexOfTitle == -1 || indexOfAuthor == -1) {
+    if (indexOfTitle == -1 || indexOfAuthor == -1 || (indexOfAuthor - indexOfTitle) > 100) {
         stringTitleName = "Unknown title";
         titleName.push_back(stringTitleName);
         return titleName;
@@ -78,11 +74,7 @@ std::vector<std::string> FindAuthorVector (const std::vector<std::string>& input
     std::vector<std::string> authorName;
     indexOfAuthor = FindAuthorIndex(input);
     indexOfReleaseDate = FindReleaseDateIndex(input);
-    if ((indexOfReleaseDate - indexOfAuthor) > 100) {
-        stringAuthorName = "Unknown author";
-        authorName.push_back(stringAuthorName);
-        return authorName;
-    }else if (indexOfReleaseDate == -1 || indexOfAuthor == -1) {
+    if (indexOfReleaseDate == -1 || indexOfAuthor == -1 || (indexOfReleaseDate - indexOfAuthor) > 100) {
         stringAuthorName = "Unknown author";
         authorName.push_back(stringAuthorName);
         return authorName;
@@ -132,3 +124,24 @@ std::string FindLongestWord (const std::vector<std::string>& input){
     }
     return longestWord;
 }
+/* this function will find the keyword entered by the user as well as it's index location within the vector*/
+std::vector<keyWord> FindKeyWords (const std::vector<std::string>& input, const std::string& word){
+    std::vector<keyWord> keyWords;
+    keyWord oneKeyWord;
+    for (int i = 0; i < input.size(); i++) {
+        if (input[i] == word) {
+            oneKeyWord.indexLocation = i;
+            oneKeyWord.threeWords = (input[i-1] + input[i] + input[i+1]);
+            keyWords.push_back(oneKeyWord);
+        }
+    }
+    return keyWords;
+}
+/* This function is to calculate and print the details of the word we searched for*/
+void PrintKeyWordDetails (const std::vector<keyWord>& input, const std::string& word, int numWords){
+    std::cout << "The word " << "'" << word << "'" << " appears " << (input.size()-1) << " times \n";
+    for (int i = 0; i < input.size(); i++) {
+        std::cout << "at " << (((input.indexLocation[i])/numWords)*100) << "%: " << input.threeWords[i] << "\n";
+    }
+}
+

@@ -22,6 +22,7 @@ int main(int argc, const char * argv[]) {
     int numChars = 0;
     std::string shortestWord;
     std::string longestWord;
+    std::vector<keyWord> keyWordInfo;
     
         
    //These are my sample book files
@@ -42,7 +43,7 @@ int main(int argc, const char * argv[]) {
     myFile.open("Spooky.txt", std::ios::out);
     if (myFile.is_open()) {
         myFile << "What a beautiful day in the neighborhood \n";
-        //myFile << "I can't wait to repot my plants. \n";
+        myFile << "I can't wait to repot my plants. \n";
         myFile.flush();
         myFile.close();
     }
@@ -53,6 +54,7 @@ int main(int argc, const char * argv[]) {
         myFile.flush();
         myFile.close();
     }
+    
     /* first the user enters in the name of a text file and then the word they want to find*/
     std::cout << "Please enter the name of a file containing one of our avaiable book (including '.txt' at the end): \n";
     std::cin >> chosenBook;
@@ -66,12 +68,14 @@ int main(int argc, const char * argv[]) {
     }
     std::cout << "Please enter a word to search for in the book: \n";
     std::cin >> wordToFind;
+    
     //function to get all the words
     while (myFile >> singleWord) {
         allTheWords.push_back(singleWord);
     }
     
-    //all of our functions 
+    //all of our functions
+    
     //printStringVector(allTheWords);
 
     titleName = (FindTitleVector(allTheWords));
@@ -101,4 +105,9 @@ int main(int argc, const char * argv[]) {
     longestWord = FindLongestWord(allTheWords);
     
     std::cout << "The longest word is: " << longestWord << " \n";
+    
+    keyWordInfo = FindKeyWords(allTheWords, wordToFind);
+    
+    
+    
 }
