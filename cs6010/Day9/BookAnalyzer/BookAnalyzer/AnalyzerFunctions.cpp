@@ -58,7 +58,7 @@ int FindAuthorIndex(const std::vector<std::string>& input){
 int FindReleaseDateIndex(const std::vector<std::string>& input){
     size_t indexOfReleaseDate = -1;
     for (int k = 0; k < input.size(); k++) {
-        if (input[k] == "Release" && input[k + 1] == "date:") {
+        if (input[k] == "Release" && input[k + 1] == "Date:") {
             indexOfReleaseDate = k;
         }
     }
@@ -131,8 +131,16 @@ std::vector<keyWord> FindKeyWords (const std::vector<std::string>& input, const 
     int charCounter = 1;
     for (int i = 0; i < input.size(); i++) {
         if (input[i] == word) {
+            if (i == 0) {
+                oneKeyWord.charLocation = charCounter;
+                oneKeyWord.threeWords = ( input[i] + " " + input[i+1]);
+            }else if (i == input.size()-1){
             oneKeyWord.charLocation = charCounter;
-            oneKeyWord.threeWords = (input[i-1] + " " + input[i] + " " + input[i+1]);
+            oneKeyWord.threeWords = (input[i-1] + " " + input[i]);
+            }else{
+                oneKeyWord.charLocation = charCounter;
+                oneKeyWord.threeWords = (input[i-1] + " " + input[i] + " " + input[i +1]);
+            }
             keyWords.push_back(oneKeyWord);
         }
         for (int j = 0; j < input[i].size(); j++) {
