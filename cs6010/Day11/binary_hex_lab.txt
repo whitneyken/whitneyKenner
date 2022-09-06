@@ -1,0 +1,25 @@
+Convert the following decimal to binary and hexadecimal:
+12	1100		C
+63	00111111	3F
+100	01100100	64
+127	01111111	7F
+254	11111110	FE
+
+Binary to decimal and hexadecimal:
+100		4	4
+10001		17	11
+100010		34	22
+11000000	192	C0
+11111111	255	FF
+
+Hexadecimal to decimal and binary:
+A	10	1010
+C0	192	11000000
+FF	255	11111111
+BEEF	48,879	1011111011101111
+F00D	61,453	1111000000001101
+
+
+The biggest number you can write using 8 binary digits is 11111111 which is 256 in decimal or FF in hexadecimal. This is significant because it is the highest number you can make with 1 byte (8 bits).
+
+You need 5 fingers to count to 31 on your hands
