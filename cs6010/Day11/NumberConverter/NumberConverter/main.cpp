@@ -16,6 +16,7 @@ int main(int argc, const char * argv[]) {
     int numericValue;
     
     
+    runTests();
     //recieve the string of digits and the base from the user
     std::cout << "Please enter your string of digits: ";
     std::cin >> stringOfDigits;

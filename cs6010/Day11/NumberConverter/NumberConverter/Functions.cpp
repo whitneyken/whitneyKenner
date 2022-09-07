@@ -10,6 +10,11 @@
 /* this function will convert the users string into an int. Different paths will be based on the base the user input*/
 int StringToInt(std::string input, int base){
     int numericValue = 0;
+    bool isNegative = false;
+    if (input[0] == '-') {
+        input = input.substr(1, input.length());
+        isNegative = true;
+    }
     if (base == 10) {
         numericValue = std::stoi(input);
     }else if (base == 16){
@@ -30,6 +35,9 @@ int StringToInt(std::string input, int base){
             numericValue += value * pow(16, powerCounter10);
             powerCounter10 --;
         }
+        if (isNegative) {
+            numericValue *= -1;
+        }
         return numericValue;
     }else{//this is for base size 2
         int powerCounter2 = input.size()-1;
@@ -38,6 +46,9 @@ int StringToInt(std::string input, int base){
             numericValue += c2 * pow(2, powerCounter2);
             powerCounter2 --;
         }
+    }
+    if (isNegative) {
+        numericValue *= -1;
     }
     return numericValue;
 }
@@ -50,6 +61,7 @@ std::string IntToDecimalString (int input){
 std::string IntToBinaryString (int input){
     std::string backwardString;
     std::string forwardString;
+    
     while (input > 0) {
         if ((input % 2) == 0) {
             backwardString += '0';
@@ -58,20 +70,34 @@ std::string IntToBinaryString (int input){
         }
         input = (input / 2);
     }//This for loop reverses the order since it is backwards
-    for (int i = backwardString.size(); i > 0; i--) {
+    for (int i = backwardString.size()-1; i >= 0; i--) {
         forwardString += backwardString[i];
     }
     return forwardString;
 }
 //This function will convert from an int to hex
 std::string IntToHexString (int input){
-        std::string hexString;
-        std::vector <std::string> values = {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F"};
-        while (input > 0){
-            hexString.insert(0, values[input % 16] ); //uses the % remainder to find the value in the vector
-            input /= 16;
-        }
-        return hexString;
+    std::string hexString;
+    std::vector <std::string> values = {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F"};
+    bool isNegative = false;
+
+    if (input < 0) {
+        input *= -1;
+        isNegative = true;
+    }
+    while (input > 0){
+        hexString.insert(0, values[input % 16] ); //uses the % remainder to find the value in the vector
+        input /= 16;
+    }
+    if (isNegative) {
+        hexString = "-" + hexString;
+    }
+    return hexString;
 }
-
-
+//RUN TESTS
+//Write tests for your functions to demonstrate that they work correctly. Note that a good test is that those operations are inverses: stringToInt( intToHexadecimal( anything ), 16 ) == anything for any valid input.
+void runTests (){
+    assert (StringToInt(IntToHexString(255), 16)== 255);
+    assert((StringToInt(IntToBinaryString(1001), 2))== 1001);
+    assert((StringToInt(IntToDecimalString(44), 10)) == 44);
+}

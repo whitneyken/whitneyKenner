@@ -20,5 +20,6 @@ int StringToInt(std::string input, int base);
 std::string IntToDecimalString (int input);
 std::string IntToBinaryString (int input);
 std::string IntToHexString (int input);
+void runTests ();
 
 #endif /* Functions_hpp */
