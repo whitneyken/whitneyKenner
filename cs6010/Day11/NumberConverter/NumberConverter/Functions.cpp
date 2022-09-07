@@ -63,3 +63,15 @@ std::string IntToBinaryString (int input){
     }
     return forwardString;
 }
+//This function will convert from an int to hex
+std::string IntToHexString (int input){
+        std::string hexString;
+        std::vector <std::string> values = {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F"};
+        while (input > 0){
+            hexString.insert(0, values[input % 16] ); //uses the % remainder to find the value in the vector
+            input /= 16;
+        }
+        return hexString;
+}
+
+

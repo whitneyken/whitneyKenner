@@ -14,9 +14,11 @@
 #include <iostream>
 #include <stdlib.h>
 #include <sstream>
+#include <vector>
 
 int StringToInt(std::string input, int base);
 std::string IntToDecimalString (int input);
 std::string IntToBinaryString (int input);
+std::string IntToHexString (int input);
 
 #endif /* Functions_hpp */

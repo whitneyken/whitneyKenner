@@ -37,6 +37,7 @@ int main(int argc, const char * argv[]) {
     int enteredNum;
     std::string decimalString;
     std::string binaryString;
+    std::string hexString;
     
     std::cout << "Please enter an integer ";
     std::cin >> enteredNum;
@@ -49,7 +50,9 @@ int main(int argc, const char * argv[]) {
     
     std::cout << "\n Your entered number as a binary string is: " << binaryString << std::endl;
     
-
+    hexString = IntToHexString(enteredNum);
+    
+    std::cout << "\n Your entered number as a hex string is: " << hexString << std::endl;
     
     
     return 0;
