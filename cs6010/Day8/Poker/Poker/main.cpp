@@ -17,14 +17,15 @@
 #include "PokerFunctions.hpp"
 
 int main(int argc, const char * argv[]) {
-        srand(time(NULL));
-        //declare variables
-        std::vector<Card> createdCardDeck;
-        std::vector<Card> currentHand;
-        std::vector<float> trackingStats {0, 0, 0, 0, 0};
-        
-        createdCardDeck = MakeDeckOfCards();
+    srand(time(NULL));
+    //declare variables
+    std::vector<Card> createdCardDeck;
+    std::vector<Card> currentHand;
+    std::vector<float> trackingStats {0, 0, 0, 0, 0};
     int numberOfHands = 1000000;
+        
+    createdCardDeck = MakeDeckOfCards();
+    
         runTests();
     
     trackingStats = checkStats(createdCardDeck, numberOfHands);
@@ -33,6 +34,7 @@ int main(int argc, const char * argv[]) {
     std::cout << "Percentage of straight flushes: " << (trackingStats[2]/numberOfHands)*100 << "\n";
     std::cout << "Percentage of royal flushes: " << (trackingStats[3]/numberOfHands)*100 << "\n";
     std::cout << "Percentage of full houses: " << (trackingStats[4]/numberOfHands)*100 << "\n";
+    
         //shuffleTheDeck(createdCardDeck);
     
 

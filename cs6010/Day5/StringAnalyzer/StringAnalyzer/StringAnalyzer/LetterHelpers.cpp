@@ -7,10 +7,7 @@
 
 #include "LetterHelpers.hpp"
 #include "WordHelpers.hpp"
-#include <cstdio>
-#include <string>
-#include <iostream>
-#include <cmath>
+
 
 //this function is used to determine what is punctuation
 bool isPunctuation(char c){
@@ -45,9 +42,8 @@ bool isTerminator(char c){
 //this function calculates the number of vowels
 int numVowels (std::string sentence){
     int vowelCounter = 0;
-    bool isCharAVowel;
     for(int i = 0; i <= (sentence.length() - 1); i++){
-        if ((isCharAVowel = isVowel(sentence[i])) == true)
+        if (isVowel(sentence[i]))
         vowelCounter++;
     }
     return vowelCounter;
@@ -55,10 +51,9 @@ int numVowels (std::string sentence){
 //this function calculates the number of constants
 int numConsonants (std::string sentence){
     int consonantCounter = 0;
-    bool isCharAConstant;
     for(int i = 0; i <= (sentence.length()-1); i++){
-        if((isCharAConstant = isConsonant(sentence[i])) == true)
+        if(isConsonant(sentence[i]))
             consonantCounter++;
     }
-        return consonantCounter;
+    return consonantCounter;
 }

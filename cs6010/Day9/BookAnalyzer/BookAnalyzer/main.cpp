@@ -64,23 +64,23 @@ int main(int argc, const char * argv[]) {
     //all of our functions
 
     titleName = (FindTitleVector(allTheWords));
+    authorName = (FindAuthorVector(allTheWords));
+    numWords = CountWords(allTheWords);
+    numChars = CountChars(allTheWords);
+    shortestWord = FindShortestWord(allTheWords);
+    longestWord = FindLongestWord(allTheWords);
+    keyWordInfo = FindKeyWords(allTheWords, wordToFind);
    
+    //Printing the results
     std::cout << "Statistics for ";
     printStringVector(titleName);
     std::cout << " by ";
-    authorName = (FindAuthorVector(allTheWords));
     printStringVector(authorName);
     std::cout << std::endl;
-    numWords = CountWords(allTheWords);
     std:: cout << "Number of words: " << numWords << "\n";
-    numChars = CountChars(allTheWords);
     std:: cout << "Number of characters: " << numChars << "\n";
-    shortestWord = FindShortestWord(allTheWords);
-    longestWord = FindLongestWord(allTheWords);
     std::cout << "The shortest word is: " << "\"" << shortestWord << "\"" << ", and the longest word is: " << "\"" << longestWord << "\"" << "\n";
-    keyWordInfo = FindKeyWords(allTheWords, wordToFind);
     PrintKeyWordDetails(keyWordInfo, wordToFind, numChars);
-    
     
     
 }

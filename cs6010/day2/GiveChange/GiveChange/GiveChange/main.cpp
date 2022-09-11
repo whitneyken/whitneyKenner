@@ -24,6 +24,7 @@ int main(int argc, const char * argv[]) {
     std::cin >> itemPrice;
     std::cout << "\n Enter the amount you paid in cents: ";
     std::cin >> amountPaidForItem;
+    
     //now calculate the change they will need to recieve
     changeOwed = amountPaidForItem - itemPrice;
     std::cout <<"\n The change owed is: " << changeOwed;

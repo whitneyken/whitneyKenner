@@ -126,14 +126,7 @@ bool IsRoyalFlush (std::vector<Card> & currentHand){
     }
     return false;
 }
-/*bool IsRoyals (std::vector<Card> & currentHand){
-    for (int i = 0; i < currentHand.size(); i++) {
-        if (currentHand[i].cardValue < 10) {
-            return false;
-        }
-    }
-    return true;
-}*/
+
 //Function to check if our hand is a full house
 
 bool IsFullHouse (std::vector<Card> & currentHand){
@@ -157,28 +150,28 @@ bool IsFullHouse (std::vector<Card> & currentHand){
 /* in the tracking vector, index 0 tracks # of flushes, 1 tracks # of straights, 2 tracks straight flushes, 3 tracks royal flushes, 4 tracks full house*/
 std::vector<float> checkStats (std::vector<Card>& inputDeck, int numberOfRuns){
     std::vector<Card> currentHand;
-    std::vector<float> trackingSpecialHands {0, 0, 0, 0, 0};
+    std::vector<float> trackingStats {0, 0, 0, 0, 0};
     for (int i = 0; i < numberOfRuns; i++) {
         shuffleTheDeck(inputDeck);
         currentHand = DrawFiveCards(inputDeck);
         if (IsFlush(currentHand)) {
-            trackingSpecialHands[0]++;
+            trackingStats[0]++;
         }
         if (IsStraight(currentHand)) {
-            trackingSpecialHands[1]++;
+            trackingStats[1]++;
         }
         if (IsStraightFlush(currentHand)) {
-            trackingSpecialHands[2]++;
+            trackingStats[2]++;
         }
         if (IsRoyalFlush(currentHand)) {
-            trackingSpecialHands[3]++;
+            trackingStats[3]++;
         }
         if (IsFullHouse(currentHand)) {
-            trackingSpecialHands[4]++;
+            trackingStats[4]++;
         }
         
     }
-    return trackingSpecialHands;
+    return trackingStats;
 }
 void runTests(){
 //test deck 1 for flushes
