@@ -11,6 +11,7 @@
 int StringToInt(std::string input, int base){
     int numericValue = 0;
     bool isNegative = false;
+    //don't change input, change the range for the for loop (1 vs 0)
     if (input[0] == '-') {
         input = input.substr(1, input.length());
         isNegative = true;
