@@ -7,74 +7,82 @@
 
 #include "vectorFunctions.hpp"
 
-MyVector MakeVector (size_t initialCapacity){
-    MyVector tempVector;
-    tempVector.capacity = initialCapacity;
-    tempVector.size = 0;
-    tempVector.data = new double[initialCapacity];
-    return tempVector;
+MyVector::MyVector (size_t initialCapacity){
+    capacity = initialCapacity;
+    size = 0;
+    data = new double[initialCapacity];
 }
 
-void PrintVector (const MyVector& vec){
-    for (int i = 0; i < vec.size; i++) {
-        std::cout << vec.data[i] << " ";
+
+void MyVector::PrintVector () const{
+    for (int i = 0; i < this->size; i++) {
+        std::cout << this->data[i] << " ";
     }
     std::cout << std::endl;
 }
 
-void FreeVector (MyVector& input){
-    delete [] input.data;
-    input.data = nullptr;
+void MyVector::FreeVector (){
+    delete [] this->data;
+    this->data = nullptr;
 }
 
 //this will work like the std::vector push back
 //first it will check if the capacity is equal to the size
 //if it is equal, call the expand capacity function
 //then push back
-void PushBack (MyVector& vecInput, int input){
-    if (vecInput.capacity == vecInput.size) {
-        GrowMyVector(vecInput);
+void MyVector::PushBack (int input){
+    if (this->capacity == this->size) {
+        this->GrowMyVector();
     }
-    vecInput.data[vecInput.size] = input;
-    vecInput.size += 1;
+    this->data[this->size] = input;
+    this->size += 1;
 }
 //this function will work like pop back and remove the last element
 //this happens by not truly removing the element, but by reducing size
-void PopBack (MyVector& vec){
-    vec.size -= 1;
+void MyVector::PopBack (){
+    this->size -= 1;
 }
 //Will work like [] does for std::vector
 //First we make sure index is within bounds
 //Then get value and return
-int Get (const MyVector& vec, int index){
+int MyVector::Get (int index){
     int valueAtIndex = -1;
-    if (index > (vec.size + 1)) {
+    if (index > (this->size + 1)) {
         std::cout << "\n You have entered an invalid index \n";
         exit(1);
     }
-    valueAtIndex = vec.data[index];
+    valueAtIndex = this->data[index];
     return valueAtIndex;
 }
 //This function will change the element at the input index location to the new value
 //If the index is higher than the size, it will exit the program
-void Set (MyVector& vec, int index, int newValue){
-    if (index > (vec.size + 1)) {
+void MyVector::Set (int index, int newValue){
+    if (index > (this->size + 1)) {
         std::cout << "\n You have entered an invalid index \n";
         exit(2);
     }
-    vec.data[index] = newValue;
+    this->data[index] = newValue;
 }
 
 //this function grows the vector if the size is equal to the capacity. It passes by reference so the changes are made to the vector itself
-void GrowMyVector (MyVector& vec){
-    if (vec.size == vec.capacity) {
-        vec.capacity *= 2;
-        double* tempArray = new double[vec.capacity];
-        for (int i = 0; i < vec.size; i++) {
-            tempArray[i] = vec.data[i];
+void MyVector::GrowMyVector (){
+    if (this->size == this->capacity) {
+        this->capacity *= 2;
+        double* tempArray = new double[this->capacity];
+        for (int i = 0; i < this->size; i++) {
+            tempArray[i] = this->data[i];
         }
-        delete [] vec.data;
-        vec.data = tempArray;
+        delete [] this->data;
+        this->data = tempArray;
         tempArray = nullptr;
     }
+}
+int MyVector::GetSize (){
+    int size = this->size;
+    return size;
+}
+
+int MyVector::GetCapacity (){
+    int capacity = this->capacity;
+    return capacity;
 }

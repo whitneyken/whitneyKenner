@@ -12,27 +12,34 @@
 #include <iostream>
 
 //This is our vector struct
-struct MyVector{
+class MyVector{
+private:
     double* data;
     size_t capacity;
     size_t size;
     
+public:
+    //This is my constructor
+    MyVector (size_t initialCapacity);
+    //These are my methods
+    int Get (int index);
+    
+    void Set (int index, int newValue);
+    
+    void PushBack (int input);
+    
+    void PopBack ();
+    
+    void GrowMyVector ();
+    
+    void FreeVector ();
+    
+    void PrintVector () const;
+    
+    int GetSize ();
+    
+    int GetCapacity ();
 };
 
-MyVector MakeVector (size_t initialCapacity);
-
-void FreeVector (MyVector vec);
-
-void PushBack (MyVector& vec, int input);
-
-void PopBack (MyVector& vec);
-
-void PrintVector (const MyVector& vec);
-
-int Get (const MyVector& vec, int index);
-
-void Set (MyVector& vec, int index, int newValue);
-
-void GrowMyVector (MyVector& vec);
 
 #endif /* vectorFunctions_hpp */

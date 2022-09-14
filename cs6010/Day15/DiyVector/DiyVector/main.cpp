@@ -8,9 +8,9 @@
 #include <iostream>
 #include "vectorFunctions.hpp"
 
+
 int main(int argc, const char * argv[]) {
     size_t initialCapacity;
-    MyVector vector1;
     int userPushBack;
     int valueAtIndex = -1;
     int valueAtIndex2 = -1;
@@ -18,34 +18,38 @@ int main(int argc, const char * argv[]) {
     std::cout << "Please enter your desired capacity: ";
     std::cin >> initialCapacity;
     
-    vector1 = MakeVector(initialCapacity);
+    MyVector vector1 (initialCapacity);
     
     std::cout << "\n What would you like to push back to the vector? ";
     std::cin >> userPushBack;
     
-    PushBack(vector1, userPushBack);
+    //PushBack(vector1, userPushBack);
+    vector1.PushBack(userPushBack);
     
     
-    
-    
+
     //Some testing things
-    PushBack(vector1, 4);
-    PushBack(vector1, 6);
-    PushBack(vector1, 6);
-    PushBack(vector1, 7);
-    PrintVector(vector1);
+    vector1.PushBack(4);
+    vector1.PushBack(5);
+    vector1.PushBack(6);
+    vector1.PushBack(7);
     
-    valueAtIndex = Get(vector1, 2);
+    valueAtIndex = vector1.Get(2);
     std::cout << "\n The value at the index location 2 is: \n";
     std::cout << valueAtIndex <<std::endl;
     
-    Set(vector1, 2, 14);
+    vector1.Set(2, 14);
     std:: cout << "\n My updated set vector is: \n";
-    PrintVector(vector1);
+    vector1.PrintVector();
     
-    valueAtIndex2 = Get(vector1, 2);
+    valueAtIndex2 = vector1.Get(2);
     std::cout << "\n The NEW value at the index location 2 is: \n";
     std::cout << valueAtIndex2 <<std::endl;
+    vector1.PushBack(4);
+    vector1.PushBack(6);
+    vector1.PushBack(6);
+    vector1.PushBack(7);
+    //std::cout << "The new capacity is: " << vector1.capacity << std::endl;
     
     return 0;
 }
