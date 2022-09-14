@@ -86,3 +86,33 @@ int MyVector::GetCapacity (){
     int capacity = this->capacity;
     return capacity;
 }
+//MY TEST CASES
+void RunTests (){
+    MyVector testvec1(6);
+    testvec1.PushBack(4);
+    testvec1.PushBack(9);
+    testvec1.PushBack(12);
+    testvec1.PushBack(1);
+    
+    //These asserts test that my constructor and the functions Get, GetSize, GetCapacity, and PushBack work
+    assert((testvec1.Get(0)) == 4);
+    assert(testvec1.GetSize() == 4);
+    assert(testvec1.GetCapacity() == 6);
+    
+    testvec1.PushBack(4);
+    testvec1.PushBack(9);
+    testvec1.PushBack(12);
+    testvec1.PushBack(1);
+    
+    //These asserts test that GrowMyVector function is called when the vector is pushbacked beyond capacity
+    assert((testvec1.Get(4)) == 4);
+    assert(testvec1.GetSize() == 8);
+    assert(testvec1.GetCapacity() == 12);
+    
+    //This assert will verify that the PopBack function works and the size is adjusted accordingly
+    testvec1.PopBack();
+    
+    assert(testvec1.GetSize() == 7);
+    
+
+}

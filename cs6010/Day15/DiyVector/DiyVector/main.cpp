@@ -14,6 +14,8 @@ int main(int argc, const char * argv[]) {
     int userPushBack;
     int valueAtIndex = -1;
     int valueAtIndex2 = -1;
+    
+    RunTests();
     // going to recieve the capacity as input from the user
     std::cout << "Please enter your desired capacity: ";
     std::cin >> initialCapacity;

@@ -41,5 +41,6 @@ public:
     int GetCapacity ();
 };
 
+void RunTests ();
 
 #endif /* vectorFunctions_hpp */
