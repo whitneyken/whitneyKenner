@@ -44,6 +44,19 @@ public:
     
     MyVector& operator = (const MyVector& vect2);
     
+    double& operator [] (int index);
+    
+    bool operator == (const MyVector& vect2);
+    
+    bool operator != (const MyVector& vect2);
+    
+    bool operator <(const MyVector& vect2);
+    
+    bool operator >(const MyVector& vect2);
+    
+    bool operator <=(const MyVector& vect2);
+    
+    bool operator >=(const MyVector& vect2);
 };
 
 void RunTests ();

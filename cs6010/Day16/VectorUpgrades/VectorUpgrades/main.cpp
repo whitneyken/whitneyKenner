@@ -47,7 +47,16 @@ int main(int argc, const char * argv[]) {
     vector1.PrintVector();
     vector3.PrintVector();
     
+    vector3[3] = 2;
 
+    std::cout << vector3[3] << std::endl;
+    std::cout << vector1[3] << std::endl;
     
-    return 0;
+
+    MyVector vector4 (vector3);
+    
+    vector4.PopBack();
+    vector4.PopBack();
+    
+  
 }

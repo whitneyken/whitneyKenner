@@ -141,6 +141,27 @@ void RunTests (){
     assert(testvec2.Get(3) == testvec3.Get(3));
     assert(testvec2.GetSize() == testvec3.GetSize());
     assert(testvec2.GetCapacity() == testvec3.GetCapacity());
+    
+    //These assert swill verify that the [] operator works appropriately and does not change the original of a copied vector
+    testvec3[3] = 40;
+    assert(testvec3.Get(3) == 40);
+    assert(testvec3.Get(3) != testvec2.Get(3));
+    
+    //To assert my == and += operator overloads work
+    MyVector testvec4 (testvec3);
+    
+    assert(testvec4 == testvec3);
+    assert(testvec1 != testvec4);
+    
+    //asserts for <, >, <=, >=
+    
+    assert(testvec2 < testvec1);
+    assert(testvec1 > testvec2);
+    assert(testvec4 <= testvec3);
+    assert(testvec2 <= testvec1);
+    assert(testvec1 >= testvec2);
+    assert(testvec2 >= testvec1);
+    
 }
 
 
@@ -176,4 +197,70 @@ MyVector::MyVector(const MyVector& vect2){
     for (size_t i = 0; i < vect2.size; i++) {
         data[i] = vect2.data[i];
     }
+}
+
+//operator overload for []. Works like [] for std::vector
+double& MyVector::operator [] (int index){
+    return this->data[index];
+}
+
+//Next, add operator overloads for all the comparison operators (==, !=, <, <=, >=, >). These should compare vectors lexicographically (which means in dictionary order). Remember, only 2 of the comparison operators need "real code" in them - the others can just those two. Vector comparison consists of comparing the 1st element of v1 to the first element of v2, etc. For example, given v1 is { 9, 9, 4, 15 }, and v2 is { 9, 9, 10, 12 } - v1 is considered less than (<) v2 because the 1st two elements of both vectors are the same, but the 3rd element of v1 is less than the 3rd element of v2 (ie: 4 < 5). Note, for two vectors to be considered equal (==), they must have the same size and the same values for at each position.
+//
+//Be sure to turn on address sanitizer and test as you implement the individual functions to see what problems they fix/don't fix.
+
+bool MyVector::operator == (const MyVector& vect2){
+    if (size != vect2.size) {
+        return false;
+    }
+    for (size_t i = 0; i < size; i++) {
+        if (data[i] != vect2.data[i]) {
+            return false;
+        }
+    }
+    
+    return true;
+}
+//This method uses the above == overloaded operator to check if something is not equal
+bool MyVector::operator != (const MyVector& vect2){
+    return !(*this == vect2);
+}
+
+//Writing an operator overload for <
+bool MyVector::operator <(const MyVector& vect2){
+    if (size != vect2.size) {
+        return false;
+    }
+    for (size_t i = 0; i < size; i++) {
+        if (data[i] > vect2.data[i]) {
+            return false;
+        }
+    }
+    return true;
+}
+////Writing an operator overload for >
+bool MyVector::operator >(const MyVector& vect2){
+    if (size != vect2.size) {
+        return false;
+    }
+    for (size_t i = 0; i < size; i++) {
+        if (data[i] < vect2.data[i]) {
+            return false;
+        }
+    }
+    return true;
+}
+
+////Writing an operator overload for <=
+bool MyVector::operator <=(const MyVector& vect2){
+    if (*this == vect2 || *this < vect2) {
+        return true;
+    }
+    return false;
+}
+////Writing an operator overload for >=
+bool MyVector::operator >=(const MyVector& vect2){
+    if (*this == vect2 || *this > vect2) {
+        return true;
+    }
+    return false;
 }
