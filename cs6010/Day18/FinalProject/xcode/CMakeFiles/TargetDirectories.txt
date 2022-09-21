@@ -1,0 +1,3 @@
+/Users/whitneykenner/whitneyKenner/cs6010/Day18/FinalProject/xcode/CMakeFiles/testSFML.dir
+/Users/whitneykenner/whitneyKenner/cs6010/Day18/FinalProject/xcode/CMakeFiles/ALL_BUILD.dir
+/Users/whitneykenner/whitneyKenner/cs6010/Day18/FinalProject/xcode/CMakeFiles/ZERO_CHECK.dir

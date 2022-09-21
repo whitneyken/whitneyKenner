@@ -57,10 +57,7 @@ bool GetBit( uint32_t input, int b )
 bool IsNegative( int input )
 {
     input = input >> 31;
-    if (input & 1) {
-        return true;
-    }
-  return false;
+    return (input & 1);
 }
 
 /*
@@ -150,8 +147,22 @@ uint32_t SetByte( uint32_t input, uint8_t value, int b )
     return (input | valueMask );             // 00000000 00000000 00000101 00000000 input mask
 }
 
-int Increment( uint32_t x );
 
+/*
+ * Challenge Question
+ *
+ * Increment
+ * This function should return x + 1 but should only make use of bitwise operators and == or !=
+*/
+int Increment( uint32_t x ){
+    int comparator = 1;     //To compare against each bit
+    while (comparator & x) {
+        x = x ^ comparator;
+        comparator <<= 1;
+    }
+    x = x ^ comparator;     //To flip the final bit
+  return x;
+}
 /*
  * Negate() computes the negation of an integer.
  *
@@ -183,23 +194,6 @@ int Negate( int input )
     input = Increment(input);
     
   return input;
-}
-
-
-/*
- * Challenge Question
- *
- * Increment
- * This function should return x + 1 but should only make use of bitwise operators and == or !=
-*/
-int Increment( uint32_t x ){
-    int comparator = 1;     //To compare against each bit
-    while (comparator & x) {
-        x = x ^ comparator;
-        comparator <<= 1;
-    }
-    x = x ^ comparator;     //To flip the final bit
-  return x;
 }
 
 
