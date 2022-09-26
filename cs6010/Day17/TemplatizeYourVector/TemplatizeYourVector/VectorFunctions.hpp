@@ -31,9 +31,9 @@ public:
     //These are my methods
     int Get (int index) const;
     
-    void Set (int index, int newValue);
+    void Set (int index, T newValue);
     
-    void PushBack (int input);
+    void PushBack (T input);
     
     void PopBack ();
     
@@ -94,7 +94,7 @@ MyVector<T>::~MyVector (){
 template <typename T>
 int MyVector<T>::Get (int index) const{
     int valueAtIndex = -1;
-    if (index > (this->size + 1)) {
+    if (index > (this->size -1)) {
         std::cout << "\n You have entered an invalid index \n";
         exit(1);
     }
@@ -105,8 +105,8 @@ int MyVector<T>::Get (int index) const{
 //This function will change the element at the input index location to the new value
 //If the index is higher than the size, it will exit the program
 template <typename T>
-void MyVector<T>::Set (int index, int newValue){
-    if (index >= (this->size)) {
+void MyVector<T>::Set (int index, T newValue){
+    if (index > (this->size -1)) {
         std::cout << "\n You have entered an invalid index \n";
         exit(2);
     }
@@ -119,7 +119,7 @@ void MyVector<T>::Set (int index, int newValue){
 //then push back
 
 template <typename T>
-void MyVector<T>::PushBack (int input){
+void MyVector<T>::PushBack (T input){
     if (this->capacity == this->size) {
         this->GrowMyVector();
     }
@@ -159,13 +159,13 @@ void MyVector<T>::PrintVector () const{
 
 template <typename T>
 int MyVector<T>::GetSize (){
-    int size = this->size;
+    size_t size = this->size;
     return size;
 }
 
 template <typename T>
 int MyVector<T>::GetCapacity (){
-    int capacity = this->capacity;
+    size_t capacity = this->capacity;
     return capacity;
 }
 
@@ -178,7 +178,7 @@ MyVector<T>& MyVector<T>::operator = (const MyVector<T>& vect2){
     capacity = vect2.capacity;
     data = new T [capacity];
     //Should this be vect2.size or just size????
-    for (size_t i = 0; i < vect2.size; i++) {
+    for (size_t i = 0; i < size; i++) {
         data[i] = vect2.data[i];
     }
     return *this;
@@ -211,13 +211,13 @@ bool MyVector<T>::operator != (const MyVector<T>& vect2){
 }
 
 //Writing an operator overload for <
+//Add a condition for ==
 template <typename T>
 bool MyVector<T>::operator <(const MyVector<T>& vect2){
     if (size != vect2.size) {
         std::cout << "Invalid comparison '<' \n";
         exit(1);
-    }
-    for (size_t i = 0; i < size; i++) {
+    }    for (size_t i = 0; i < size; i++) {
         if (data[i] > vect2.data[i]) {
             return false;
         }

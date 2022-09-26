@@ -67,7 +67,7 @@ void RunTests (){
     assert(testvec3.Get(3) == 40);
     assert(testvec3.Get(3) != testvec2.Get(3));
     
-    //To assert my == and += operator overloads work
+    //To assert my == and != operator overloads work
     MyVector testvec4 (testvec3);
     
     assert(testvec4 == testvec3);
@@ -87,21 +87,21 @@ void RunTests (){
     
     MyVector<char> charVector1(6);
     MyVector<char> charVector2 = charVector1;
-    
+    //Verifying == for char vector as well as verifyig copy constructor
     assert(charVector1 == charVector2);
     
     charVector1.PushBack('g');
     charVector1.PushBack('t');
     charVector1.PushBack('f');
     charVector1.PushBack('p');
-    
+    //verifying get and set for type char
     assert(charVector1.Get(3) == 'p');
     
     charVector1.Set(3, 'r');
     
     assert(charVector1.Get(3) == 'r');
     assert(charVector1 != charVector2);
-    
+    //Verifying popback
     charVector1.PopBack();
     
     assert(charVector1.GetSize() == 3);
@@ -111,7 +111,7 @@ void RunTests (){
     charVector1.PushBack('t');
     charVector1.PushBack('f');
     charVector1.PushBack('p');
-    
+    //verifying grow my vector
     assert(charVector1.GetCapacity() == 12);
     
     MyVector<char> charVector3(5);
@@ -127,7 +127,7 @@ void RunTests (){
     charVector4.PushBack('c');
     charVector4.PushBack('c');
     charVector4.PushBack('e');
-    
+    //verifying the comparison operator > for chars
     assert(charVector3 > charVector4);
     
     charVector4.Set(3, 'd');
