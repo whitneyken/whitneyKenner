@@ -53,9 +53,10 @@ hs_err_pid*
 .settings/
 
 # Intellij
-.idea/
+*.idea
 *.iml
 *.iws
+*.out
 
 # Mac
 .DS_Store
