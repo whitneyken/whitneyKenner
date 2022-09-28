@@ -1,0 +1,48 @@
+1.What data is being sent to the other computer?
+ pinging someone sends a small packet of info containing an echo 
+request, and then an echo reply packet is sent in response
+
+
+
+2.Open the "Internet Protocol Version 4" section - what is the source 
+address, the destination address? 
+My IP is the source address and the person I am pinging is the 
+destination address
+
+3.Open the Data section - how do the integer values compare with the ASCII 
+that is displayed in the terminal? Does it match anything that we have 
+seen before?
+ the integer values are the the hex number values that represent ascii 
+values (i.e. 40 in hex is @ in ascii) I haven't used the hex numbers in 
+this way, but I have seen them on ascii charts, so it makes sense
+
+4.How long does it take a ping packet to travel to your classmate's 
+machine and back?
+ The average time from mine to my classmates was 29.140 milliseconds round trip. 
+
+5. Try ping google.com. How long does it take these ping packets to travel? 
+The average time for google.com was 30.496 milliseconds
+
+6. Try ping www.louvre.fr. How long does this take?
+The average time was 169.225 milliseconds
+
+7. What do these numbers tell you?
+These numbers indicate the physical distance
+
+8. Did you see more than you expected in the output? 
+Yes, there was more than just the request and reply
+
+9. Can you figure out what other data was sent/received?
+There were also a lot of TCP protocols picked up by Wireshark 
+
+10. What is the purpose of the curl program?
+curl is a tool for transferring data from or to a server
+
+11. How are your results different / similar?
+We can still see the response and reply as well as other TCP packets. The response and reply length is much shorter from the terminal (using curl)
+
+12. What URL actually show's up when GitHub is loaded?
+https://github.com
+
+13. Can you understand the output from Wireshark? Why can you only read the first couple of messages?
+You can probably only read the first couple of messages because the request isn't secure but the response is secure and therefor we cannot view the details of it as it is encrypted
