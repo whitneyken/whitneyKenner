@@ -1,10 +1,9 @@
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.*;
-import java.util.regex.MatchResult;
 
 public class RainData {
     String cityName;
@@ -14,14 +13,12 @@ public class RainData {
 
 
     public RainData(String filename) throws FileNotFoundException {
-        //File myObj = new File("src/rainfall_data.txt"); //tried both this one and the line below and neither work
-        FileInputStream fin = new FileInputStream("rainfall_data.txt");
-        Scanner myReader = new Scanner(fin);
-        cityName = myReader.nextLine();
-        while(myReader.hasNextLine()){
-            month.add(myReader.next());
-            year.add(Integer.parseInt(myReader.next()));
-            rainFall.add(Double.parseDouble(myReader.next()));
+        Scanner fileReader = new Scanner( new FileReader( filename) );
+        cityName = fileReader.nextLine();
+        while(fileReader.hasNextLine()){
+            month.add(fileReader.next());
+            year.add(Integer.parseInt(fileReader.next()));
+            rainFall.add(Double.parseDouble(fileReader.next()));
         }
     }
 }
