@@ -10,7 +10,7 @@ public class Fraction {
 
     //This constructor will set the value of the numerator and denominator to input values
     public Fraction(long n, long d) {
-        if ((n < 0 && d < 0) || (n > 0 && d < 0)) {
+        if (d < 0) {
             n *= -1;
             d *= -1;
         }
