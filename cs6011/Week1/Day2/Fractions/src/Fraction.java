@@ -43,15 +43,15 @@ public class Fraction {
         Fraction tempFrac = new Fraction();
         if (denominator == rhs.denominator) {
             tempFrac.denominator = rhs.denominator;
-            tempFrac.numerator = (numerator - rhs.numerator);
+            tempFrac.numerator = numerator - rhs.numerator;
             tempFrac.reduce();
             return tempFrac;
         } else {
             tempFrac.denominator = (denominator * rhs.denominator);
             tempFrac.numerator = ((numerator * rhs.denominator) - (rhs.numerator * denominator));
-            tempFrac.reduce();
-            return tempFrac;
         }
+        tempFrac.reduce();
+        return tempFrac;
 
     }
 
