@@ -21,13 +21,10 @@ public class RainData {
         String oneMonth = new String();
         int oneYear;
         double oneRainFall;
-        for (int i = 0; i < 239; i++){
-            oneMonth = myReader.nextLine();
-            month.add(oneMonth);
-            oneYear = myReader.nextInt();
-            year.add(oneYear);
-            oneRainFall = myReader.nextDouble();
-            rainFall.add(oneRainFall);
+        while(myReader.hasNextLine()){
+            month.add(myReader.next());
+            year.add(Integer.parseInt(myReader.next()));
+            rainFall.add(Double.parseDouble(myReader.next()));
         }
     }
 }
