@@ -18,9 +18,6 @@ public class RainData {
         FileInputStream fin = new FileInputStream("rainfall_data.txt");
         Scanner myReader = new Scanner(fin);
         cityName = myReader.nextLine();
-        String oneMonth = new String();
-        int oneYear;
-        double oneRainFall;
         while(myReader.hasNextLine()){
             month.add(myReader.next());
             year.add(Integer.parseInt(myReader.next()));
