@@ -107,7 +107,7 @@ public class Fraction {
     }
 
     //Returns the greatest common divisor of this fraction's numerator and denominator
-    public long GCD() {
+    private long GCD() {
         long gcd = numerator;
         long remainder = denominator;
         while (remainder != 0) {
@@ -119,7 +119,7 @@ public class Fraction {
     }
 
     //Changes this fraction to its reduced form.
-    public void reduce() {
+    private void reduce() {
         long gcd = this.GCD();
         numerator = (numerator / gcd);
         denominator = (denominator / gcd);
