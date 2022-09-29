@@ -45,10 +45,10 @@ public class RainData {
         fileWrite.write(cityName);
         fileWrite.println();
         //This prints out all of the data
-        for (int i = 0; i < sizeOfVector; i++){
-            fileWrite.write(month.get(i) + " " + year.get(i) + " "  + rainFall.get(i));
-            fileWrite.println();
-        }
+//        for (int i = 0; i < sizeOfVector; i++){
+//            fileWrite.write(month.get(i) + " " + year.get(i) + " "  + rainFall.get(i));
+//            fileWrite.println();
+//        }
         double avgRain = averageRainfall();
         fileWrite.write("The overall average rainfall amount is: " + avgRain + " inches.");
         fileWrite.println();
