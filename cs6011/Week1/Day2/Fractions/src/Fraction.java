@@ -9,7 +9,15 @@ public class Fraction {
     }
 
     //This constructor will set the value of the numerator and denominator to input values
-    public Fraction(long n, long d) {
+
+    //    Update your Fraction class (From Tuesday) so that it throws an exception if someone tries
+//    to create a fraction with a 0 denominator.
+//
+//    Add a test that uses try/catch to make SURE that creating a fraction like 10/0 throws an exception.
+    public Fraction(long n, long d) throws IllegalArgumentException{
+        if (d == 0){
+            throw new IllegalArgumentException("Argument denominator is 0");
+        }
         if (d < 0) {
             numerator *= -1;
             denominator *= -1;

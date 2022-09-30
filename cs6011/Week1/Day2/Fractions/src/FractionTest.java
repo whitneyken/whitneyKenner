@@ -11,6 +11,7 @@ class FractionTest {
         testMinus();
         testDividedBy();
         testReciprocal();
+        //exceptionThrowTest();
 
     }
     @Test
@@ -28,6 +29,7 @@ class FractionTest {
         Fraction f3 = f1.Plus(f2);
         Assertions.assertEquals( f3.toString(), "5/6");
 
+//Assertions.assertEquals(true, true)
     }
 
     @Test
@@ -55,6 +57,17 @@ class FractionTest {
         Assertions.assertEquals( f3.toString(), "2/1");
         Assertions.assertEquals( f4.toString(), "3/1");
     }
+
+        @Test
+    public void exceptionThrowTest(){
+        Fraction f4 = new Fraction(10,0);
+//            try {
+//                Fraction f4 = new Fraction(10, 0);
+//            }catch (IllegalArgumentException e){
+//                System.out.println(e.getMessage());
+//                System.out.println("Caught thrown exception for illegal denominator");
+//            }
+        }
 
 
 }
