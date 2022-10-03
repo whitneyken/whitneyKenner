@@ -1,4 +1,7 @@
-public class Fraction {
+import java.lang.Comparable;
+
+
+public class Fraction implements Comparable<Fraction>{
     long numerator;
     long denominator;
 
@@ -27,6 +30,7 @@ public class Fraction {
         this.reduce();
 
     }
+
 
     //This is the beginning of my methods
     //This method makes a sum of the 2 fractions and returns a fraction
@@ -107,6 +111,17 @@ public class Fraction {
         denominator = (denominator / gcd);
     }
 
+    @Override
+    public int compareTo(Fraction o) {
+        double comparison = this.toDouble() - o.toDouble();
+        if (comparison > 0){
+            return 1;
+        } else if (comparison < 0) {
+            return -1;
+        }else {
+            return 0;
+        }
+    }
 }
 
 
