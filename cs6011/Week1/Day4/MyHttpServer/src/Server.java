@@ -11,13 +11,8 @@ public class Server {
 
     public Server(int port) {
         try {
-            //This is waiting for a response from the client
             //Setting up server
             servSock = new ServerSocket(port);
-            System.out.print("Waiting for client...");
-            clientSocket = servSock.accept();
-            System.out.println("Accepted");
-            System.out.println("-------------------------------------------");
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -25,68 +20,72 @@ public class Server {
         }
     }
 
+    public void waitForClient() throws IOException {
+        System.out.print("Waiting for client...");
+        clientSocket =  servSock.accept();
+        System.out.println("Accepted");
+        System.out.println("-------------------------------------------");
+    }
+
     public void handleRequest() throws IOException {
         // Parsing HTTP request
         // create a reader to get all the info from the clientSocket
-        InputStreamReader input = new InputStreamReader(clientSocket.getInputStream());
+            InputStreamReader input = new InputStreamReader(clientSocket.getInputStream());
 
-        // use a scanner to read the info from the input stream
-        Scanner inputScanner = new Scanner(input);
+            // use a scanner to read the info from the input stream
+            Scanner inputScanner = new Scanner(input);
 
-        // reading the first line
-        String firstLine = inputScanner.nextLine();
-        System.out.println("\t" + firstLine);
+            // reading the first line
+            String firstLine = inputScanner.nextLine();
+            System.out.println("\tHTTP REQUEST:\n\t\t" + firstLine);
 
-        //Then we need to parse through the first line and determine what file is wanted
-        String[] arrOfFirstLine = firstLine.split(" ", 3);
-        String fileName = arrOfFirstLine[1];
+            //Then we need to parse through the first line and determine what file is wanted
+            String[] arrOfFirstLine = firstLine.split(" ", 3);
+            String fileName = arrOfFirstLine[1];
 
-        //after we have determined the file name, we need to check if the file exists
-        if (fileName.equals("/")) {
-            fileName = "index.html";
-        }
-        file = new File(fileName);
+            //after we have determined the file name, we need to check if the file exists
+            if (fileName.equals("/")) {
+                fileName = "index.html";
+            }
+            file = new File(fileName);
+        //IDK how to make a generic exception catch in addition to this one
     }
 
     public void handleResponse() throws IOException {
 
-        boolean exists = file.exists();
-        int fileStatus;
-        String message;
-        if (exists) {
-            fileStatus = 200;
-            message = "OK";
-            System.out.println("\tFile found");
-        } else {
+        int fileStatus = 200;
+        String message = "OK";
+        if (!file.exists()) {
             fileStatus = 404;
             System.out.println("\tFile NOT found");
-            message = "not found";
+            message = "File NOT found";
         }
 
         //if the file exists, we should return it
         //Scanner fileRead = new Scanner( new FileReader( filename) );
         OutputStream outputStream = clientSocket.getOutputStream();
+
         PrintWriter writer = new PrintWriter(outputStream);
 
         // Build Response
         writer.write("HTTP/1.1 " + fileStatus + " " + message);
-        writer.write("Content-Type: text/html");
-        writer.write("Content-Size: " + file.length());
-        writer.write("\n");
 
         System.out.println("\tGenerating response:");
         System.out.println("\t\tHTTP/1.1 " + fileStatus + " " + message);
-        System.out.println("\t\tContent-Type: text/html");
-        System.out.println("\t\tContent-Size: " + file.length());
-        System.out.println("-------------------------------------------");
 
-        if(fileStatus == 200) {
+        if (fileStatus == 200) {
+            writer.write("Content-Type: text/html");
+            writer.write("Content-Size: " + file.length());
             Scanner fileScanner = new Scanner(new FileReader(file));
+
+            System.out.println("\t\tContent-Type: text/html");
+            System.out.println("\t\tContent-Size: " + file.length());
 
             while (fileScanner.hasNextLine()) {
                 writer.println(fileScanner.nextLine());
             }
         }
+        System.out.println("-------------------------------------------");
         writer.flush();
         writer.close();
         outputStream.flush();
@@ -94,9 +93,11 @@ public class Server {
 
     }
 
-    public void closeShit() throws IOException {
+    public void closeClient() throws IOException {
         clientSocket.close();
-        servSock.close();
+        if (!clientSocket.isClosed()) {
+            throw new IOException("Failure to close client socket ");
+        }
     }
 
 }
