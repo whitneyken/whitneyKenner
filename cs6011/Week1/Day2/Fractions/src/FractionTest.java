@@ -107,9 +107,7 @@ class FractionTest {
 
         manyFractions.sort(Fraction::compareTo);
 
-        for (Fraction el: manyFractions) {
-            System.out.println(el.toString());
-        }
+        for (Fraction el: manyFractions) System.out.println(el);
 
     }
 
