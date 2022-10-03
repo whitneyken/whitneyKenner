@@ -13,18 +13,15 @@ public class Server {
         try {
             //Setting up server
             servSock = new ServerSocket(port);
+            System.out.print("Waiting for client...");
+            clientSocket =  servSock.accept();
+            System.out.println("Accepted");
+            System.out.println("-------------------------------------------");
 
         } catch (Exception e) {
             e.printStackTrace();
             System.exit(1);
         }
-    }
-
-    public void waitForClient() throws IOException {
-        System.out.print("Waiting for client...");
-        clientSocket =  servSock.accept();
-        System.out.println("Accepted");
-        System.out.println("-------------------------------------------");
     }
 
     public void handleRequest() throws IOException {
@@ -97,6 +94,10 @@ public class Server {
         clientSocket.close();
         if (!clientSocket.isClosed()) {
             throw new IOException("Failure to close client socket ");
+        }
+        servSock.close();
+        if (!servSock.isClosed()){
+            throw new IOException("Failure to close server socket");
         }
     }
 

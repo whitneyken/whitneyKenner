@@ -4,10 +4,10 @@ public class Main {
     public static void main(String[] args) {
 
         int port = 8080;
-        Server server = new Server(port);
+
         while (true) {
             try {
-                server.waitForClient();
+                Server server = new Server(port);
                 server.handleRequest();
                 server.handleResponse();
                 server.closeClient();
