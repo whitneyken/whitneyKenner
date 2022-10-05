@@ -1,4 +1,6 @@
 package com.example.synthesizer;
+import org.junit.jupiter.api.Assertions;
+
 import java.lang.Math;
 
 public class SineWave implements AudioComponent{
@@ -11,20 +13,26 @@ public class SineWave implements AudioComponent{
 
     }
 //This will return an array of bytes containing our sine wave
+@Override
     public AudioClip getClip() {
+        //We create a new audioclip that we return instead of returning the original audioclip from the audioclip class
+        audioClip = new AudioClip();
         for (int i = 0; i < audioClip.data.length / 2; i++) {
-            //This equation creates the sign wave
+            //This equation creates the sine wave
             double temp = Short.MAX_VALUE * Math.sin((2 * Math.PI * frequency * i) / audioClip.sampleRate);
             audioClip.setSample(i, (int) temp);
         }
         return audioClip;
     }
-
+    @Override
     public boolean hasInput() {
+        //This returns false because our sine wave does not have an input
         return false;
     }
-
+    @Override
     public void connectInput(AudioComponent input) {
+        //Assert false because the sign wave cannot accept inputs
+        assert (false);
 
     }
 }

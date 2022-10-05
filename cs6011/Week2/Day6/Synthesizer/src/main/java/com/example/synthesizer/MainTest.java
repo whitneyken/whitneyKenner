@@ -26,5 +26,11 @@ class MainTest {
         System.out.println("The array has been tested for all values");
 
     }
+
+    @Test
+    public void testMixer(){
+        AudioClip clip = new AudioClip();
+        AudioClip clip2 = new AudioClip();
+    }
 }
 
