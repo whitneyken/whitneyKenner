@@ -13,12 +13,12 @@ static void badSum(ArrayList<Thread> threads){
             }
 
         });
-
+        thread.start();
         threads.add(thread);
     }
     for (Thread thread : threads){
         try {
-            thread.start();
+
             System.out.println("The calculated answer is: " + answer);
             System.out.println("The real answer is: " + (maxValue * (maxValue - 1) / 2));
             thread.join();
