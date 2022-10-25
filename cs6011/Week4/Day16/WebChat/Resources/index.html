@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Chat Server</title>
+    <link rel = "stylesheet" href = "myStyle.css">
+
+</head>
+<body style="background-color: lightcyan">
+<h1>Chat Server</h1>
+
+<label for="name"> Username </label>
+    <input type = "text" id="name"/>
+
+    <label for="chatroom"> Room name</label>
+        <input type = "text" id="chatroom"/>
+<button id="submit"> Enter </button>
+    <div class = "parent">
+    <div class="square" id = "sq1">Users</div>
+    <div class="square" id = "sq2">Messages</div>
+        <p class="layout">
+        <label> Your message:  </label>
+        <textarea id = "input"></textarea>
+
+        <button id = "send"> Send</button>
+        </p>
+    </div>
+
+<script type="text/javascript" src = "ChatClient.js"></script>
+
+</body>
+</html>
