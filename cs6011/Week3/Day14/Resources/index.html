@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title> Calculator </title>
+  <center>
+  <h1> Welcome to the Calculator </h1>
+  </center>
+  <style>
+  textarea {
+    resize:none;
+    white-space:
+    nowrap;
+    overflow-x:
+    hidden;
+  }
+  li {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+</style>
+  </head>
+  <body style="background-color:pink;">
+    <ul>
+	<li>
+		<label>X value</label>
+		<textarea id="xVal"></textarea>
+	</li>
+	<li>
+		<label>Y value</label>
+		<textarea id="yVal"></textarea>
+	</li>
+	<button id = "button">Add Numbers</button>
+	<li>
+		<label>Result</label>
+		<textarea id="resultTA"></textarea>
+	</li>
+<li>
+		<label>Result</label>
+		<textarea id="wsResultTA"></textarea>
+	</li>
+</ul>
+    <script type="text/javascript", src = "webServerJava.js"></script>
+  </body>
+</html>
