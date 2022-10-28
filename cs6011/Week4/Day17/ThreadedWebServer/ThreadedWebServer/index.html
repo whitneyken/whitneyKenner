@@ -1,52 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="shortcut icon" href="#">
-    <link rel="stylesheet" type="text/css" href="mystyles.css">
-    <meta charset="utf-8">
-    <title> Whitney learns html </title>
+    <meta charset="UTF-8">
+    <title>Chat Server</title>
+    <link rel = "stylesheet" href = "myStyle.css">
+
 </head>
-<body>
+<body style="background-color: lightcyan">
+<h1>Chat Server</h1>
 
-<h1 style="color:green"> Hello, this is my first header file </h1>
-<p> this is my first paragraph, welcome to whitney learns html, today we will learn the basic principles of html </p>
-<p> if you would like to learn more about html, please view the following resource page </p>
-<a href="https://www.w3schools.com/html/html_basic.asp">Resources</a>
-<img src="https://www.udacity.com/blog/wp-content/uploads/2020/06/HTML_Blog-scaled.jpeg.webp" alt="html.jpg" width="150"
-     height="100">
-<p> the following is an unsorted list of some of the things we will be learning: </p>
-<ul>
-    <li>Common tags</li>
-    <li>Attributes</li>
-    <li>CSS</li>
-    <p><b> we have currently used 16 tags out of the 15 required for this assignment</b></p>
+<label for="name"> Username </label>
+    <input type = "text" id="name"/>
+
+    <label for="chatroom"> Room name</label>
+        <input type = "text" id="chatroom"/>
+<button id="submit"> Enter </button>
+    <div class = "parent">
+    <div class="square" id = "sq1">Users</div>
+    <div class="square" id = "sq2">Messages</div>
+
+        <label> Your message:  </label>
+        <textarea id = "input" style="position:relative; left:10px; top:20px;"></textarea>
+
+          <button id = "send"> Send</button>
+    </div>
+    <button id="leaveBtn" style="position:relative; left: 30px; top 500px"> Leave room</button>
 
 
-    <blockquote cite="https://www.brainyquote.com/quotes/mike_davidson_230176?src=t_html"> "Writing old school HTML was
-        never very much fun but now it's getting downright tedious for most people"
-    </blockquote>
-    <details>
-        <summary> Above Quote</summary>
-        <p> This quote is by the late Dwayne "The Rock" Johnson in 1944 when he joined in with the maple syrup union of
-            Michigan to fight off the crushing weight of capitalism.</p>
-    </details>
 
-    <label for="mood">How are you feeling? </label>
-    <select name="mood" id="mood">
-        <option value="sad"> sad</option>
-        <option value="happy"> happy</option>
-        <option value="angry"> angry</option>
-        <option value="existential"> existential</option>
-    </select>
-    <small>
-        <p style="color:purple"> if you have more questions you can reach out to the author of this page by sending a
-            letter to: </p>
-        <address> 427 Douglas Street, SLC UT, 84102</address>
-    </small>
-    <footer>
-        <p> This website was made in collaboration with NPR and PBS </p>
-    </footer>
+<script type="text/javascript" src = "ChatClient.js"></script>
 
-</ul>
 </body>
 </html>
