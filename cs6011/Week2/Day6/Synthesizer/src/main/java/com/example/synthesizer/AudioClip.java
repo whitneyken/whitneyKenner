@@ -7,14 +7,13 @@ public class AudioClip {
     static final float duration = 2.0F; //This is in seconds
     static final int sampleRate = 44100; //hertz?
     byte[] data;
-    int totalSamples;
+    //int totalSamples;
 
     //Constructor
     public AudioClip(){
         data = new byte[sampleRate * (int) duration * 2];
-        totalSamples = data.length/2;
+        //totalSamples = data.length/2;
     }
-
 
 
     //This method returns the value at a desired index
@@ -41,4 +40,5 @@ public class AudioClip {
         temp = Arrays.copyOf(data, data.length);
         return temp;
     }
+
 }

@@ -6,11 +6,12 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
+import javafx.scene.shape.Circle;
 
-public class AudioComponenetWidget extends AudioComponentWidgetBase{
+public class SineWaveWidget extends AudioComponentWidgetBase implements ConnectingInputs{
 //extends Pane extends  AudioComponentWidgetBase
     //Going to comment out the things I move over to the base widget class
-    AudioComponenetWidget (AudioComponent sw, AnchorPane parent) {
+    SineWaveWidget(AudioComponent sw, AnchorPane parent) {
         super(parent, 15, 20);
         audioComponent_ = sw;
 
@@ -54,12 +55,11 @@ public class AudioComponenetWidget extends AudioComponentWidgetBase{
     }
 
 
-    public Integer adjustFrequency(Label title) {
-        return (Integer.parseInt(title.getText()));
+    public String toString(){
+        return "SineWave";
+    }
+    public AudioComponent getAudioClip(){
+        return this.audioComponent_;
     }
 
-//    public AudioComponent getAudioComponenet() {
-//        return audioComponent_;
-//    }
-//
 }

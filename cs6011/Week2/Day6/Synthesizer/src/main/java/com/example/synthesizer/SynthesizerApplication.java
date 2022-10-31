@@ -1,34 +1,32 @@
 package com.example.synthesizer;
 
 import javafx.application.Application;
-import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Slider;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
-import javafx.scene.control.Label;
 
-import javax.sound.sampled.AudioFormat;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
-import javax.sound.sampled.LineUnavailableException;
-import java.awt.*;
 import java.io.IOException;
 import java.util.ArrayList;
+
 import javafx.scene.control.Button;
 
-public class SynthesizeApplication extends Application {
+public class SynthesizerApplication extends Application {
     private AnchorPane mainCanvas_;
-    public static Circle speaker_;
-    public static ArrayList<AudioComponenetWidget> widgets_ = new ArrayList<>();
+//    public static ArrayList<SineWaveWidget> widgets_ = new ArrayList<>();
+    public static ArrayList<AudioComponentWidgetBase> allWidgets_ = new ArrayList<>();
+
+
+    //public static Circle speaker;
+
+    public static SpeakerWidget speakerWidget;
+
+    public static AudioComponent audioConnectedToSpeaker;
+
+
     @Override
     public void start(Stage stage) throws IOException {
 
@@ -43,64 +41,41 @@ public class SynthesizeApplication extends Application {
 
         //Creating the right side panel
         VBox rightPanel = new VBox();
-        rightPanel.setPadding(new Insets(4));
         rightPanel.setStyle("-fx-background-color: lightpink");
         Button sineWaveButton = new Button("Sine Wave");
         rightPanel.getChildren().add(sineWaveButton);
+        Button volumeButton = new Button("Volume");
+        rightPanel.getChildren().add(volumeButton);
+        rightPanel.setPadding(new Insets(4));
+        rightPanel.setSpacing(10);
         //This method will eventually create a new sine wave widget when clicked
-        sineWaveButton.setOnAction(e-> createSineWaveWidget("Sine Wave"));
-
+        sineWaveButton.setOnAction(e -> createSineWaveWidget());
+        volumeButton.setOnAction(e -> createVolumeWidget());
 
         //Creating center panel
         mainCanvas_ = new AnchorPane();
         mainCanvas_.setStyle("-fx-background-color: lightgrey");
+        speakerWidget = new SpeakerWidget(mainCanvas_);
+        //speaker = new Circle(455, 325, 20);
+        //speaker.setFill(Color.BLACK);
+//        mainCanvas_.getChildren().add(speakerWidget);
 
-        //Making a speaker
-        speaker_ = new Circle(400, 200, 20);
-        speaker_.setFill(Color.BLACK);
-        mainCanvas_.getChildren().add(speaker_);
 
         //Bottom panel stuff
         HBox bottomPanel = new HBox();
         bottomPanel.setPadding(new Insets(4));
         Button playBtn = new Button("Play");
-        playBtn.setOnAction( e-> playNetwork());
+        playBtn.setOnAction(e -> playNetwork());
         bottomPanel.getChildren().add(playBtn);
 
+        //Trying some cable stuff:
+//        Cable cable = new Cable(mainCanvas_);
+//        if (widgets_.size() > 0 && connectedWidgetToSpeaker_ != null) {
+//            audioCompFromCables = cable.createTheConnection(widgets_.get(0), connectedWidgetToSpeaker_);
+//            audioCompFromCables = cable.createTheConnection(connectedWidgetToSpeaker_, speakerWidget);
+//        }
 
 
-
-
-
-        // Bottom panel play button
-//        HBox bottomPane = new HBox();
-//        Button playBtn = new Button("Play");
-//        bottomPane.setStyle("-fx-background-color: lightpink");
-//
-//        VBox sineWaveWidget = new VBox();
-//        sineWaveWidget.setStyle("-fx-background-color: lightpink");
-//
-//        Label title = new Label();
-//        title.setText("Sine Wave (440 Hz)");
-//
-//        sineWaveWidget.getChildren().add(title);
-//
-//        sineWaveWidget.relocate(50, 100);
-//        Slider slider = new Slider(220, 880, 440);
-//        sineWaveWidget.getChildren().add(slider);
-//        slider.setOnMouseDragged( e-> handleSlider(e, slider, title));
-//
-//        //playBtn.
-////        playBtn.setOnMouseClicked(e-> handleMouseClicked(e)){
-////            try {
-////                handleMouseClicked(e);
-////            } catch (LineUnavailableException ex) {
-////                throw new RuntimeException(ex);
-////            }
-////        });
-//        root.getChildren().add(bottomPane);
-        //root.getChildren().add(playBtn);
-        //root.getChildren().add(sineWaveWidget);
         root.setRight(rightPanel);
         root.setCenter(mainCanvas_);
         root.setBottom(bottomPanel);
@@ -108,47 +83,73 @@ public class SynthesizeApplication extends Application {
         stage.show();
     }
 
+    private void createVolumeWidget() {
+        VolumeWidget vw = new VolumeWidget(mainCanvas_, new Filter(1));
+        allWidgets_.add(vw);
+    }
+
     private void playNetwork() {
-        try {
-            Clip c = AudioSystem.getClip();
-            AudioFormat format = new AudioFormat(44100, 16, 1, true, false);
-
-            AudioComponenetWidget acw;
-            AudioComponent ac = acw.getAudioComponenet_();
-            byte[] data
-
-            c.open(format, data, 0, data.length);
-            c.start();
-        }catch(LineUnavailableException e){
-        //Do nothing, keep running
+        if (SpeakerWidget.allConnectedWidgetsToSpeaker.size() == 0) {
+            return;
         }
+        SpeakerWidget.playFromSpeaker();
+//        try {
+//
+//            if (audioConnectedToSpeaker != null) {
+//                Clip c = AudioSystem.getClip();
+//                AudioListener listener = new AudioListener(c);
+//
+
+
+
+
+                //!!! Between this comment and the other exclamation comment (not including the commented out portion)
+                // is my janky ass code to make sure that my volume widget works and my god, it does!! will need to
+                // fix later once I have actual connections and such
+//            AudioComponent ac;
+//            VolumeWidget vw;
+//            if (connectedWidgetToSpeaker_  != null) {
+//                vw = (VolumeWidget) connectedWidgetToSpeaker_;
+//                vw.connectInput(widgets_.get(0));
+//                ac = vw.getAudioComponenet();
+
+
+//            Mixer mixer = new Mixer();
+//            for (AudioComponentWidgetBase w : connectedWidgetsToSpeaker_) {
+//                if (w instanceof VolumeWidget) {
+//                    AudioComponent ac = ((VolumeWidget) w).getAudioComponenet();
+//                    mixer.connectInput(ac);
+//                }
+//            }
+//            byte[] data = mixer.getClip().data;
+
+
+
+
+
+//                byte[] data = audioConnectedToSpeaker.getClip().data;
+//                //!!!
+//
+//                AudioFormat format = new AudioFormat(44100, 16, 1, true, false);
+//
+//                c.open(format, data, 0, data.length);
+//                c.start();
+//                c.addLineListener(listener);
+//            }
+//
+//    } catch(LineUnavailableException e)
+//
+//    {
+//        //Do nothing, keep running
+//    }
+
+}
+
+
+    private void createSineWaveWidget() {
+        //Going to attempt to not create and pass in a sine wave but instead create it within the constructor
+        SineWaveWidget acw = new SineWaveWidget(new SineWave(440), mainCanvas_);
+        allWidgets_.add(acw);
     }
 
-    private void createSineWaveWidget(String sine_wave) {
-        AudioComponent sineWave = new SineWave(440);
-        AudioComponenetWidget acw = new AudioComponenetWidget(sineWave, mainCanvas_, sine_wave);
-        widgets_.add(acw);
-    }
-
-    private void handleSlider(MouseEvent e, Slider slider, Label title) {
-        int value = (int)slider.getValue();
-        title.setText("Sine Wave (" + value + " Hz)");
-    }
-
-    private void handleMouseClicked(Object e) throws LineUnavailableException {
-        Clip c = AudioSystem.getClip();
-        AudioClip clip;
-        AudioFormat format16 = new AudioFormat( 44100, 16, 1, true, false );
-        AudioComponent gen = new SineWave(440);
-        clip = gen.getClip();
-        c.open( format16, clip.getData(), 0, clip.getData().length );
-        c.start(); // Plays it.
-        c.loop( 2 );
-        while( c.getFramePosition() < 2 || c.isActive() || c.isRunning() ){
-            // Do nothing while we wait for the note to play.
-        }
-
-        System.out.println( "Done." );
-        c.close();
-    }
 }

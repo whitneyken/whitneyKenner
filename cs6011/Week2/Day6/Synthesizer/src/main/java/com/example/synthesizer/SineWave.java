@@ -12,6 +12,13 @@ public class SineWave implements AudioComponent{
         frequency = freq;
 
     }
+
+    //Need to make a set frequency method so that we can adjust the frequency of the sine wave based on the slider position
+
+    public void setFrequency(int newFreq){
+        frequency = newFreq;
+        audioClip = this.getClip();
+    }
 //This will return an array of bytes containing our sine wave
 @Override
     public AudioClip getClip() {
@@ -35,4 +42,6 @@ public class SineWave implements AudioComponent{
         assert (false);
 
     }
+
+
 }

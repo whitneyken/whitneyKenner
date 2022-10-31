@@ -1,2 +1,10 @@
-package com.example.synthesizer;public class ConnectInput {
-}
+//package com.example.synthesizer;
+//
+//import javafx.scene.shape.Circle;
+//
+//public interface WidgetConnectInput {
+//
+//    void connectInputToWidget(AudioComponentWidgetBase input);
+//
+//
+//}

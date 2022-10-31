@@ -15,12 +15,7 @@ public class Filter implements AudioComponent {
         for (int i = 0; i <(original.data.length / 2);
         i++){
             double tempInput = scale* original.getSample(i);
-            if (tempInput > Short.MAX_VALUE){
-                tempInput = Short.MAX_VALUE;
-            } else if (tempInput < Short.MIN_VALUE) {
-                tempInput = Short.MIN_VALUE;
-            }
-            result.setSample(i, (int) tempInput);
+            result.setSample(i, (int) clampValue(tempInput));
         }
         return result;
 
@@ -38,5 +33,13 @@ public class Filter implements AudioComponent {
     @Override
     public void connectInput(AudioComponent audi) {
         input = audi;
+    }
+
+    public void setScale(Double inputScale){
+        scale = inputScale;
+    }
+
+    public double getScale() {
+        return scale;
     }
 }
