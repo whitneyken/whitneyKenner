@@ -3,6 +3,7 @@ package com.example.synthesizer;
 import javafx.geometry.Bounds;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 
 public class Cable extends Pane {
@@ -75,6 +76,29 @@ public class Cable extends Pane {
 
     public void isConnectedToSpeaker() {
         isConnectedToSpeaker = true;
+    }
+
+    public void updateLine(AudioComponentWidgetBase acwb, MouseEvent e, Bounds bounds) {
+        try {
+
+            Bounds parentBounds = acwb.parent_.getBoundsInParent();
+            if (originWidget_ == acwb && acwb.cable_.line_ != null) {
+                line_.setStartX(bounds.getCenterX() - parentBounds.getMinX());
+                line_.setStartY(bounds.getCenterY() - parentBounds.getMinY());
+            }
+            if (acwb.connectedWidget != null && acwb.connectedWidget.cable_.line_ != null) {
+
+                Circle inputCircle = acwb.getInputCircle();
+                Bounds inputBounds = inputCircle.localToScene(inputCircle.getBoundsInLocal());
+                acwb.connectedWidget.cable_.line_.setEndX(inputBounds.getCenterX());
+                acwb.connectedWidget.cable_.line_.setEndY(inputBounds.getCenterY());
+
+            } else {
+                System.out.println("Something went wrong, not origin or destination widget line trying to move");
+            }
+        }catch (Exception error){
+            System.out.println(error.getMessage());
+        }
     }
 }
 

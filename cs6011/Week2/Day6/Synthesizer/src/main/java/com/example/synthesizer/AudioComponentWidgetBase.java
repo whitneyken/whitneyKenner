@@ -95,10 +95,11 @@ public class AudioComponentWidgetBase extends Pane {
     }
 
 
-    private void handleDrag(MouseEvent e) {
+    private void handleDrag(MouseEvent e){
         double mouseDeltaX = e.getSceneX() - mouseStartDragX_;
         double mouseDeltaY = e.getSceneY() - mouseStartDragY_;
         this.relocate(widgetStartDragX_ + mouseDeltaX, widgetStartDragY_ + mouseDeltaY);
+        cable_.updateLine(this, e, this.outputCircle_.localToScene(this.outputCircle_.getBoundsInLocal()));
     }
 
     private void startDrag(MouseEvent e) {
@@ -188,7 +189,6 @@ public class AudioComponentWidgetBase extends Pane {
     }
 
     private void startConnection(MouseEvent e) {
-
         cable_.startLine(e);
 
     }
