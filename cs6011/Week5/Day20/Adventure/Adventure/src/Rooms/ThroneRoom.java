@@ -4,7 +4,7 @@ import Game.Adventure;
 import Items.Item;
 
 
-//This is Whitney's code, I worked with Felix Ye to create our interactive rooms
+//This is Whitney Kenner's code, I worked with Felix Ye to create our interactive rooms
 public class ThroneRoom extends Room {
     static boolean hasSeenPainting = false;
 
@@ -18,10 +18,10 @@ public class ThroneRoom extends Room {
 
     @Override
     public Item getItem(String name) {
-        if (name.equals("chest") && !hasSeenPainting) {
+        if (name.equals("Chest") && !hasSeenPainting) {
             System.out.println("The chest is too large to lift and you do not know how to open it.");
             return null;
-        } else if (name.equals("chest")) {
+        } else if (name.equals("Chest")) {
             System.out.println("The chest is still too large to lift, maybe you can try something else....");
             return null;
         } else {
@@ -34,31 +34,38 @@ public class ThroneRoom extends Room {
         }
         return null;
     }
-
     @Override
-    public boolean handleCommand(String[] subcommands) {
+    public boolean handleCommand( String[] subcommands ) {
 
-        if (subcommands.length <= 1) {
+        if( subcommands.length <= 1 ) {
             return false;
         }
-        String cmd = subcommands[0];
+        String cmd  = subcommands[0];
         String attr = subcommands[1];
 
         // unlock, use
-        if (cmd.equals("open") && attr.equals("chest") && hasSeenPainting) {
-            System.out.println("You follow the directions from the painting and rotate 2 metal hooks 3 " +
-                    "times in opposite directions until you hear a click and the lid of the chest opens.\n");
-            System.out.println("Inside the opened chest is a large pile of gold");
-            Item goldPile = new Item("pile of gold", "A shining pile of gold");
-            items_.add(goldPile);
+        if( cmd.equals( "open" ) && attr.equals( "Chest") ) {
+
+            for( Item item : Adventure.inventory ) {
+                if( item.getName().equals( "instructions" ) ) {
+                    hasSeenPainting = true;
+                    break;
+                }
+            }
+            if( hasSeenPainting ) {
+                System.out.println( "You follow the directions from the painting and rotate 2 metal hooks 3 " +
+                        "times in opposite directions until you hear a click and the lid of the chest opens.\n");
+                System.out.println("Inside the opened chest is a large pile of gold");
+                Item goldPile = new Item("pile of gold", "A shining pile of gold");
+                items_.add(goldPile);
+            }
+            else {
+                System.out.println( "The chest is too large to lift and you do not know how to open it." );
+            }
             return true;
-        } else {
-            System.out.println("The chest is too large to lift and you do not know how to open it.");
-
         }
-
         return false;
-    }
+}
 
 
 }
