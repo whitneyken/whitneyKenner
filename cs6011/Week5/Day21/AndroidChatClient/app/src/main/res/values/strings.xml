@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">AndroidChatClient</string>
+    <string name="chat_server">Chat Server</string>
+    <string name="user_name">User name:</string>
+    <string name="chat_room">Chat room:</string>
+    <string name="enter_chat">Enter Chat Room</string>
+    <string name="active_users">Active Users</string>
+    <string name="messages">Messages</string>
+    <string name="send_message">Send</string>
+    <string name="enter_message">Enter Message:</string>
+</resources>
