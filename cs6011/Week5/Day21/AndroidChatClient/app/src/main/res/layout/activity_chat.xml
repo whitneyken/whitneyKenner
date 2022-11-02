@@ -7,6 +7,19 @@
     android:background="@color/material_dynamic_tertiary80"
     tools:context=".ChatActivity">
 
+    <ListView
+        android:id="@+id/listView"
+        android:layout_width="350dp"
+        android:layout_height="434dp"
+        android:layout_marginStart="22dp"
+        android:layout_marginTop="99dp"
+        android:layout_marginEnd="22dp"
+        android:background="#7C9BD3DA"
+        android:isScrollContainer="false"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
         android:id="@+id/chatServer"
         android:layout_width="wrap_content"
@@ -20,52 +33,13 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/messageInputBox"
-        android:layout_width="255dp"
-        android:layout_height="377dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="31dp"
-        android:layout_marginEnd="24dp"
-        android:autofillHints=""
-        android:background="@color/purple_200"
-        android:backgroundTint="#95B4EDE5"
-        android:ems="10"
-        android:gravity="start|top"
-        android:hint="@string/messages"
-        android:inputType="textMultiLine"
-        android:textColorHint="#263238"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/activeUserInputBox"
-        app:layout_constraintTop_toBottomOf="@+id/chatServer" />
-
-    <EditText
-        android:id="@+id/activeUserInputBox"
-        android:layout_width="107dp"
-        android:layout_height="379dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="128dp"
-        android:layout_marginEnd="15dp"
-        android:autofillHints=""
-        android:background="@color/purple_200"
-        android:backgroundTint="#95B4EDE5"
-        android:ems="10"
-        android:gravity="start|top"
-        android:hint="@string/active_users"
-        android:inputType="textMultiLine"
-        android:textColor="#0E0D0D"
-        android:textColorHint="#263238"
-        app:layout_constraintEnd_toStartOf="@+id/messageInputBox"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <Button
         android:id="@+id/sendButton"
         android:layout_width="77dp"
         android:layout_height="48dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="100dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="104dp"
+        android:onClick="sendTextOnClick"
         android:text="@string/send_message"
         android:textColor="#D1C4E9"
         android:textColorLink="#2196F3"
@@ -81,11 +55,29 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/textInput"
-            android:layout_width="289dp"
-            android:layout_height="99dp"
-            android:hint="@string/enter_message"
-            android:textColorHint="#616161" />
     </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/textInput"
+        android:layout_width="289dp"
+        android:layout_height="99dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="76dp"
+        android:hint="@string/enter_message"
+        android:isScrollContainer="false"
+        android:textColorHint="#616161"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/leaveButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="15dp"
+        android:layout_marginBottom="17dp"
+        android:onClick="LeaveOnClick"
+        android:text="@string/leave_chat"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
