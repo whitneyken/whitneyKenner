@@ -1,4 +1,4 @@
-package lab01;
+package lab04;
 
 public class Part1 {
 
