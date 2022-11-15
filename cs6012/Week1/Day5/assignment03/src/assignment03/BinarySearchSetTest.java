@@ -77,7 +77,7 @@ class BinarySearchSetTest {
             //testing first() when it does not exist
             setOfInts.first();
         } catch (NoSuchElementException e) {
-            System.out.println("Cannot delete an element that does not exist");
+            System.out.println("An element that does not exist");
         }
         int firstInt = 20;
         setOfInts.add(firstInt);
@@ -138,7 +138,7 @@ class BinarySearchSetTest {
         setOfInts.addAll(list1);
         //assert that at least 1 element is contained within the array
         Assertions.assertTrue(setOfInts.containsAll(list2));
-        Assertions.assertTrue(setOfInts.containsAll(list3));
+        Assertions.assertFalse(setOfInts.containsAll(list3));
 
     }
 
@@ -166,7 +166,7 @@ class BinarySearchSetTest {
            while (myIterator.hasNext()) {
                int nextInt = myIterator.next();
                //remove all odd elements
-               if ((nextInt % 2) != 0){
+               if (nextInt == 90){
                    myIterator.remove();
                }
                //myIterator.remove();
@@ -174,6 +174,7 @@ class BinarySearchSetTest {
        }catch (NoSuchElementException e){
            System.out.println("Caught an out of bounds element");
        }
+       Assertions.assertFalse(setOfInts.contains(90));
         System.out.println(Arrays.toString(setOfInts.toArray()));
         System.out.println("My set size is: " + setOfInts.size());
 //        for (int i = 0; i < setOfInts.size() -1; i++){
@@ -216,10 +217,42 @@ class BinarySearchSetTest {
         Assertions.assertEquals(8, setOfInts.size());
         //assert it returns true even when not all elements are contained within the array
         Assertions.assertTrue(setOfInts.removeAll(list3));
+        //System.out.println(setOfInts);
         //assert everything is removed
         Assertions.assertTrue(setOfInts.removeAll(list1));
         //assert this is empty after removing everything
         Assertions.assertTrue(setOfInts.isEmpty());
     }
 
+
+
+    @Test
+    public void testSquids(){
+        //tests to check this works on my custom comparator and object
+        Squid squid = new Squid  (10, 12, "Steve");
+        Squid squid2 = new Squid (8, 8, "Chase");
+        Squid squid3 = new Squid (0, 3, "Whit");
+        Squid squid4 = new Squid (100, 1, "Felix");
+        Squid squid5 = new Squid (4, 4, "Nicole");
+        Squid squid6 = new Squid (11, 14, "Celeste");
+        List<Squid> list1 = Arrays.asList(squid, squid2, squid3, squid4, squid5, squid6);
+        BinarySearchSet<Squid> squidList = new BinarySearchSet<>(new SquidComparator());
+        squidList.add(squid);
+        //check that add works
+        Assertions.assertEquals(1, squidList.size());
+        squidList.addAll(list1);
+        //check that addAll works
+        Assertions.assertEquals(6, squidList.size());
+        //check that contains works
+        Assertions.assertTrue(squidList.contains(squid4));
+        squidList.remove(squid6);
+        //check that remove works
+        Assertions.assertFalse(squidList.contains(squid6));
+        squidList.removeAll(list1);
+        //check remove all works
+        Assertions.assertEquals(0, squidList.size());
+        //check isEmpty
+        Assertions.assertTrue(squidList.isEmpty());
+
+    }
 }

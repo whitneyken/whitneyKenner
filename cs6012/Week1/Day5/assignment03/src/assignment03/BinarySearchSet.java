@@ -20,7 +20,7 @@ public class BinarySearchSet<E> implements SortedSet<E>, Iterable<E> {
         //My chosen initial capacity
         capacity = 10;
         size = 0;
-        //Have to cast my set to an set of elements
+        //Have to cast my set to a set of elements
         mySet = (E[]) new Object[capacity];
         hasComparator = false;
     }
@@ -83,16 +83,14 @@ public class BinarySearchSet<E> implements SortedSet<E>, Iterable<E> {
         }
         if (isEmpty()) {
             mySet[0] = (E) element;
-            size++;
-            return true;
         } else {
             //call binary search to find the index we want to place the element
             int index = getIndexForInsertion(element);
             //call insertion sort to shift elements to the right and insert the desired element
             insertElement(index, element);
-            size++;
-            return true;
         }
+        size++;
+        return true;
     }
 
     //This method inserts the given element at the proper index location, it directly modifies the set
@@ -103,7 +101,7 @@ public class BinarySearchSet<E> implements SortedSet<E>, Iterable<E> {
             mySet[i] = mySet[i - 1];
         }
         //this sets the element at the desired index after having shifted the other elements
-        mySet[index] = (E) element;
+        mySet[index] = element;
     }
 
     //This method performs binary search to find the indices of where we want to place a new element.
@@ -129,7 +127,7 @@ public class BinarySearchSet<E> implements SortedSet<E>, Iterable<E> {
     private int binarySearch(E element) {
         int low = 0;
         int high = size - 1;
-        int mid = 0;
+        int mid;
         while (low <= high) {
             mid = low + (high - low) / 2;
             if (mySet[mid].equals(element)) {
@@ -151,7 +149,7 @@ public class BinarySearchSet<E> implements SortedSet<E>, Iterable<E> {
             return comparator_.compare(elemInArray, elemToPlace);
         } else {
             //else compares based on the default comparator
-            return ((Comparable<E>) elemInArray).compareTo((E) elemToPlace);
+            return ((Comparable<E>) elemInArray).compareTo(elemToPlace);
         }
 
     }
@@ -187,7 +185,6 @@ public class BinarySearchSet<E> implements SortedSet<E>, Iterable<E> {
         capacity = 10;
         size = 0;
         mySet = (E[]) new Object[capacity];
-        //make back up in case professors hate this:
     }
 
     //This method is called to verify that this set contains a specific element
@@ -209,16 +206,15 @@ public class BinarySearchSet<E> implements SortedSet<E>, Iterable<E> {
     //A boolean is returned on whether they were all contained or not
     @Override
     public boolean containsAll(Collection<? extends E> elements) {
-        boolean containsElem = false;
         //for each loop of the elements we are looking for
         for (E element : elements) {
             //If this set does not contain this element, return false
-            if (this.contains(element)) {
-                containsElem = true;
+            if (!this.contains(element)) {
+                return false;
             }
         }
         //else it contains all of them and we return true
-        return containsElem;
+        return true;
     }
 
     //This method checks and returns whether the data set is empty or not
@@ -241,21 +237,23 @@ public class BinarySearchSet<E> implements SortedSet<E>, Iterable<E> {
     public boolean remove(E element) {
         if (size == 0) {
             return false;
-        }
-        //Create a new iterator to iterate over the elements
-        Iterator<E> iterator = iterator();
-        //While there is a next element in the set
-        while (iterator.hasNext()) {
-            //Get the next element
-            E currentElem = iterator.next();
-            //If the element equals the desired element
-            if (currentElem.equals(element)) {
-                //remove it
-                iterator.remove();
-                //decrease the size for each element removed
-                //return true because it was successfully removed
-                return true;
+        } else if (contains(element)) {
 
+            //Create a new iterator to iterate over the elements
+            Iterator<E> iterator = iterator();
+            //While there is a next element in the set
+            while (iterator.hasNext()) {
+                //Get the next element
+                E currentElem = iterator.next();
+                //If the element equals the desired element
+                if (currentElem.equals(element)) {
+                    //remove it
+                    iterator.remove();
+                    //decrease the size for each element removed
+                    //return true because it was successfully removed
+                    return true;
+
+                }
             }
         }
         //Was not found, so retrun false
@@ -272,10 +270,9 @@ public class BinarySearchSet<E> implements SortedSet<E>, Iterable<E> {
         //first if all elements are not contained in this, return false
         //otherwise, for each element we want to remove
         for (E elemToRemove : elements) {
-            if (contains(elemToRemove)) {
-                //remove it, ignore returned boolean, irrelevant
-               elementsRemoved =  remove(elemToRemove);
-
+            //remove it, ignore returned boolean, irrelevant
+            if (remove(elemToRemove)) {
+                elementsRemoved = true;
             }
         }
         //return true as all elements were successfully removed
@@ -291,7 +288,6 @@ public class BinarySearchSet<E> implements SortedSet<E>, Iterable<E> {
     //returns the sorted set of data for this object
     @Override
     public E[] toArray() {
-
         return mySet;
     }
 
@@ -307,6 +303,7 @@ public class BinarySearchSet<E> implements SortedSet<E>, Iterable<E> {
 
     private class DataSetIterator implements Iterator<E> {
         private int position = 0;
+        private int indexPosition = -1;
 
         //This method is called on an set of the binary search set and checks if there is a
         // next index element in the set
@@ -328,6 +325,7 @@ public class BinarySearchSet<E> implements SortedSet<E>, Iterable<E> {
             if (this.hasNext()) {
                 //returns the element if it does exist
                 canRemove = true;
+                indexPosition = position;
                 return mySet[position++];
             } else {
                 //If there is no next element, returns null
@@ -337,12 +335,22 @@ public class BinarySearchSet<E> implements SortedSet<E>, Iterable<E> {
 
         @Override
         public void remove() throws IllegalStateException {
-//            Iterator.super.remove();
+            //If a double remove is attempted without a next() call in between
+            if (!canRemove){
+                throw new IllegalStateException();
+            }
+            //from the index of the removed element to the end, shift everything to the left
             for (int i = position - 1; i < size; i++) {
+                //the shifting
                 mySet[i] = mySet[i + 1];
             }
+            //set the final one to null
+            //this is only really necessary if we are removing an item while the array is at capacity,
+            //but still necessary
             mySet[size - 1] = null;
+            //cannot immediately remove again
             canRemove = false;
+            //reduce size
             size--;
         }
 
