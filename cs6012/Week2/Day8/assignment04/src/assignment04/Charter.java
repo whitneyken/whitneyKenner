@@ -1,4 +1,4 @@
-package lab03;
+package assignment04;
 
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;

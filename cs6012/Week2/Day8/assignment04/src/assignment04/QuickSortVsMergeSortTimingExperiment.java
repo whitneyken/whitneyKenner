@@ -1,15 +1,21 @@
-package lab03;
+package assignment04;
 
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.Random;
-import java.util.SortedSet;
-import java.util.TreeSet;
+import java.util.ArrayList;
+import java.util.Comparator;
 
-public class ContainsTimingExperiment {
+public class QuickSortVsMergeSortTimingExperiment {
 
-  private static final int ITER_COUNT = 100;
+  static int twoPowEighteen = 262144;
+  static final ArrayList<Integer> worstCaseArray = SortUtil.generateWorstCase(twoPowEighteen);
+  static final ArrayList<Integer> averageArray = SortUtil.generateAverageCase(twoPowEighteen);
+  static final ArrayList<Integer> bestCaseArray = SortUtil.generateBestCase(twoPowEighteen);
+  public Comparator<Integer> comp = Integer::compareTo;
+
+
+  private static final int ITER_COUNT = 1000;
 
   public static void main(String[] args) {
     // you spin me round baby, right round
@@ -19,8 +25,7 @@ public class ContainsTimingExperiment {
 
     try (FileWriter fw = new FileWriter(new File("contains_experiment.tsv"))) { // open up a file writer so we can write
                                                                                 // to file.
-      Random random = new Random();
-      for (int exp = 10; exp <= 20; exp++) { // This is used as the exponent to calculate the size of the set.
+      for (int exp = 10; exp <= 18; exp++) { // This is used as the exponent to calculate the size of the set.
         int size = (int) Math.pow(2, exp); // or ..
 
         // Do the experiment multiple times, and average out the results
@@ -28,15 +33,16 @@ public class ContainsTimingExperiment {
 
         for (int iter = 0; iter < ITER_COUNT; iter++) {
           // SET UP!
-          SortedSet<Integer> set = new TreeSet<>();
-          for (int i = 0; i < size; i++) {
-            set.add(i);
+          ArrayList<Integer> copyOfSet = new ArrayList<>(size);
+          for (int i = 0; i < size-1; i++) {
+            copyOfSet.add(i, bestCaseArray.get(i));
           }
-          int findElement = random.nextInt(size); // This gets me a random int between 0 and size;
+          //int findElement = random.nextInt(size); // This gets me a random int between 0 and size;
 
           // TIME IT!
           long start = System.nanoTime();
-          set.remove(findElement);
+          SortUtil.quickSort(copyOfSet, Integer::compareTo, "middle");
+          //SortUtil.mergeSort(copyOfSet, Integer::compareTo);
           long stop = System.nanoTime();
           totalTime += stop - start;
         }
