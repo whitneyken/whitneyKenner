@@ -11,7 +11,7 @@ public class SortUtil {
     //Driver method for mergeSort. takes in an array list (that we want sorted) as a parameter, as well as a comparator
     //to be used in the actual sorting
     //returns nothing because the method is void and the list itself will be updated
-    public static <T> void mergeSort (ArrayList<T> list, Comparator<? super T> comp) throws IndexOutOfBoundsException{
+    public static <T> void mergesort(ArrayList<T> list, Comparator<? super T> comp) throws IndexOutOfBoundsException{
         //throws an exception if an empty listed is passed in
         if (list.isEmpty()){
             throw new IndexOutOfBoundsException();
@@ -24,7 +24,7 @@ public class SortUtil {
         // tempArray every recursive call
         T[] tempArray = (T[]) new Object[list.size()];
         //calling the recursive method of mergeSort (I believe?)
-        mergeSort(list, tempArray, 0, tempArray.length - 1, comp);
+        mergesort(list, tempArray, 0, tempArray.length - 1, comp);
 
     }
 
@@ -38,7 +38,7 @@ public class SortUtil {
 
     //the recursive method of merge sort. takes in the list we are sorting, the temp array we are going to sort into, the
     //smallest index of our array (0), the last index of our array (length - 1), and the comparator used for sorting
-    private static <T> void mergeSort(ArrayList<T> list, Object[] tempArray, int left, int right, Comparator<? super T> comp) {
+    private static <T> void mergesort(ArrayList<T> list, Object[] tempArray, int left, int right, Comparator<? super T> comp) {
         //the base case, once we have called merge sort to the lowest level, this will be once we have called merge sort down
         //to the lowest level and we are sorting 1 element (i.e. the right and left side equal each other)
         if (right - left + 1 <= thresholdValue || left >= right) {
@@ -48,8 +48,8 @@ public class SortUtil {
         //the center must be calculated each time as the array is split in half, this will change the center
         int center = (left + right) / 2;
         //recursively calling mergeSort on each half
-        mergeSort(list, tempArray, left, center, comp);
-        mergeSort(list, tempArray, center + 1, right, comp);
+        mergesort(list, tempArray, left, center, comp);
+        mergesort(list, tempArray, center + 1, right, comp);
         //where the actual merge portion happens and data is copied over into the tempArray
         merge(list, tempArray, left, center, right, comp);
 
@@ -141,7 +141,7 @@ public class SortUtil {
 
     //The driver method takes in the array list of elements to be sorted, a given comparator for how to sort them, and
     //a string of the pivot type which will be used to determine which of the 3 pivot options are used
-    public static <T> void quickSort(ArrayList<T> list, Comparator<? super T> comp, String pivotType) throws IndexOutOfBoundsException{
+    public static <T> void quicksort(ArrayList<T> list, Comparator<? super T> comp, String pivotType) throws IndexOutOfBoundsException{
         //throws an exception if an empty listed is passed in
         if (list.isEmpty()){
             throw new IndexOutOfBoundsException();
@@ -153,7 +153,7 @@ public class SortUtil {
         //copy everything over into an array to be handled by quickSort
         T[] tempArray = arrayListToArray(list);
         //this is a call to the method that will recursively call quickSort
-        quickSort(tempArray, 0, tempArray.length - 1, comp, pivotType);
+        quicksort(tempArray, 0, tempArray.length - 1, comp, pivotType);
         //here the data is copied over from the tempArray back into the original array
         for (int k = 0; k < tempArray.length; k++) {
             list.set(k, tempArray[k]);
@@ -182,9 +182,23 @@ public class SortUtil {
             swapArrayElements(array, randomIndex, highIndex);
         }
     }
+    //driver method that doesn't take a string for autograder lol
+    private static <T> void quicksort(Object[] tempArray, int low, int high, Comparator<? super T> comp) {
+        //this is the base case: once low is greater than or equal to the high index, aka everything has been sorted
+        if (low >= high) {
+            //if base case is met, break out
+            return;
+        }
+        String pivotType = "middle";
+        //this method does the actual partitioning /sorting component within quicksort
+        int pIndex = partition(tempArray, low, high, comp, pivotType);
+        //recursive calls on each half of the array
+        quicksort(tempArray, low, pIndex - 1, comp, pivotType);
+        quicksort(tempArray, pIndex + 1, high, comp, pivotType);
+    }
 
     //the quicksort method, takes in the array, the low inde, the high index, the provided comparator, and the pivot type
-    private static <T> void quickSort(Object[] tempArray, int low, int high, Comparator<? super T> comp, String pivotType) {
+    private static <T> void quicksort(Object[] tempArray, int low, int high, Comparator<? super T> comp, String pivotType) {
         //this is the base case: once low is greater than or equal to the high index, aka everything has been sorted
         if (low >= high) {
             //if base case is met, break out
@@ -193,8 +207,8 @@ public class SortUtil {
         //this method does the actual partitioning /sorting component within quicksort
         int pIndex = partition(tempArray, low, high, comp, pivotType);
         //recursive calls on each half of the array
-        quickSort(tempArray, low, pIndex - 1, comp, pivotType);
-        quickSort(tempArray, pIndex + 1, high, comp, pivotType);
+        quicksort(tempArray, low, pIndex - 1, comp, pivotType);
+        quicksort(tempArray, pIndex + 1, high, comp, pivotType);
     }
 
 

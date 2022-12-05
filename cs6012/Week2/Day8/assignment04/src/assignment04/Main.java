@@ -18,7 +18,7 @@ public class Main {
 
         Comparator<Integer> comp = Integer::compareTo;
 
-        SortUtil.quickSort(arrayOfInts, comp, "first");
+        SortUtil.quicksort(arrayOfInts, comp, "first");
         System.out.println(arrayOfInts);
 
 

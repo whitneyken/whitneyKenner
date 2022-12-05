@@ -35,14 +35,14 @@ public class QuickSortVsMergeSortTimingExperiment {
           // SET UP!
           ArrayList<Integer> copyOfSet = new ArrayList<>(size);
           for (int i = 0; i < size-1; i++) {
-            copyOfSet.add(i, bestCaseArray.get(i));
+            copyOfSet.add(i, averageArray.get(i));
           }
           //int findElement = random.nextInt(size); // This gets me a random int between 0 and size;
 
           // TIME IT!
           long start = System.nanoTime();
-          SortUtil.quickSort(copyOfSet, Integer::compareTo, "middle");
-          //SortUtil.mergeSort(copyOfSet, Integer::compareTo);
+          //SortUtil.quickSort(copyOfSet, Integer::compareTo, "middle");
+          SortUtil.mergesort(copyOfSet, Integer::compareTo);
           long stop = System.nanoTime();
           totalTime += stop - start;
         }

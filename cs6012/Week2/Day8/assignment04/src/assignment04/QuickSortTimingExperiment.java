@@ -39,7 +39,7 @@ public class QuickSortTimingExperiment {
 
           // TIME IT!
           long start = System.nanoTime();
-          SortUtil.quickSort(copyOfSet, Integer::compareTo, "random");
+          SortUtil.quicksort(copyOfSet, Integer::compareTo, "random");
           long stop = System.nanoTime();
           totalTime += stop - start;
         }

@@ -85,9 +85,9 @@ class SortUtilTest {
     void testQuickSortOnEmptyArrayLists() {
         //tests empty arrayLists for all types of pivot
         //all should throw an index out of bounds exception
-        Assertions.assertThrows(IndexOutOfBoundsException.class, () -> SortUtil.quickSort(emptyTestArray, integerComparator, "first"));
-        Assertions.assertThrows(IndexOutOfBoundsException.class, () -> SortUtil.quickSort(emptyTestArray, integerComparator, "middle"));
-        Assertions.assertThrows(IndexOutOfBoundsException.class, () -> SortUtil.quickSort(emptyTestArray, integerComparator, "random"));
+        Assertions.assertThrows(IndexOutOfBoundsException.class, () -> SortUtil.quicksort(emptyTestArray, integerComparator, "first"));
+        Assertions.assertThrows(IndexOutOfBoundsException.class, () -> SortUtil.quicksort(emptyTestArray, integerComparator, "middle"));
+        Assertions.assertThrows(IndexOutOfBoundsException.class, () -> SortUtil.quicksort(emptyTestArray, integerComparator, "random"));
 
     }
 
@@ -95,11 +95,11 @@ class SortUtilTest {
     @Test
     void testQuickSortOnSortedArrayListsFirstPivot() {
         //testing the sorted arrays
-        SortUtil.quickSort(smallestBestArray, integerComparator, "first");
+        SortUtil.quicksort(smallestBestArray, integerComparator, "first");
         for (int i = 1; i < smallestBestArray.size(); i++) {
             Assertions.assertTrue(smallestBestArray.get(i - 1) <= smallestBestArray.get(i));
         }
-        SortUtil.quickSort(bestArray, integerComparator, "first");
+        SortUtil.quicksort(bestArray, integerComparator, "first");
         for (int i = 1; i < bestArray.size(); i++) {
             Assertions.assertTrue(bestArray.get(i - 1) <= bestArray.get(i));
         }
@@ -109,11 +109,11 @@ class SortUtilTest {
     @Test
     void testQuickSortOnSortedArrayListsMiddlePivot() {
         //testing on the middle pivot
-        SortUtil.quickSort(smallestBestArray, integerComparator, "middle");
+        SortUtil.quicksort(smallestBestArray, integerComparator, "middle");
         for (int i = 1; i < smallestBestArray.size(); i++) {
             Assertions.assertTrue(smallestBestArray.get(i - 1) <= smallestBestArray.get(i));
         }
-        SortUtil.quickSort(bestArray, integerComparator, "middle");
+        SortUtil.quicksort(bestArray, integerComparator, "middle");
         for (int i = 1; i < bestArray.size(); i++) {
             Assertions.assertTrue(bestArray.get(i - 1) <= bestArray.get(i));
         }
@@ -122,11 +122,11 @@ class SortUtilTest {
     @Test
     void testQuickSortOnSortedArrayListsRandomPivot() {
         //testing on random pivot
-        SortUtil.quickSort(smallestBestArray, integerComparator, "random");
+        SortUtil.quicksort(smallestBestArray, integerComparator, "random");
         for (int i = 1; i < smallestBestArray.size(); i++) {
             Assertions.assertTrue(smallestBestArray.get(i - 1) <= smallestBestArray.get(i));
         }
-        SortUtil.quickSort(bestArray, integerComparator, "random");
+        SortUtil.quicksort(bestArray, integerComparator, "random");
         for (int i = 1; i < bestArray.size(); i++) {
             Assertions.assertTrue(bestArray.get(i - 1) <= bestArray.get(i));
         }
@@ -135,11 +135,11 @@ class SortUtilTest {
     @Test
     void testQuickSortOnAverageArrayListsFirstPivot() {
         //testing the smallest arrays
-        SortUtil.quickSort(smallestAverageArray, integerComparator, "first");
+        SortUtil.quicksort(smallestAverageArray, integerComparator, "first");
         for (int i = 1; i < smallestAverageArray.size(); i++) {
             Assertions.assertTrue(smallestAverageArray.get(i - 1) <= smallestAverageArray.get(i));
         }
-        SortUtil.quickSort(averageArray, integerComparator, "first");
+        SortUtil.quicksort(averageArray, integerComparator, "first");
         for (int i = 1; i < averageArray.size(); i++) {
             Assertions.assertTrue(averageArray.get(i - 1) <= averageArray.get(i));
         }
@@ -148,11 +148,11 @@ class SortUtilTest {
     @Test
     void testQuickSortOnAverageArrayListsMiddlePivot() {
         //testing on the middle pivot
-        SortUtil.quickSort(smallestAverageArray, integerComparator, "middle");
+        SortUtil.quicksort(smallestAverageArray, integerComparator, "middle");
         for (int i = 1; i < smallestAverageArray.size(); i++) {
             Assertions.assertTrue(smallestAverageArray.get(i - 1) <= smallestAverageArray.get(i));
         }
-        SortUtil.quickSort(averageArray, integerComparator, "middle");
+        SortUtil.quicksort(averageArray, integerComparator, "middle");
         for (int i = 1; i < averageArray.size(); i++) {
             Assertions.assertTrue(averageArray.get(i - 1) <= averageArray.get(i));
         }
@@ -161,11 +161,11 @@ class SortUtilTest {
     @Test
     void testQuickSortOnAverageArrayListsRandomPivot() {
         //testing on the middle pivot
-        SortUtil.quickSort(smallestAverageArray, integerComparator, "random");
+        SortUtil.quicksort(smallestAverageArray, integerComparator, "random");
         for (int i = 1; i < smallestAverageArray.size(); i++) {
             Assertions.assertTrue(smallestAverageArray.get(i - 1) <= smallestAverageArray.get(i));
         }
-        SortUtil.quickSort(averageArray, integerComparator, "random");
+        SortUtil.quicksort(averageArray, integerComparator, "random");
         for (int i = 1; i < averageArray.size(); i++) {
             Assertions.assertTrue(averageArray.get(i - 1) <= averageArray.get(i));
         }
@@ -174,11 +174,11 @@ class SortUtilTest {
     @Test
     void testQuickSortOnWorstArrayListsFirstPivot() {
         //testing on the middle pivot
-        SortUtil.quickSort(smallestWorstArray, integerComparator, "first");
+        SortUtil.quicksort(smallestWorstArray, integerComparator, "first");
         for (int i = 1; i < smallestWorstArray.size(); i++) {
             Assertions.assertTrue(smallestWorstArray.get(i - 1) <= smallestWorstArray.get(i));
         }
-        SortUtil.quickSort(worstArray, integerComparator, "first");
+        SortUtil.quicksort(worstArray, integerComparator, "first");
         for (int i = 1; i < worstArray.size(); i++) {
             Assertions.assertTrue(worstArray.get(i - 1) <= worstArray.get(i));
         }
@@ -188,11 +188,11 @@ class SortUtilTest {
     @Test
     void testQuickSortOnWorstArrayListsMiddlePivot() {
         //testing on the middle pivot
-        SortUtil.quickSort(smallestWorstArray, integerComparator, "middle");
+        SortUtil.quicksort(smallestWorstArray, integerComparator, "middle");
         for (int i = 1; i < smallestWorstArray.size(); i++) {
             Assertions.assertTrue(smallestWorstArray.get(i - 1) <= smallestWorstArray.get(i));
         }
-        SortUtil.quickSort(worstArray, integerComparator, "middle");
+        SortUtil.quicksort(worstArray, integerComparator, "middle");
         for (int i = 1; i < worstArray.size(); i++) {
             Assertions.assertTrue(worstArray.get(i - 1) <= worstArray.get(i));
         }
@@ -202,11 +202,11 @@ class SortUtilTest {
     @Test
     void testQuickSortOnWorstArrayListsRandomPivot() {
         //testing on the middle pivot
-        SortUtil.quickSort(smallestWorstArray, integerComparator, "random");
+        SortUtil.quicksort(smallestWorstArray, integerComparator, "random");
         for (int i = 1; i < smallestWorstArray.size(); i++) {
             Assertions.assertTrue(smallestWorstArray.get(i - 1) <= smallestWorstArray.get(i));
         }
-        SortUtil.quickSort(worstArray, integerComparator, "random");
+        SortUtil.quicksort(worstArray, integerComparator, "random");
         for (int i = 1; i < worstArray.size(); i++) {
             Assertions.assertTrue(worstArray.get(i - 1) <= worstArray.get(i));
         }
@@ -214,25 +214,25 @@ class SortUtilTest {
 
     @Test
     void testQuickSortOnArrayOfTwoFirstPivot() {
-        SortUtil.quickSort(arrayOf2, integerComparator, "first");
+        SortUtil.quicksort(arrayOf2, integerComparator, "first");
         Assertions.assertTrue(arrayOf2.get(0) < arrayOf2.get(1));
     }
 
     @Test
     void testQuickSortOnArrayOfTwoMiddlePivot() {
-        SortUtil.quickSort(arrayOf2, integerComparator, "middle");
+        SortUtil.quicksort(arrayOf2, integerComparator, "middle");
         Assertions.assertTrue(arrayOf2.get(0) < arrayOf2.get(1));
     }
 
     @Test
     void testQuickSortOnArrayOfTwoRandomPivot() {
-        SortUtil.quickSort(arrayOf2, integerComparator, "random");
+        SortUtil.quicksort(arrayOf2, integerComparator, "random");
         Assertions.assertTrue(arrayOf2.get(0) < arrayOf2.get(1));
     }
 
     @Test
     void testQuickSortOnArrayOfOneFirstPivot() {
-        SortUtil.quickSort(arrayOf1, integerComparator, "first");
+        SortUtil.quicksort(arrayOf1, integerComparator, "first");
         assertEquals(1, arrayOf1.size());
     }
 
@@ -241,14 +241,14 @@ class SortUtilTest {
 
         // Testing empty arraylist input
         assertThrows(IndexOutOfBoundsException.class, () -> {
-            SortUtil.mergeSort(emptyTestArray, Integer::compareTo);
+            SortUtil.mergesort(emptyTestArray, Integer::compareTo);
         });
 
     }
 
     @Test
     public void mergeSortBestCaseTest() {
-        SortUtil.mergeSort(bestArray, Integer::compareTo);
+        SortUtil.mergesort(bestArray, Integer::compareTo);
         for (int i = 0; i < bestArray.size() - 1; i++) {
             Assertions.assertTrue(bestArray.get(i) < bestArray.get(i + 1));
         }
@@ -256,7 +256,7 @@ class SortUtilTest {
 
     @Test
     public void mergeSortAverageCaseTest() {
-        SortUtil.mergeSort(averageArray, Integer::compareTo);
+        SortUtil.mergesort(averageArray, Integer::compareTo);
         for (int i = 0; i < averageArray.size() - 1; i++) {
             Assertions.assertTrue(averageArray.get(i) < averageArray.get(i + 1));
         }
@@ -270,14 +270,14 @@ class SortUtilTest {
             Assertions.assertFalse(worstArray.get(i) < worstArray.get(i + 1));
         }
 
-        SortUtil.mergeSort(worstArray, Integer::compareTo);
+        SortUtil.mergesort(worstArray, Integer::compareTo);
 
         // After sorting testing to see it changed to ascending order
         for (int i = 0; i < worstArray.size() - 1; i++) {
             Assertions.assertTrue(worstArray.get(i) < worstArray.get(i + 1));
         }
 
-        SortUtil.mergeSort(arrayOf2, Integer::compareTo);
+        SortUtil.mergesort(arrayOf2, Integer::compareTo);
 
         // Testing to see a two element array and how the sort handles it
         Assertions.assertEquals(arrayOf2.size(), 2);
@@ -285,7 +285,7 @@ class SortUtilTest {
 
 
         // Testing to see how the sort handles a single element arraylist
-        SortUtil.mergeSort(arrayOf1, Integer::compareTo);
+        SortUtil.mergesort(arrayOf1, Integer::compareTo);
         Assertions.assertEquals(arrayOf1.size(), 1);
     }
 }

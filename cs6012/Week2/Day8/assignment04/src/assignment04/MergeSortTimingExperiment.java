@@ -38,7 +38,7 @@ public class MergeSortTimingExperiment {
 
           // TIME IT!
           long start = System.nanoTime();
-          SortUtil.mergeSort(copyOfSet, Integer::compareTo);
+          SortUtil.mergesort(copyOfSet, Integer::compareTo);
           long stop = System.nanoTime();
           totalTime += stop - start;
         }
