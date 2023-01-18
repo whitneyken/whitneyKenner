@@ -1,0 +1,2 @@
+the smallest delay is 16.563 which is what will be assumed to be a queuing delay of 0 
+the average delay (with the smallest value detracted from all delays) is 8.624172

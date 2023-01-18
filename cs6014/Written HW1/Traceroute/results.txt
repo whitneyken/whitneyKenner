@@ -1,0 +1,21 @@
+ 1  10.17.128.2 (10.17.128.2)  9.505 ms  5.716 ms  4.947 ms
+ 2  155.99.130.69 (155.99.130.69)  4.868 ms  3.755 ms  4.508 ms
+ 3  155.99.130.64 (155.99.130.64)  6.126 ms
+    155.99.130.66 (155.99.130.66)  4.377 ms *
+ 4  fw-border-trust.net.utah.edu (199.104.93.34)  4.600 ms
+    fw-border-trust.net.utah.edu (199.104.93.30)  4.303 ms  3.094 ms
+ 5  199.104.93.21 (199.104.93.21)  6.007 ms  6.970 ms  4.813 ms
+ 6  140.197.253.138 (140.197.253.138)  4.928 ms  4.792 ms  4.768 ms
+ 7  140.197.253.22 (140.197.253.22)  163.995 ms  33.971 ms  5.552 ms
+ 8  hundredge-0-0-0-24.701.core1.salt.net.internet2.edu (198.71.47.145)  14.637 ms  15.432 ms  16.302 ms
+ 9  fourhundredge-0-0-0-21.4079.core2.salt.net.internet2.edu (163.253.1.29)  20.532 ms
+    fourhundredge-0-0-0-23.4079.core2.salt.net.internet2.edu (163.253.1.33)  19.778 ms
+    fourhundredge-0-0-0-22.4079.core2.salt.net.internet2.edu (163.253.1.31)  43.303 ms
+10  fourhundredge-0-0-0-8.4079.core1.losa.net.internet2.edu (163.253.1.114)  21.349 ms  22.653 ms  21.300 ms
+11  fourhundredge-0-0-0-48.4079.agg1.losa2.net.internet2.edu (163.253.1.197)  48.621 ms  229.768 ms  21.049 ms
+12  ae40.r12.lax01.ien.netarch.akamai.com (23.203.155.20)  19.047 ms  44.429 ms  16.388 ms
+13  ae19.r02.border101.lax01.fab.netarch.akamai.com (23.207.234.193)  18.140 ms  17.595 ms  34.032 ms
+14  * * *
+15  * * *
+16  * * *
+17  a104-119-76-11.deploy.static.akamaitechnologies.com (104.119.76.11)  107.663 ms  24.329 ms  21.842 ms
