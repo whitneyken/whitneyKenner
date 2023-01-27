@@ -102,6 +102,7 @@ public class WebSocketHandler {
 
     private void handleWSResponse(String fakeJsonToSend, byte opcode) throws IOException {
         room = Room.getRoom(roomName_);
+        System.out.println("The returned room name is:" + room.roomName_);
         room.addUserToRoom(clientSocket_);
         room.sendMessageToRoom(fakeJsonToSend, opcode);
         if (toLeave){

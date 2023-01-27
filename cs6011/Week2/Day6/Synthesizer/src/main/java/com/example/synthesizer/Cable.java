@@ -63,8 +63,10 @@ public class Cable extends Pane {
         originWidget_.parent_.getChildren().remove(line_);
         SpeakerWidget.allConnectedWidgetsToSpeaker.remove(originWidget_);
         isConnectedToSpeaker = false;
-        destinationWidget_.connectedWidget = null;
-        destinationWidget_ = null;
+        if (destinationWidget_!= null) {
+            destinationWidget_.connectedWidget = null;
+            destinationWidget_ = null;
+        }
         line_ = null;
 
     }
@@ -79,25 +81,27 @@ public class Cable extends Pane {
     }
 
     public void updateLine(AudioComponentWidgetBase acwb, MouseEvent e, Bounds bounds) {
-        try {
+        if (acwb.cable_.line_ != null || this.destinationWidget_ != null) {
+            try {
 
-            Bounds parentBounds = acwb.parent_.getBoundsInParent();
-            if (originWidget_ == acwb && acwb.cable_.line_ != null) {
-                line_.setStartX(bounds.getCenterX() - parentBounds.getMinX());
-                line_.setStartY(bounds.getCenterY() - parentBounds.getMinY());
+                Bounds parentBounds = acwb.parent_.getBoundsInParent();
+                if (originWidget_ == acwb && acwb.cable_.line_ != null) {
+                    line_.setStartX(bounds.getCenterX() - parentBounds.getMinX());
+                    line_.setStartY(bounds.getCenterY() - parentBounds.getMinY());
+                }
+                if (acwb.connectedWidget != null && acwb.connectedWidget.cable_.line_ != null) {
+
+                    Circle inputCircle = acwb.getInputCircle();
+                    Bounds inputBounds = inputCircle.localToScene(inputCircle.getBoundsInLocal());
+                    acwb.connectedWidget.cable_.line_.setEndX(inputBounds.getCenterX());
+                    acwb.connectedWidget.cable_.line_.setEndY(inputBounds.getCenterY());
+
+                } else {
+                    System.out.println("Something went wrong, not origin or destination widget line trying to move");
+                }
+            } catch (Exception error) {
+                System.out.println(error.getMessage());
             }
-            if (acwb.connectedWidget != null && acwb.connectedWidget.cable_.line_ != null) {
-
-                Circle inputCircle = acwb.getInputCircle();
-                Bounds inputBounds = inputCircle.localToScene(inputCircle.getBoundsInLocal());
-                acwb.connectedWidget.cable_.line_.setEndX(inputBounds.getCenterX());
-                acwb.connectedWidget.cable_.line_.setEndY(inputBounds.getCenterY());
-
-            } else {
-                System.out.println("Something went wrong, not origin or destination widget line trying to move");
-            }
-        }catch (Exception error){
-            System.out.println(error.getMessage());
         }
     }
 }

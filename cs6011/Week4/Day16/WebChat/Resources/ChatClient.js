@@ -81,7 +81,7 @@ function handleMessageFromWsCB(event) {
     if (response.type === "join") {
         let joinText = document.createElement('p');
         let nameText = document.createElement('p');
-        joinText.textContent = " has joined the chat";
+        joinText.textContent = response.user + " has joined the chat";
         nameText.textContent = response.user;
         nameText.setAttribute("id", response.user);
         display1.appendChild(nameText);
@@ -89,7 +89,7 @@ function handleMessageFromWsCB(event) {
 
     } else if (response.type === "leave") {
         let leaveText = document.createElement('p');
-        leaveText.textContent = response.user + "has left the chat";
+        leaveText.textContent = response.user + " has left the chat";
         display2.appendChild(leaveText);
         let leaveUser = document.getElementById(response.user);
         display1.removeChild(leaveUser);
@@ -100,4 +100,3 @@ function handleMessageFromWsCB(event) {
     }
     display2.scrollTop = display2.scrollHeight;
 }
-

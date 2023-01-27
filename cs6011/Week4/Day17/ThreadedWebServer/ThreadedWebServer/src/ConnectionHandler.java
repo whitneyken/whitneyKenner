@@ -7,7 +7,6 @@ import java.security.NoSuchAlgorithmException;
 public class ConnectionHandler implements Runnable {
     Socket clientSocket;
     boolean isWebSocket;
-    DataInputStream dis_;
 
     ConnectionHandler(Socket Sock) {
         clientSocket = Sock;

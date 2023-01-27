@@ -1,0 +1,26 @@
+# Makefile for Lab01 cs6015
+#
+# To build a target, enter
+# make <target>
+#
+#targets:
+# build- builds everything
+# clean- deletes everything (.o files, and program)
+# run- executes the program  
+
+build: program
+program: main.o Caps.o Clothing.o Pants.o
+	c++ main.o Caps.o Clothing.o Pants.o -o program
+main.o: main.cpp
+	c++ -c main.cpp
+Caps.o: Caps.cpp Caps.h
+	c++ -c Caps.cpp
+Clothing.o: Clothing.cpp Clothing.h
+	c++ -c Clothing.cpp
+Pants.o: Pants.cpp Pants.h
+	c++ -c Pants.cpp
+run: program
+	./program
+clean:
+	rm -rf *.o program
+

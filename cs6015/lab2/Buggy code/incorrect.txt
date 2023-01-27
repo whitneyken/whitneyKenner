@@ -1,0 +1,66 @@
+  Here is the List of all the Staff in the R&D Department: 
+  ------------------------------------------------------------
+   Name  ID          Title            Salary   Year Hired  Supervisor  ProjectID Prog.Lang. #Exp Years
+
+   Josh   1   Technology Specialist   3000.00      2015
+
+   Mary   2         Project Manager   5500.00      2010
+
+   Marc   3    Research Team Leader   8000.00      2007
+
+   Mike  11        Multimedia Prog.   2500.00      2014      Mary         5         CSS
+
+  Julie  12     Mainframe Sys.Prog.   2150.00      2013      Mary         5         C++
+
+ Albert  13                OS Prog.   2300.00      2015      Mary         9         C++
+
+   John  21    Senior Software Eng.   4899.00      2011      Marc         6                    7
+
+ Connor  24      Software Developer   1900.00      2017      John         8                    0
+  Here is the List of all the Staff in the IT Department: 
+  ------------------------------------------------------------
+   Name  ID          Title            Salary   Year Hired  Supervisor  ProjectID Prog.Lang. #Exp Years
+
+    Roy  32           Network Prog.   1900.00      2016       N/A         7        JAVA
+
+   Jane  35                  Tester   1500.00      2018       Roy         7        JAVA
+
+ Removing Mike from the company: Succeeded
+ -------------------------------
+   Name  ID          Title            Salary   Year Hired  Supervisor  ProjectID Prog.Lang. #Exp Years
+
+   Josh   1   Technology Specialist   3000.00      2015
+
+   Mary   2         Project Manager   5500.00      2010
+
+   Marc   3    Research Team Leader   8000.00      2007
+
+  Julie  12     Mainframe Sys.Prog.   2150.00      2013      Mary         5         C++
+
+ Albert  13                OS Prog.   2300.00      2015      Mary         9         C++
+
+   John  21    Senior Software Eng.   4899.00      2011      Marc         6                    7
+
+ Connor  24      Software Developer   1900.00      2017      John         8                    0
+
+  Here is the List of all the Programmers who know C++ in the R&D Department: 
+  ---------------------------------------------------------------------------
+   Name  ID          Title            Salary   Year Hired  Supervisor  ProjectID Prog.Lang. #Exp Years
+
+  Julie  12     Mainframe Sys.Prog.   2150.00      2013      Mary         5         C++
+
+ Albert  13                OS Prog.   2300.00      2015      Mary         9         C++
+
+ Listing All Project IDs:  5 9 6 8
+-------------------------
+The Highest R&D Employee Salary is: 8000.00
+The Highest R&D Programmer Salary is: 2300.00
+The Highest R&D Software Architect Salary is: 4899.00
+
+The Average R&D Employee Salary is: 5500
+The Average R&D Programmer Salary is: 2225
+The Average R&D Software Architect Salary is: 3399
+
+The Average IT Employee Salary is: 0
+The Average IT Programmer Salary is: 1700
+The Average IT Software Architect Salary is: 0

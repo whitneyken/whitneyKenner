@@ -38,10 +38,6 @@ function handleClick(event){
         previous.style.background = "white";
         previous.style.fontWeight = "normal";
 
-        // if (event.target.id == selected) {
-        //   selected.style.backgroundColor = "white";
-        //   selected.style.fontWeight = "normal";
-        // }
   }
   selected = event.target.id;
 }

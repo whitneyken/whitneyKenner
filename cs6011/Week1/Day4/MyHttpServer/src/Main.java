@@ -21,7 +21,5 @@ public class Main {
             }
 
         }
-        //clientSocket.close();
-
     }
 }

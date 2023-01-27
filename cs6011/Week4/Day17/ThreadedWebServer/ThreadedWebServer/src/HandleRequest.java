@@ -11,8 +11,6 @@ public class HandleRequest {
     Boolean isWebSocket = false;
     String webSocketKey;
 
-    DataInputStream dis;
-    DataOutputStream dos;
 
 
     public String handleHTTPRequest(Socket clientSocket) throws IOException, NoSuchAlgorithmException {
@@ -78,9 +76,6 @@ public class HandleRequest {
         return fileName;
     }
 
-    public void handleWSRequest() {
-
-    }
 
     public String getWebSocketKey() {
         return webSocketKey;

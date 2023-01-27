@@ -1,5 +1,5 @@
 "use strict";
-	
+
 
 
 
@@ -27,7 +27,7 @@
 	let myImage = document.createElement( 'img');
 	myImage.src = "https://www.udacity.com/blog/wp-content/uploads/2020/06/HTML_Blog-scaled.jpeg.webp";
 	myImage.style.height = "150px";
-	
+
 
 	let myP3 = document.createElement ('p');
 	let myText3 = document.createTextNode('the following is an unsorted list of some of the things we will be learning: ');
@@ -48,7 +48,7 @@
 	unList.appendChild(item1);
 	unList.appendChild(item2);
 	unList.appendChild(item3);
-	
+
 	document.body.appendChild(myH);
 	document.body.appendChild(myP);
 	document.body.appendChild(myP2);
@@ -56,5 +56,5 @@
 	document.body.appendChild(myImage);
 	document.body.appendChild(myP3);
 	document.body.appendChild(unList);
-	
+
 	document.body.style.backgroundColor = "beige";

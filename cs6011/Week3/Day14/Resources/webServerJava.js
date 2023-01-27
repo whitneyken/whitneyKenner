@@ -8,6 +8,7 @@ let button = document.getElementById( "button");
 
 xValue.addEventListener("keypress", handleKeyPressCB);
 yValue.addEventListener("keypress", handleKeyPressCB);
+button.addEventListener("click", handleKeyPressCB);
 
 
 
@@ -39,7 +40,7 @@ function handleMessageFromWsCB( event ) {
 
 
 function handleKeyPressCB(event){
-  button.addEventListener("click", handleKeyPressCB);
+
     if(event.keycode == 13 || event.type == "click"){
       //display the data in the text area
       let x =  parseFloat( xValue.value);

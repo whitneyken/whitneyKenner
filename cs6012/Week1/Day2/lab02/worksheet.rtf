@@ -1,0 +1,42 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2639
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\margl1440\margr1440\vieww12540\viewh16140\viewkind1
+\deftab720
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardeftab720\ri0\partightenfactor0
+
+\f0\fs24 \cf0 Lab 2 Worksheet\
+\
+Answer the following questions by modifying this text file. Add your answer below each question.\
+\
+1. On your computer, how many times per second does the millisecond timer update?\
+	Generally 1000 times per second. There is a bit of noise that makes it occasionally update 1000.2 or so when repeating the 10 second run time multiple times. On average though it is 1000 times per second. This is NOT the same as how many times it runs through the loop and checks to see if the timer can update which is in the many millions\
+\
+\
+2. Is it possible to determine how many times per second the nanosecond timer updates?\
+If so, how many? If not, why not?\
+Not truly because we cannot go through the loop fast enough for the nanosecond timer to actually be updated as frequently as it would be if the other lines of code took no time to run and the System.nanoTime() took no time to compute. We do get a number of around 2.3e7~ times per second, but this is much less than the 1e9 nanoseconds within a second. According to the description of the nanoTime() method it provides nanosecond precision but not necessarily nanosecond accuracy\
+\
+3. Judging by experiment 4, how long does it appear to take to compute System.nanoTime()?\
+Around 85~ nanoseconds on average (plus some outliers/noise)\
+\
+\
+4. Estimate the precision of your answer above (+/- how many nanoseconds?)\
+	I estimate a precision of +/-458 nanoseconds (the highest time I got was 500 and the lowest was 42) \
+\
+\
+5. How long does it take to compute the square root of the numbers 1 through 10?\
+	for experiment 7: A long time with an average of 6000~ nanoseconds\
+	for experiment 8 a much faster time of 52~ nanoseconds\
+\
+6. Estimate the precision of your answer above (+/- how many nanoseconds?)\
+	for experiment 7: +/- 8,975 \
+	for experiment 8: +/- 25 nanoseconds\
+\
+7. If you repeat the square root test 100x as many times, does the precision improve?\
+	YES! The precision improves a lot and I got exactly 3 nanoseconds for every time I ran it 100x as many times\
+\
+8. How could you improve the results (get a more accurate estimate of elapsed time)\
+ 	By Increasing the number of times we run this!!! The more times we run something, the less evident outliers/noise are, which gives us a more accurate picture of the amount of time elapsed\
+}

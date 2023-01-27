@@ -51,7 +51,7 @@ public class ChatActivity extends AppCompatActivity {
 
     }
     public void LeaveOnClick(View view){
-        MainActivity.ws_.sendText("leave " + userName + " " + chatRoom);
-        MainActivity.ws_.disconnect();
+        //MainActivity.ws_.sendText("leave " + userName + " " + chatRoom);
+        MainActivity.ws_.sendClose();
     }
 }

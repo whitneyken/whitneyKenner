@@ -1,0 +1,42 @@
+Lab 1 Worksheet
+
+Answer the following questions in a text file(NOT A WORD DOCUMENT!). Add your answer below each question.
+
+
+
+1. Where is the assertEquals method defined? What does it do? Can we use assertEquals for more than just int types? (Hint: Consult the API for JUnit)
+  it's defined under the class Assert within the package org.junit.jupiter.api. The Assert class is static only so we can use it's methods without creating an Assert object.
+  AssertEquals will check if the expected value (which you enter) matches the actual value. Only failed assertions are recorded!!!! We can use assertEquals
+  for all sorts of types: arrays(with bytes, chars, ints, objects, etc), strings, shorts, doubles, etc....
+
+2. Briefly describe what each of the three tests is checking.
+  emptyArray() is checking that when an array with a length of less than 2 is entered, the findSmallestDiff method handles this by returning -1.
+  allArrayElementsEqual() is checking that if you have an array where all elements are the same value, that findSmallestDiff() appropriately returns 0;
+  smallRandomArrayElements() is checking that findSmallestDiff() can handle a small random array of elements which includes negative numbers
+
+3. Why is our unimplemented findSmallestDiff method passing one of the tests?
+  This is just because our stub method is returning 0 (no matter what the input is) which just happens to be what we are trying to assertEquals in one of the tests.
+  So it is not correctly calculating anything, it just happens to be the answer for one of our tests
+
+4. Why are we failing the third test? How should our method be modified to correct this?
+  we are failing the third tests because we aren't appropriately handling negative numbers. we can change this by checking (in our if statement) if
+  the absolute value of our temp difference is less than the current diff variable and in that case store the absolute value of the temp as our new diff.
+
+5. What is the appropriate call to assertEquals for your new test (test 4)?
+NA (told to skip)
+
+
+6. Provide one more test (test 5) for the findSmallestDiff method. Briefly describe your test and write the call to assertEquals here.
+  I'm going to make a test to make sure it handles a[0] and a[1] appropriately for comparisons since diff is being initialized and stored before the for loop
+  arr5 = new int[] {-1, 1, 9, 2, 16};
+  @Test
+    public void firstTwoElements(){
+        assertEquals(1, DiffUtil.findSmallestDiff(arr5));
+    }
+
+  I also set the initial diff to be the absolute value of a[0] - a[1], otherwise this method can return a false smallest value
+
+7. Briefly describe your unit tests for Assignment 1.
+  I used various unit tests to check the robustness of my code. I checked a normal case in which a normal answer can be expected. then I checked
+  various cases that should return null (on times and plus) due to incompatible sizes of the various arrays. I also tested compatible differently
+  sized vectors (3x2 and 2x3). I also checked if the plus and times worked with matrices of 0s

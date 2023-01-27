@@ -11,12 +11,12 @@ import java.util.stream.Stream;
 
 public class PacmanApp {
 
-    static final int BlockSize = 50;
+    static final int BlockSize = 10;
     static final int CornerSize = 10;
     static final int DotRadius = 7;
     public static void main(String[] args) throws IOException {
 
-        var mazeFile = "mediumMazeSol.txt";
+        var mazeFile = "mazes/bigMazeSol.txt";
         var maze = readMaze(mazeFile);
 
         SwingUtilities.invokeLater(new Runnable() {

@@ -88,9 +88,6 @@ public class VolumeWidget extends AudioComponentWidgetBase implements Connecting
         return "Volume";
     }
 
-    //    public AudioComponent getAudioComponenet() {
-//        return audioComponent_;
-//    }
     @Override
     public AudioComponent getAudioClip() {
         if (this.hasInput()) {

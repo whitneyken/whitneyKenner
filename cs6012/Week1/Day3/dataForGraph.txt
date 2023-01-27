@@ -1,0 +1,36 @@
+Data for graphing:
+all run 5,000 times
+
+
+size: 10^2
+average time: 3655 nanoseconds
+
+size: 10^11
+average: 4648
+
+size: 10^12
+average: 8550
+
+size: 10^13
+average: 15880
+
+size: 10^14
+average: 29691
+
+size: 10^15
+average: 66061
+
+size: 10^16
+average: 119471
+
+size: 10^17
+average: 242026
+
+size: 10^18
+average: 571723
+
+size: 10^19
+average: 1100884
+
+size: 10^20
+average: 2211671

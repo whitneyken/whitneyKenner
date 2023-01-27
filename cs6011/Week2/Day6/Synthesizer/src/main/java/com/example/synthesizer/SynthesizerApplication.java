@@ -56,9 +56,7 @@ public class SynthesizerApplication extends Application {
         mainCanvas_ = new AnchorPane();
         mainCanvas_.setStyle("-fx-background-color: lightgrey");
         speakerWidget = new SpeakerWidget(mainCanvas_);
-        //speaker = new Circle(455, 325, 20);
-        //speaker.setFill(Color.BLACK);
-//        mainCanvas_.getChildren().add(speakerWidget);
+
 
 
         //Bottom panel stuff
@@ -68,12 +66,6 @@ public class SynthesizerApplication extends Application {
         playBtn.setOnAction(e -> playNetwork());
         bottomPanel.getChildren().add(playBtn);
 
-        //Trying some cable stuff:
-//        Cable cable = new Cable(mainCanvas_);
-//        if (widgets_.size() > 0 && connectedWidgetToSpeaker_ != null) {
-//            audioCompFromCables = cable.createTheConnection(widgets_.get(0), connectedWidgetToSpeaker_);
-//            audioCompFromCables = cable.createTheConnection(connectedWidgetToSpeaker_, speakerWidget);
-//        }
 
 
         root.setRight(rightPanel);
@@ -93,55 +85,6 @@ public class SynthesizerApplication extends Application {
             return;
         }
         SpeakerWidget.playFromSpeaker();
-//        try {
-//
-//            if (audioConnectedToSpeaker != null) {
-//                Clip c = AudioSystem.getClip();
-//                AudioListener listener = new AudioListener(c);
-//
-
-
-
-
-                //!!! Between this comment and the other exclamation comment (not including the commented out portion)
-                // is my janky ass code to make sure that my volume widget works and my god, it does!! will need to
-                // fix later once I have actual connections and such
-//            AudioComponent ac;
-//            VolumeWidget vw;
-//            if (connectedWidgetToSpeaker_  != null) {
-//                vw = (VolumeWidget) connectedWidgetToSpeaker_;
-//                vw.connectInput(widgets_.get(0));
-//                ac = vw.getAudioComponenet();
-
-
-//            Mixer mixer = new Mixer();
-//            for (AudioComponentWidgetBase w : connectedWidgetsToSpeaker_) {
-//                if (w instanceof VolumeWidget) {
-//                    AudioComponent ac = ((VolumeWidget) w).getAudioComponenet();
-//                    mixer.connectInput(ac);
-//                }
-//            }
-//            byte[] data = mixer.getClip().data;
-
-
-
-
-
-//                byte[] data = audioConnectedToSpeaker.getClip().data;
-//                //!!!
-//
-//                AudioFormat format = new AudioFormat(44100, 16, 1, true, false);
-//
-//                c.open(format, data, 0, data.length);
-//                c.start();
-//                c.addLineListener(listener);
-//            }
-//
-//    } catch(LineUnavailableException e)
-//
-//    {
-//        //Do nothing, keep running
-//    }
 
 }
 

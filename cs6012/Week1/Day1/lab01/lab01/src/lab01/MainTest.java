@@ -1,3 +1,5 @@
+package lab01;
+
 class MainTest {
 
     @org.junit.jupiter.api.BeforeEach

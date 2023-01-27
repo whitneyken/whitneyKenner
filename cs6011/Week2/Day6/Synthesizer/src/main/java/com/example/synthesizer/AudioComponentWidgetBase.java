@@ -1,6 +1,6 @@
 package com.example.synthesizer;
 
-import javafx.geometry.BoundingBox;
+
 import javafx.geometry.Bounds;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -12,9 +12,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
-import javafx.scene.shape.Line;
 
-import javax.crypto.spec.PSource;
 
 
 public class AudioComponentWidgetBase extends Pane {
@@ -79,9 +77,6 @@ public class AudioComponentWidgetBase extends Pane {
         return false;
     }
 
-    public void connectInputToWidget(AudioComponentWidgetBase input) {
-
-    }
 
     public AudioComponent getAudioClip() {
         System.out.println("You shouldn't make it to get audioClip in the ACWB class, the child methods should override  this");
@@ -92,6 +87,9 @@ public class AudioComponentWidgetBase extends Pane {
         parent_.getChildren().remove(this);
         //Below is what we call spaghetti code and it's bad and we don't want to do it
         SynthesizerApplication.allWidgets_.remove(this);
+        if (this.cable_.line_ != null){
+            cable_.clearLine();
+        }
     }
 
 
@@ -99,7 +97,9 @@ public class AudioComponentWidgetBase extends Pane {
         double mouseDeltaX = e.getSceneX() - mouseStartDragX_;
         double mouseDeltaY = e.getSceneY() - mouseStartDragY_;
         this.relocate(widgetStartDragX_ + mouseDeltaX, widgetStartDragY_ + mouseDeltaY);
+
         cable_.updateLine(this, e, this.outputCircle_.localToScene(this.outputCircle_.getBoundsInLocal()));
+
     }
 
     private void startDrag(MouseEvent e) {
@@ -109,12 +109,6 @@ public class AudioComponentWidgetBase extends Pane {
         widgetStartDragY_ = this.getLayoutY();
     }
 
-
-//    @Override
-//    public void connectInputToWidget(AudioComponentWidgetBase input) {
-//        audioComponent_ = input.getAudioComponent();
-//
-//    }
 
 
     private void endConnection(MouseEvent e) {
@@ -160,19 +154,6 @@ public class AudioComponentWidgetBase extends Pane {
         }
         cable_.clearLine();
 
-
-//        Bounds speakerBounds = SynthesizerApplication.speaker.localToScreen(SynthesizerApplication.speaker.getBoundsInLocal());
-//        double distance = Math.sqrt(Math.pow(speakerBounds.getCenterX() - e.getScreenX(), 2.0) + Math.pow(speakerBounds.getCenterY() - e.getScreenY(), 2.0));
-//
-//
-//        if (distance < 20) {
-//            SynthesizerApplication.connectedWidgetToSpeaker_ = this;
-//            //handle connection
-//        } else {
-//            parent_.getChildren().remove(line_);
-//            line_ = null;
-//        }
-        //
 
     }
 

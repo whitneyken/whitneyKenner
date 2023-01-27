@@ -229,11 +229,11 @@ class BinarySearchSetTest {
     @Test
     public void testSquids(){
         //tests to check this works on my custom comparator and object
-        Squid squid = new Squid  (10, 12, "Steve");
-        Squid squid2 = new Squid (8, 8, "Chase");
+        Squid squid = new Squid  (10, 12, "Aiden");
+        Squid squid2 = new Squid (8, 8, "Melanie");
         Squid squid3 = new Squid (0, 3, "Whit");
         Squid squid4 = new Squid (100, 1, "Felix");
-        Squid squid5 = new Squid (4, 4, "Nicole");
+        Squid squid5 = new Squid (4, 4, "Nick");
         Squid squid6 = new Squid (11, 14, "Celeste");
         List<Squid> list1 = Arrays.asList(squid, squid2, squid3, squid4, squid5, squid6);
         BinarySearchSet<Squid> squidList = new BinarySearchSet<>(new SquidComparator());

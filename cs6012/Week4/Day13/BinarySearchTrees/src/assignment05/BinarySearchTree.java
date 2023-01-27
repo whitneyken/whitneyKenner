@@ -17,6 +17,7 @@ public class BinarySearchTree<T extends Comparable<? super T>> implements Sorted
     //another constructor that takes in an item and sets it to be the root of the binary search tree
     public BinarySearchTree(T item) {
         root = new BinaryNode<>(item);
+        size++;
     }
 
     //add method which takes the item to be added as input and returns a boolean.
@@ -280,6 +281,10 @@ public class BinarySearchTree<T extends Comparable<? super T>> implements Sorted
     public boolean removeAll(Collection<? extends T> items) throws NullPointerException{
         boolean isChanged = false;
         //for each item
+        //if the collection passed in is null, a null pointer exception is thrown
+        if (items == null) {
+            throw new NullPointerException();
+        }
         for (T item : items) {
             //if the item is null, throws a null pointer exception
             if (item == null){

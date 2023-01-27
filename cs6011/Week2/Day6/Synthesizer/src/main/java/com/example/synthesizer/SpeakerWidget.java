@@ -71,36 +71,9 @@ public class SpeakerWidget implements ConnectingInputs {
                 }
             }
 
-            //        AudioComponent testFilter = new Filter(1);
-//        AudioComponent testFilter2 = new Filter(1);
-//        AudioComponent gen = new SineWave(100); // Your code
-//        AudioComponent gen2 = new SineWave(200);
-//        testFilter.connectInput(gen);
-//        testFilter2.connectInput(gen2);
-//        Mixer testMixer = new Mixer();
-//        testMixer.connectInput(testFilter);
-//        testMixer.connectInput(testFilter2);
-            //!!! Between this comment and the other exclamation comment (not including the commented out portion)
-            // is my janky ass code to make sure that my volume widget works and my god, it does!! will need to
-            // fix later once I have actual connections and such
-//            AudioComponent ac;
-//            VolumeWidget vw;
-//            if (connectedWidgetToSpeaker_  != null) {
-//                vw = (VolumeWidget) connectedWidgetToSpeaker_;
-//                vw.connectInput(widgets_.get(0));
-//                ac = vw.getAudioComponenet();
 
-
-//            Mixer mixer = new Mixer();
-//            for (AudioComponentWidgetBase w : connectedWidgetsToSpeaker_) {
-//                if (w instanceof VolumeWidget) {
-//                    AudioComponent ac = ((VolumeWidget) w).getAudioComponenet();
-//                    mixer.connectInput(ac);
-//                }
-//            }
-//            byte[] data = mixer.getClip().data;
             byte[] data = mixer.getClip().data;
-            //!!!
+
 
             AudioFormat format = new AudioFormat(44100, 16, 1, true, false);
 
