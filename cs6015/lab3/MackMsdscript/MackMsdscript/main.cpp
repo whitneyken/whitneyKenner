@@ -1,8 +1,8 @@
 //
 //  main.cpp
-//  lab01cs6013
+//  MackMsdscript
 //
-//  Created by Whitney Kenner on 1/21/23.
+//  Created by Whitney Kenner on 2/2/23.
 //
 
 #include <iostream>

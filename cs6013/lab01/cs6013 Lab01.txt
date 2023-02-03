@@ -1,0 +1,108 @@
+Question 1:
+#include <cstdio>
+
+
+template<typename T>
+T add(T a, T b){
+return(a + b);
+}
+
+
+int main() {
+printf("%d", add(3, 1));
+return(0);
+}
+Question 2:
+.LC0:
+       .string "%d"
+main:
+       push    rbp
+       mov     rbp, rsp
+       mov     esi, 1
+       mov     edi, 3
+       call    int add<int>(int, int)
+       mov     esi, eax
+       mov     edi, OFFSET FLAT:.LC0
+       mov     eax, 0
+       call    printf
+       mov     eax, 0
+       pop     rbp
+       ret
+int add<int>(int, int):
+       push    rbp
+       mov     rbp, rsp
+       mov     DWORD PTR [rbp-4], edi
+       mov     DWORD PTR [rbp-8], esi
+       mov     edx, DWORD PTR [rbp-4]
+       mov     eax, DWORD PTR [rbp-8]
+       add     eax, edx
+       pop     rbp
+       ret
+
+
+Question 3: 
+	.LC0:
+       		.string "%d"
+I believe this indicates the flag type used in printf
+main:
+       push    rbp
+This line pushes the address stored in the register rbp so that it can be accessed later once we return to whatever function called main. We need to store this so we don’t lose different function’s stack frames.
+	mov     rbp, rsp
+This line sets the pointer in the register rbp to be equal to the pointer stored in the register rsp, which gives us the address of the “top” of the current functions stack frame which will be used for storing/accessing data for this function 
+	mov     esi, 1
+This line stores the first value that will be passed into the add function in the register esi. The ABI dictates where certain things need to be stored for function calls. Because this is an int, and the first value being passed to the function, it should be stored in esi
+	mov     edi, 3
+Similarly, according to the ABI, the 2nd value (also an int) should be stored in the edi register to be accessed by the add function called by main
+	call    int add<int>(int, int)
+This is the call to call the add function. It explicitly says int for the return value as well as the parameters passed in, but this is just explicitly stated since it is known at compile time that the values passed in and returned are ints. The function is templatized so any primitive type can be passed in. If the function got the values from the user as input at run time, it would not explicitly state int the way it does here because the type would not be known until run time.
+	mov     esi, eax
+The value returned from the add function will be stored in the eax register (as is decided by the ABI), so this call is moving the value stored in the eax register to also be stored in the esi register
+	mov     edi, OFFSET FLAT:.LC0
+//instructions say to ignore this one but the offset flat is just a way to refer to a string resource in the program
+	mov     eax, 0
+This call is returning the value stored at eax to 0 now that the result value has been moved into edi. This 0 also needs to be here because printf is a system call and system calls require certain values to be stored in the eax regsiter
+	call    printf
+This makes the system call printf, the cpu will switch to kernel mode where it will decide if the function call will be executed and then execute this printf call
+	mov     eax, 0
+The value at the register eax is returned to 0 after exiting the system call
+	pop     rbp
+This pops the address that had been pushed at the beginning so that when we return to whatever function called main, we would have the appropriate address to the top of the stack frame
+    	 ret
+This call returns us to whatever function called main
+int add<int>(int, int):
+       push    rbp
+This is now inside the add function call. This begins the same way as main by pushing the pointer stored in the rbp register so that the proper stack frame can be accessed by main upon returning from this function call
+	mov     rbp, rsp
+Same thing as in main, the address in rbp is now being set to the top of the stack frame for this function call
+	mov     DWORD PTR [rbp-4], edi
+This is a very un-optimized call where the value that was stored in the edi register (1) is being placed in ram as well. DWORD means “doubleword” which means 32 bits of storage for an int. The rbp-4 is the location in ram where the value will be stored. It is 4 bytes down from the rbp address to allow for the storage of an int.
+	mov     DWORD PTR [rbp-8], esi
+This repeats the same thing as above with the value stored in esi, but now it is stored 8 bytes down from the address stored in rbp so that it is 4 bytes down from where the above value was stored (all values are stored in relation to the pointer in rbp)
+	mov     edx, DWORD PTR [rbp-4]
+After having stored these values in ram, they need to be put into registers to be added together (also very unoptimized). So the value previously stored in the address rbp-4 (the int 1) is retrieved from that address in memory and stored in the register edx
+	mov     eax, DWORD PTR [rbp-8]
+The second value stored in ram is retrieved and placed in the eax register
+	add     eax, edx
+The value stored in edx (1) is added to the value stored in eax (3). This is the register that stores return values for functions, so the appropriate return value for this function is now in the appropriate register (4)
+	pop     rbp
+Now the function pops back the stored rbp so we will have the appropriate address for the stack of main 
+	ret
+This returns us to main where the add function was called
+
+
+Question 4:
+.LC0:
+       .string "%d"
+main:
+       sub     rsp, 8
+       mov     esi, 4
+       mov     edi, OFFSET FLAT:.LC0
+       xor     eax, eax
+       call    printf
+       xor     eax, eax
+       add     rsp, 8
+       ret
+
+
+Question 5:
+The -O3 flag relates to the level of optimization so above where -O0 flag was used, there was no level of optimization, it was the most explicit (and also inefficient) level of assembly code. This -O3 flag indicates a much higher level of optimization. The assembly changed by taking out unnecessary steps. For example the add function isn’t even called as the values are already declared in main, so they can be added without moving to a new stack frame just to perform the add operation. Additionally the values are not stored in ram, since they are not needed for any calculations later. This assembly is simplified down to moving rsp down 8 bytes (presumably for space to store the 2 ints even though it is not done here, since the values are not needed). Then the value of the 2 added ints is stored in the register esi. Since the values are known at compile time, it is assumed that the addition can be done without an explicit call to add. The xor call is a bitwise exclusive or that when used on a register and itself will 0 out the value in the register. This is done in preparation for the system call printf. After the system call, eax is zeroed out using the xor call again and then rsp is moved back to the top of the call stack (8 bytes). Then we return to whatever function called main.
