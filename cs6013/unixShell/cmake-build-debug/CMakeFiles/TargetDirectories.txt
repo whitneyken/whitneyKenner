@@ -1,0 +1,3 @@
+/Users/whitneykenner/whitneyKenner/cs6013/unixShell/cmake-build-debug/CMakeFiles/unixShell.dir
+/Users/whitneykenner/whitneyKenner/cs6013/unixShell/cmake-build-debug/CMakeFiles/edit_cache.dir
+/Users/whitneykenner/whitneyKenner/cs6013/unixShell/cmake-build-debug/CMakeFiles/rebuild_cache.dir
