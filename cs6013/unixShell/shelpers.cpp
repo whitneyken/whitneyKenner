@@ -110,7 +110,7 @@ std::vector<Command> getCommands(const std::vector<std::string> &tokens) {
                     char *fileName = const_cast<char *>(tokens[j + 1].c_str());
                     //file status flags used by open() and indirectly in the kernel
                     ret[i].fdIn = open(fileName, O_RDONLY | O_CREAT, S_IRWXG | S_IRWXU);
-                    if (ret[i].fdIn == -1){
+                    if (ret[i].fdIn == -1) {
                         std::perror("failed to open file for input redirection");
                         exit(1);
                     }
@@ -118,7 +118,7 @@ std::vector<Command> getCommands(const std::vector<std::string> &tokens) {
                     //output redirection
                     char *fileName = const_cast<char *>(tokens[j + 1].c_str());
                     ret[i].fdOut = open(fileName, O_WRONLY | O_CREAT, S_IRWXG | S_IRWXU);
-                    if (ret[i].fdOut == -1){
+                    if (ret[i].fdOut == -1) {
                         std::perror("failed to open file for output redirection");
                         exit(1);
                     }
@@ -178,4 +178,25 @@ std::vector<Command> getCommands(const std::vector<std::string> &tokens) {
         }
     }
     return ret;
+}
+
+void cleanFds(std::vector<Command> commands) {
+//close any file descriptors opened:
+    for (int i = 0; i < commands.size(); i++) {
+//check if fdOut has been assigned to a pipe/file and close it
+        if (commands[i].fdOut != 1) {
+            if (close(commands[i].fdOut) < 0) {
+                std::cerr << "failed to close stdout file descriptor in getCommands upon error";
+                exit(1);
+            }
+        }
+        if (commands[i].fdIn != 0) {
+//check if fdIn has been assigned to a pipe/file and close it
+            if (close(commands[i].fdIn) < 0) {
+                std::cerr << "failed to close stdin file descriptor in getCommands upon error";
+                exit(1);
+            }
+        }
+
+    }
 }

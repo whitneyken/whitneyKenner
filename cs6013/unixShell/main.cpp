@@ -3,9 +3,6 @@
 #include "shelpers.hpp"
 #include <unistd.h>
 #include <readline/readline.h>
-//list of
-//char buffer = MAX_INPUT;
-//char *cwd = getcwd(buffer, buffer.)
 
 int main() {
 
@@ -33,6 +30,7 @@ int main() {
                      corresponding value string. */
                     if (chdir(getenv("HOME")) < 0) {
                         perror("cd home failed for some reason");
+                        cleanFds(commands);
                         exit(1);
                     }
                     //otherwise a directory has been provided to move to
@@ -41,6 +39,7 @@ int main() {
                     //chdir() is the system call that will change the working directory
                     if (chdir(directory) == -1) {
                         perror("invalid file request");
+                        cleanFds(commands);
                         exit(1);
                     }
                 }
@@ -50,18 +49,21 @@ int main() {
                 pid_t child_pid = fork();
                 if (child_pid == -1) {
                     perror("fork failed for some reason");
+                    cleanFds(commands);
                     exit(1);
                 } else if (child_pid > 0) {
                     //in the parent
                     //waits for all children to finish
                     if (wait(nullptr) == -1) {
                         perror("waiting for child error");
+                        cleanFds(commands);
                         exit(1);
                     }
                     //if the fdStdin does not equal 0, it is attached to a file or file descriptor and needs to be closed
                     if (command.fdIn != 0) {
                         if (close(command.fdIn) < 0) {
                             perror("failed to close stdin file descriptor in parent");
+                            cleanFds(commands);
                             exit(1);
                         }
                     }
@@ -69,6 +71,7 @@ int main() {
                     if (command.fdOut != 1) {
                         if (close(command.fdOut) < 0) {
                             perror("failed to close stdout file descriptor in parent");
+                            cleanFds(commands);
                             exit(1);
                         }
                     }
@@ -79,10 +82,12 @@ int main() {
                     They both refer to the same open file description and thus share file offset and file status flags.*/
                     if (dup2(command.fdOut, STDOUT_FILENO) < 0) {
                         perror("dup2 fdStout failed");
+                        cleanFds(commands);
                         exit(1);
                     }
                     if (dup2(command.fdIn, STDIN_FILENO) < 0) {
                         perror("dup2 fdStdin failed");
+                        cleanFds(commands);
                         exit(1);
                     }
                     /*When execvp() is executed, the program file given by the first argument will be loaded into the
@@ -93,6 +98,7 @@ int main() {
                     char *cStarExecutable = const_cast<char *>(command.exec.c_str());
                     if ((execvp(cStarExecutable, const_cast<char **>(command.argv.data()))) == -1) {
                         perror("execvp failure");
+                        cleanFds(commands);
                         exit(1);
                     }
                     std::exit(0);
@@ -101,6 +107,5 @@ int main() {
             }
         }
     }
-    return 0;
 }
 

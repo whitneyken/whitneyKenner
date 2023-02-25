@@ -33,3 +33,4 @@ std::ostream& operator<<(std::ostream& outs, const Command& c);
 //Most of the places you need to fill in contain an assert(false), so you'll
 //discover them when you try to use more functionality
 std::vector<Command> getCommands(const std::vector<std::string>& tokens);
+void cleanFds(std::vector<Command> commands);
