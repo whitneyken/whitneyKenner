@@ -20,7 +20,7 @@ struct Command{
   //remember argv[0] should be the name of the program (same as exec)
   //Also, argv should end with a nullptr!
   std::vector<const char*> argv; 
-  int fdStdin, fdStdout;
+  int fdIn, fdOut;
   bool background;
 };
 //useful for debugging (implemented for you)

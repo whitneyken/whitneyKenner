@@ -64,7 +64,7 @@ std::vector<std::string> tokenize(const std::string &s) {
 std::ostream &operator<<(std::ostream &outs, const Command &c) {
     outs << c.exec << " argv: ";
     for (const auto &arg: c.argv) { if (arg) { outs << arg << ' '; }}
-    outs << "fds: " << c.fdStdin << ' ' << c.fdStdout << ' ' << (c.background ? "background" : "");
+    outs << "fds: " << c.fdIn << ' ' << c.fdOut << ' ' << (c.background ? "background" : "");
     return outs;
 }
 
@@ -91,8 +91,8 @@ std::vector<Command> getCommands(const std::vector<std::string> &tokens) {
         ret[i].exec = tokens[first];
         ret[i].argv.push_back(tokens[first].c_str()); //argv0 = program name
         std::cout << "exec start: " << ret[i].exec << std::endl;
-        ret[i].fdStdin = 0;
-        ret[i].fdStdout = 1;
+        ret[i].fdIn = 0;
+        ret[i].fdOut = 1;
         ret[i].background = false;
 
         for (int j = first + 1; j < last; ++j) {
@@ -104,17 +104,24 @@ std::vector<Command> getCommands(const std::vector<std::string> &tokens) {
                   (all others get input from a pipe)
                   Only the LAST command can have output redirection!
                  */
-                // && j == first handle first and last later
                 if (tokens[j] == "<") {
-                    std::cout << "did I make it inside of I/O";
+                    // input redirection
+                    //fileName needs to be a const_cast<char *>
                     char *fileName = const_cast<char *>(tokens[j + 1].c_str());
-                    ret[i].fdStdin = open(fileName, O_RDONLY | O_CREAT, S_IRWXG | S_IRWXU);
-//                  throw  std::runtime_error ("failed to open file");
-//              }
-// && j+1 == last handle first and last later
+                    //file status flags used by open() and indirectly in the kernel
+                    ret[i].fdIn = open(fileName, O_RDONLY | O_CREAT, S_IRWXG | S_IRWXU);
+                    if (ret[i].fdIn == -1){
+                        std::perror("failed to open file for input redirection");
+                        exit(1);
+                    }
                 } else if (tokens[j] == ">") {
+                    //output redirection
                     char *fileName = const_cast<char *>(tokens[j + 1].c_str());
-                    ret[i].fdStdout = open(fileName, O_WRONLY | O_CREAT, S_IRWXG | S_IRWXU);
+                    ret[i].fdOut = open(fileName, O_WRONLY | O_CREAT, S_IRWXG | S_IRWXU);
+                    if (ret[i].fdOut == -1){
+                        std::perror("failed to open file for output redirection");
+                        exit(1);
+                    }
                 }
                 j++;
 
@@ -125,22 +132,20 @@ std::vector<Command> getCommands(const std::vector<std::string> &tokens) {
                 //otherwise this is a normal command line argument!
                 ret[i].argv.push_back(tokens[j].c_str());
             }
-
         }
         if (i > 0) {
-
             //if it is not the last command
             int fds[2];
-            if (pipe(fds) < 0) {
+            if (pipe(fds) == -1) {
                 perror("pipe failed for some reason");
                 exit(1);
             }
-            ret[i].fdStdin = fds[0];
-            ret[i - 1].fdStdout = fds[1];
-
-            /* there are multiple commands.  Open a pipe and
-               Connect the ends to the fds for the commands!
-            */
+            //the following 2 lines handle appropriately do not handle the input redirection in the first call
+            // and the output redirection in the last call
+            //set the read end of the file descriptor, should not be linked
+            ret[i].fdIn = fds[0];
+            //this line allows for piping between commands by connecting to write ends from the previous command
+            ret[i - 1].fdOut = fds[1];
         }
         //exec wants argv to have a nullptr at the end!
         ret[i].argv.push_back(nullptr);
@@ -155,14 +160,16 @@ std::vector<Command> getCommands(const std::vector<std::string> &tokens) {
     if (error) {
         //close any file descriptors you opened in this function!
         for (int i = 0; i < ret.size(); i++) {
-            if (ret[i].fdStdout != 1) {
-                if (close(ret[i].fdStdout) < 0) {
+            //check if fdOut has been assigned to a pipe/file and close it
+            if (ret[i].fdOut != 1) {
+                if (close(ret[i].fdOut) < 0) {
                     std::cerr << "failed to close stdout file descriptor in getCommands upon error";
                     exit(1);
                 }
             }
-            if (ret[i].fdStdin != 0) {
-                if (close(ret[i].fdStdin) < 0) {
+            if (ret[i].fdIn != 0) {
+                //check if fdIn has been assigned to a pipe/file and close it
+                if (close(ret[i].fdIn) < 0) {
                     std::cerr << "failed to close stdin file descriptor in getCommands upon error";
                     exit(1);
                 }
