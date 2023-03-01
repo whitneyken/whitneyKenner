@@ -11,7 +11,7 @@ public class DNSServer {
     int responsePort;
 
     public DNSServer() throws SocketException {
-        socket = new DatagramSocket(8069);
+        socket = new DatagramSocket(8053);
 
     }
 
