@@ -78,8 +78,6 @@ int main() {
     shuffleArray(shuffledArray7);
 
 
-
-
     std::byte decryptUnshuffledArray[256];
     std::byte decryptShuffledArray1[256];
     std::byte decryptShuffledArray2[256];
@@ -99,10 +97,11 @@ int main() {
     createDecryptArrays(shuffledArray7, decryptShuffledArray7);
 
 
-
     std::byte *encryptionTables[] = {unshuffledArray, shuffledArray1, shuffledArray2, shuffledArray3, shuffledArray4,
-                           shuffledArray5, shuffledArray6, shuffledArray7};
-    std::byte *decryptionTables[] = {decryptUnshuffledArray, decryptShuffledArray1, decryptShuffledArray2, decryptShuffledArray3, decryptShuffledArray4, decryptShuffledArray5, decryptShuffledArray6, decryptShuffledArray7};
+                                     shuffledArray5, shuffledArray6, shuffledArray7};
+    std::byte *decryptionTables[] = {decryptUnshuffledArray, decryptShuffledArray1, decryptShuffledArray2,
+                                     decryptShuffledArray3, decryptShuffledArray4, decryptShuffledArray5,
+                                     decryptShuffledArray6, decryptShuffledArray7};
 
     std::string stringMessage = "whitneyk";
     Block message;
@@ -115,49 +114,52 @@ int main() {
     //encryption
     for (int i = 0; i < numLoops; i++) {
         //xor current message
-        for (int i = 0; i < message.size(); i++) {
-            message[i] = message[i] ^ key->at(i );
+        for (int j = 0; j < message.size(); j++) {
+            message[j] = message[j] ^ key->at(j);
         }
         //substitution table
-        for (int i = 0; i < message.size(); i++) {
-            message[i] = (char) encryptionTables[i][message[i]];
+        for (int k = 0; k < message.size(); k++) {
+            message[k] = (char) encryptionTables[k][message[k]];
         }
         //rotation (bitwise)
         Block copyBlock = message;
-        for (int i = 0; i < message.size(); ++i) {
-            copyBlock[i] = (message[i] & 0x80) >> 7;
-            message[i] = (message[i] & 0x7F) << 1;
+        for (int l = 0; l < message.size(); ++l) {
+            copyBlock[l] = (message[l] & 0x80) >> 7;
+            message[l] = (message[l] & 0x7F) << 1;
         }
         message[7] = message[7] | copyBlock[0];
-        for (int i = 0; i < message.size() - 1; ++i) {
-            message[i] = message[i] | copyBlock[i + 1];
+        for (int m = 0; m < message.size() - 1; ++m) {
+            message[m] = message[m] | copyBlock[m + 1];
         }
     }
-
+    std::cout << "message after encryption: ";
+    printBlock(message);
+    //commented out line to show what happens when a single bit is flipped
+    //message[5] = message[5] ^ 0x40;
     for (int i = 0; i < numLoops; i++) {
         //decryption
         //rotation(bitwise)
         Block copyBlockDecrypt = message;
-        for (int i = 0; i < message.size(); ++i) {
-            copyBlockDecrypt[i] = (message[i] & 0x01) << 7;
-//            message[i] = (message[i] & 0xFE) >> 1;
-            message[i] = (message[i] >> 1) & 0x7F;
+        for (int j = 0; j < message.size(); ++j) {
+            copyBlockDecrypt[j] = (message[j] & 0x01) << 7;
+            message[j] = (message[j] >> 1) & 0x7F;
 
         }
         message[0] = message[0] | copyBlockDecrypt[7];
-        for (int i = 1; i < message.size(); ++i) {
-            message[i] = message[i] | copyBlockDecrypt[i - 1];
+        for (int k = 1; k < message.size(); ++k) {
+            message[k] = message[k] | copyBlockDecrypt[k - 1];
         }
         //substitution table
-        for (int i = 0; i < message.size(); i++) {
-            message[i] = (char) decryptionTables[i][message[i]];
+        for (int l = 0; l < message.size(); l++) {
+            message[l] = (char) decryptionTables[l][message[l]];
         }
         //xor current message
-        for (int i = 0; i < message.size(); i++) {
-            message[i] = message[i] ^ key->at(i);
+        for (int m = 0; m < message.size(); m++) {
+            message[m] = message[m] ^ key->at(m);
         }
     }
 
+    std::cout << "message after decryption: ";
     printBlock(message);
     return 0;
 }
