@@ -1,0 +1,3 @@
+/Users/whitneykenner/whitneyKenner/cs6013/malloc/cmake-build-debug/CMakeFiles/malloc.dir
+/Users/whitneykenner/whitneyKenner/cs6013/malloc/cmake-build-debug/CMakeFiles/edit_cache.dir
+/Users/whitneykenner/whitneyKenner/cs6013/malloc/cmake-build-debug/CMakeFiles/rebuild_cache.dir
