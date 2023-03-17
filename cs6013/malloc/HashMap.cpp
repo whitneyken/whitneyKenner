@@ -3,23 +3,25 @@
 //
 
 #include "HashMap.h"
+const int TOMBSTONE = -1;
 
 HashNode::HashNode(void *inputAdd, size_t inputSize) {
     this->address = inputAdd;
     this->size = inputSize;
 }
 
-//default Hashmap constructor if no capacity is passed
+//default Hashmap constructor if no capacity is passed -> intentionally set to very small value for debugging purposes,
+//not used by Malloc
 HashMap::HashMap() {
     HashMap(10);
 }
 
+//constructor that is called by Malloc
 HashMap::HashMap(int initialCapacity) {
     this->capacity = initialCapacity;
     this->currentSize = 0;
     this->array = static_cast<HashNode *>(mmap(nullptr, capacity * sizeof(HashNode), PROT_READ | PROT_WRITE,
                                                                                  MAP_ANONYMOUS | MAP_PRIVATE, 0, 0));
-    //std::cout << "Hashmap address is: " << array << std::endl;
     if (array == MAP_FAILED) {
         perror("mmap failed");
         exit(EXIT_FAILURE);
@@ -29,12 +31,10 @@ HashMap::HashMap(int initialCapacity) {
         array[index].size = 0;
     }
 }
+
 //destructor-> memory inside goes out of scope if it is not stored anywhere external
 HashMap::~HashMap() {
-    if (munmap(this->array, sizeof(this)) == -1){
-        perror("failed to SELF DESTRUCT");
-        exit(1);
-    }
+    this->array = nullptr;
 }
 
 
@@ -59,14 +59,13 @@ bool HashMap::insertNode(void *addressPointer, size_t sizeInPages) {
     //get hashcode and attempt to store
     int hashIndex = hashCode(reinterpret_cast<long>(addressPointer));
     while (array[hashIndex].address != nullptr && array[hashIndex].size != -1) {
-        if (array[hashIndex].address == addressPointer){
-            std::cerr << "address already in use: " <<  addressPointer << std::endl;
-            exit(1);
+        if (array[hashIndex].address == addressPointer) {
+            throw std::runtime_error("address already in use");
         }
         hashIndex++;
         hashIndex %= capacity;
     }
-    if (array[hashIndex].address == nullptr || array[hashIndex].size == -1) {
+    if (array[hashIndex].address == nullptr || array[hashIndex].size == TOMBSTONE) {
         this->currentSize++;
         array[hashIndex].address = addressPointer;
         array[hashIndex].size = sizeInPages;
@@ -85,7 +84,7 @@ size_t HashMap::deleteNode(void *addressPointer) {
             //address and size set to (void*) -1 and -1 respectively indicate a lazy delete
             array[hashIndex].address = (void *) -1;
             int numPages = array[hashIndex].size;
-            array[hashIndex].size = -1;
+            array[hashIndex].size = TOMBSTONE;
             currentSize--;
             return numPages;
         }
@@ -99,12 +98,16 @@ size_t HashMap::deleteNode(void *addressPointer) {
 void HashMap::growHashMap() {
     HashMap twiceCapacityHashMap = HashMap(this->capacity * 2);
     for (int index = 0; index < capacity; ++index) {
-        //insert only if a node that was inserted AND not lazt deleted
-        if (this->array[index].size != -1 && this->array[index].size != 0) {
-            twiceCapacityHashMap.insertNode(this->array[index].address, this->array[index].size);
+        //insert only if a node that was inserted AND not lazy deleted
+        if (this->array[index].size != TOMBSTONE && this->array[index].size != 0) {
+            if (!(twiceCapacityHashMap.insertNode(this->array[index].address, this->array[index].size))) {
+                std::cerr << "Failure to add node when growing HashMap" << std::endl;
+                exit(1);
+            }
         }
     }
     std::swap(twiceCapacityHashMap.array, this->array);
     std::swap(twiceCapacityHashMap.capacity, this->capacity);
+    munmap(twiceCapacityHashMap.array, sizeof(HashNode) * twiceCapacityHashMap.capacity);
 }
 

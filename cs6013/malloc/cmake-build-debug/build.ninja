@@ -64,6 +64,12 @@ build CMakeFiles/malloc.dir/HashMap.cpp.o: CXX_COMPILER__malloc_Debug /Users/whi
   OBJECT_DIR = CMakeFiles/malloc.dir
   OBJECT_FILE_DIR = CMakeFiles/malloc.dir
 
+build CMakeFiles/malloc.dir/Tests.cpp.o: CXX_COMPILER__malloc_Debug /Users/whitneykenner/whitneyKenner/cs6013/malloc/Tests.cpp || cmake_object_order_depends_target_malloc
+  DEP_FILE = CMakeFiles/malloc.dir/Tests.cpp.o.d
+  FLAGS = -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.1.sdk -mmacosx-version-min=12.5 -fcolor-diagnostics -std=gnu++17
+  OBJECT_DIR = CMakeFiles/malloc.dir
+  OBJECT_FILE_DIR = CMakeFiles/malloc.dir
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target malloc
@@ -72,7 +78,7 @@ build CMakeFiles/malloc.dir/HashMap.cpp.o: CXX_COMPILER__malloc_Debug /Users/whi
 #############################################
 # Link the executable malloc
 
-build malloc: CXX_EXECUTABLE_LINKER__malloc_Debug CMakeFiles/malloc.dir/main.cpp.o CMakeFiles/malloc.dir/Malloc.cpp.o CMakeFiles/malloc.dir/HashMap.cpp.o
+build malloc: CXX_EXECUTABLE_LINKER__malloc_Debug CMakeFiles/malloc.dir/main.cpp.o CMakeFiles/malloc.dir/Malloc.cpp.o CMakeFiles/malloc.dir/HashMap.cpp.o CMakeFiles/malloc.dir/Tests.cpp.o
   FLAGS = -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.1.sdk -mmacosx-version-min=12.5
   OBJECT_DIR = CMakeFiles/malloc.dir
   POST_BUILD = :
