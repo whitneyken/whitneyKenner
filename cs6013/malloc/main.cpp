@@ -16,9 +16,9 @@ int main() {
 
     //uncomment the lines below for unit testing and benchmark timing testing (see Tests.cpp)
 
-    runTests();
+//    runTests();
 
-    runBenchmarks();
+//    runBenchmarks();
 
     return 0;
 }

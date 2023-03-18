@@ -108,6 +108,9 @@ void HashMap::growHashMap() {
     }
     std::swap(twiceCapacityHashMap.array, this->array);
     std::swap(twiceCapacityHashMap.capacity, this->capacity);
-    munmap(twiceCapacityHashMap.array, sizeof(HashNode) * twiceCapacityHashMap.capacity);
+    if (munmap(twiceCapacityHashMap.array, sizeof(HashNode) * twiceCapacityHashMap.capacity) == -1){
+        perror("failed to munmap");
+        exit(1);
+    }
 }
 
