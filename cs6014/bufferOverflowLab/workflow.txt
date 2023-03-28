@@ -1,8 +1,16 @@
 Buffer Overflow lab notes:
 
 Used the command "otool -tV a.out" to get assembly code!
-Found the address for _execve is at 0x100003eb0
-This is the address location we want to go to in order to be able to exploit buffer overflow
+Found the address for "success!" Is at the address 0000000100003e8b
+This is the address location we want to go to in order to be able to exploit buffer overflow (i.e. be able to enter something that is not the supersecretpassword and still get access to the shell)
+We can see the stack for the function login() is 56 bytes
+The stack grows down, so o bytes will be at the bottom (where rsp is)
+At rsp + 8 bytes the password length is stored in 4 bytes
+The fd is stored after this at rsp + 12 bytes in 4 bytes
+At rsp + 16 is where the password is stored and it can store up to 40 bytes and then we have 8 bytes of the blank offs before the return address
+By overwriting the 40 bytes of the password and then tacking on the address for the success call, we can bypass the actual password comparison and just be taken to the success call.
+This was done by adding 40 "a"s to the password text followed by the address stored in hexadecimal in little endian 
+This successfully opened the shell!!! Muah ha ha buffer overflow
 
 
 
