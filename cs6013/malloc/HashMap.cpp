@@ -73,7 +73,6 @@ bool HashMap::insertNode(void *addressPointer, size_t sizeInPages) {
     }
     return false;
 
-
 }
 
 size_t HashMap::deleteNode(void *addressPointer) {

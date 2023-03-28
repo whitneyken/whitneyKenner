@@ -1,0 +1,8 @@
+Buffer Overflow lab notes:
+
+Used the command "otool -tV a.out" to get assembly code!
+Found the address for _execve is at 0x100003eb0
+This is the address location we want to go to in order to be able to exploit buffer overflow
+
+
+

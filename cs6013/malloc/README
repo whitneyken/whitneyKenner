@@ -1,0 +1,7 @@
+runTests() and runBenchmarks() are called in main-> running the program will execute both
+
+
+If run on the terminal, program needs to be compiled and linked using -std=c++20:
+clang++ -std=c++20 -c *.cpp      
+clang++ -std=c++20 -o malloc  *.o
+./malloc  
