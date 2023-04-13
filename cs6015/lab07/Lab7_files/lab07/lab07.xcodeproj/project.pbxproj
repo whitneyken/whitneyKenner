@@ -7,7 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		530BC83929D36363008329F4 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 530BC83829D36363008329F4 /* main.cpp */; };
+		530BC84029D36373008329F4 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 530BC83F29D36373008329F4 /* main.cpp */; };
+		530BC84329D36391008329F4 /* functions.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 530BC84229D36391008329F4 /* functions.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -24,7 +25,13 @@
 
 /* Begin PBXFileReference section */
 		530BC83529D36363008329F4 /* lab07 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = lab07; sourceTree = BUILT_PRODUCTS_DIR; };
-		530BC83829D36363008329F4 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		530BC83F29D36373008329F4 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = ../../main.cpp; sourceTree = "<group>"; };
+		530BC84129D3638B008329F4 /* functions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = functions.h; path = ../../functions.h; sourceTree = "<group>"; };
+		530BC84229D36391008329F4 /* functions.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = functions.cpp; path = ../../functions.cpp; sourceTree = "<group>"; };
+		530BC84429D3639C008329F4 /* file2 */ = {isa = PBXFileReference; lastKnownFileType = text; name = file2; path = ../../file2; sourceTree = "<group>"; };
+		530BC84529D3639C008329F4 /* file1 */ = {isa = PBXFileReference; lastKnownFileType = text; name = file1; path = ../../file1; sourceTree = "<group>"; };
+		530BC84629D3639C008329F4 /* file01 */ = {isa = PBXFileReference; lastKnownFileType = text; name = file01; path = ../../file01; sourceTree = "<group>"; };
+		530BC84729D3639C008329F4 /* file02 */ = {isa = PBXFileReference; lastKnownFileType = text; name = file02; path = ../../file02; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,7 +64,13 @@
 		530BC83729D36363008329F4 /* lab07 */ = {
 			isa = PBXGroup;
 			children = (
-				530BC83829D36363008329F4 /* main.cpp */,
+				530BC83F29D36373008329F4 /* main.cpp */,
+				530BC84129D3638B008329F4 /* functions.h */,
+				530BC84229D36391008329F4 /* functions.cpp */,
+				530BC84529D3639C008329F4 /* file1 */,
+				530BC84629D3639C008329F4 /* file01 */,
+				530BC84429D3639C008329F4 /* file2 */,
+				530BC84729D3639C008329F4 /* file02 */,
 			);
 			path = lab07;
 			sourceTree = "<group>";
@@ -119,7 +132,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				530BC83929D36363008329F4 /* main.cpp in Sources */,
+				530BC84029D36373008329F4 /* main.cpp in Sources */,
+				530BC84329D36391008329F4 /* functions.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -239,6 +253,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
+				GCC_OPTIMIZATION_LEVEL = 3;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -247,6 +262,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
+				GCC_OPTIMIZATION_LEVEL = 3;
+				"OTHER_LDFLAGS[arch=*]" = "-O3";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;

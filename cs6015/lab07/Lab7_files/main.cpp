@@ -6,13 +6,13 @@
 using namespace std;
 
 #define MAXREC  20000
-#define input1 "file01" // "file1"
-#define input2 "file02" // "file2"
+#define input1 "/Users/whitneykenner/whitneyKenner/cs6015/lab07/lab7_files/file1" // "file1"
+#define input2 "/Users/whitneykenner/whitneyKenner/cs6015/lab07/lab7_files/file2" // "file2"
 #define out1 "out1"
 #define out2 "out2"
 
 
-#define search search1 //search2 
+#define search search1 //search2
 #define sort sort1  //sort2 //sort3
 
 int readFile(string input, string a[])
