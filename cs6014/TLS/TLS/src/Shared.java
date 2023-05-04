@@ -94,10 +94,8 @@ public class Shared {
     }
     public static void compareMACS(byte[] fromOtherSide, byte[] fromMe, byte[] mac) throws NoSuchAlgorithmException, IOException, InvalidKeyException {
         byte[] myHashedBytes = Shared.macMessage(fromMe, mac);
-        for (int i = 0; i < fromOtherSide.length; i++) {
-            if (fromOtherSide[i] != myHashedBytes[i]) {
-                throw new RuntimeException("message hash mismatch");
-            }
+        if (!Arrays.equals(myHashedBytes, fromOtherSide)){
+            throw new RuntimeException("message hash mismatch");
         }
 
     }

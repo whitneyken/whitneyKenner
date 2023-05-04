@@ -27,7 +27,7 @@ public class Client {
         //System.out.println(Arrays.toString(serverRandom));
         //CA public key
         Certificate CAcert = Shared.getCertificate("../CACertificate.pem");
-        PublicKey CAclientPublicKey = CAcert.getPublicKey();
+        PublicKey CAPublicKey = CAcert.getPublicKey();
         //generate certificate with CA signed server cert . pem
         Certificate signedCert = Shared.getCertificate("../CASignedClientCertificate.pem");
         PublicKey clientCertPublicKey = signedCert.getPublicKey();
@@ -52,7 +52,7 @@ public class Client {
         BigInteger serverPublicKeyDH = (BigInteger) clientIn.readObject();
         BigInteger signedServerPublicKeyDH = (BigInteger) clientIn.readObject();
         //verify certificate
-        serverCert.verify(CAclientPublicKey);
+        serverCert.verify(CAPublicKey);
         allMessages.write(serverCert.toString().getBytes());
         allMessages.write(serverPublicKeyDH.toByteArray());
         allMessages.write(signedServerPublicKeyDH.toByteArray());
