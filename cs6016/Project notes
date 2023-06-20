@@ -1,0 +1,4 @@
+Steps for CS6016 project:
+
+- based on given criteria, generate an ER diagram including entities, relationships, cardinality, etc
+- transform ER diagram into tables in CS-DB using mysql
