@@ -1,0 +1,10 @@
+{
+    "authors": [
+	"Skeleton code by Ben Jones"
+    ],
+    "copyright": "Copyright © 2020, Skeleton code by Ben Jones",
+    "description": "Implementation of data structures for efficient KNN queries on points",
+    "license": "proprietary",
+    "name": "spatialdatastructuresind",
+
+}
