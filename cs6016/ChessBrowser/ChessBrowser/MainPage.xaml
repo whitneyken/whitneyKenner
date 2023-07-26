@@ -1,0 +1,204 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ChessBrowser.MainPage">
+
+    <ScrollView>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Border Grid.Column="0" Grid.Row="0">
+                <VerticalStackLayout 
+                Grid.Column="0"
+                Grid.Row="0"
+
+            VerticalOptions="Fill">
+                    <Border>
+                        <HorizontalStackLayout
+                Spacing="15"
+                Padding="15"
+                         
+                VerticalOptions="Center"
+                HorizontalOptions="Start"
+                >
+                            <Label
+                    Text="Username"
+                    />
+                            <Entry
+                    x:Name="username"
+                    MaximumWidthRequest="100"
+                    MinimumWidthRequest="100"
+                    Placeholder="username"
+                    MaxLength="20"
+                    />
+                            <Label
+                    Text="Password"
+                    />
+                            <Entry
+                    x:Name="password"
+                    MaximumWidthRequest="100"
+                    MinimumWidthRequest="100"
+                    MaxLength="20"
+                    IsPassword="True"
+                    />
+                        </HorizontalStackLayout>
+                    </Border>
+
+                <Border>
+                <VerticalStackLayout
+                Spacing="15"
+                Padding="15"
+                VerticalOptions="Center"
+                HorizontalOptions="Fill"
+                >
+                    <Button
+                    Text="Upload PGN File"
+                    Clicked="OnFileUpload"
+                    />
+                    <ProgressBar
+                    x:Name="progressbar"
+                    HorizontalOptions="Fill"
+                    ScaleY="3"
+                    Progress="0"
+                    ProgressColor="Green"
+                    />
+                        </VerticalStackLayout>
+                    </Border>
+
+
+                <HorizontalStackLayout
+                Spacing="15"
+                Padding="15"
+                VerticalOptions="Center"
+                HorizontalOptions="Start"
+                >
+                        <VerticalStackLayout>
+                            <Label HorizontalOptions="Center"
+                    Text="White Player"
+                    />
+                            <Entry
+                    x:Name="whiteplayer"
+                    MaximumWidthRequest="100"
+                    MinimumWidthRequest="100"            
+                    Placeholder="player, white"
+                    MaxLength="50"
+                    />
+                        </VerticalStackLayout>
+                        <VerticalStackLayout>
+                            <Label HorizontalOptions="Center"
+                    Text="Black Player"
+                    />
+                            <Entry
+                    x:Name="blackplayer"
+                    MaximumWidthRequest="100"
+                    MinimumWidthRequest="100"                               
+                    MaxLength="50"
+                    Placeholder="player, black"
+                    />
+                        </VerticalStackLayout>
+
+                        <VerticalStackLayout>
+                            <Label HorizontalOptions="Center"
+                    Text="Opening Move"
+                    />
+                            <Entry
+                    x:Name="openingmove"
+                    MaximumWidthRequest="100"
+                    MinimumWidthRequest="100"                                
+                    Placeholder="1.Nf3"
+                    MaxLength="50"
+                    />
+                        </VerticalStackLayout>
+
+                    </HorizontalStackLayout>
+
+
+                    <HorizontalStackLayout
+                Spacing="15"
+                Padding="15"
+                VerticalOptions="Center"
+                HorizontalOptions="Start"
+                >
+                        <Label
+                    Text="Winner"
+                    />
+                        <RadioButton Content="White" x:Name="whiteWon"/>
+                        <RadioButton Content="Black" x:Name="blackWon"/>
+                        <RadioButton Content="Draw" x:Name="drawGame"/>
+                        <RadioButton Content="Any" x:Name="anyWinner"
+                 IsChecked="true" />
+                    </HorizontalStackLayout>
+
+                    <HorizontalStackLayout
+                Spacing="15"
+                Padding="15"
+                VerticalOptions="Center"
+                HorizontalOptions="Start"
+                >
+                        <Label
+                    Text="Filter By Date"
+                    />
+                        <CheckBox x:Name="filterByDate" IsChecked="false" />
+                        <Label
+                    Text="From"
+                    />
+                        <DatePicker
+                    x:Name="startDate"
+                    MinimumDate="01/01/1999"
+                    MaximumDate="12/31/2018"
+                    Date="01/01/1999"
+                    />
+                        <Label
+                    Text="To"
+                    />
+                        <DatePicker
+                    x:Name="endDate"
+                    MinimumDate="01/01/1999"
+                    MaximumDate="12/31/2018"
+                    Date="12/31/2018"
+                    />
+                    </HorizontalStackLayout>
+
+                    <HorizontalStackLayout
+                Spacing="15"
+                Padding="15"
+                VerticalOptions="Center"
+                HorizontalOptions="Start"
+                >
+                        <Label
+                    Text="Show Moves"
+                    />
+                        <CheckBox x:Name="showMoves" IsChecked="false" />
+
+                    </HorizontalStackLayout>
+
+                    <Button
+                    Text="Go"
+                    Clicked="OnGoClicked"
+                    />
+
+                </VerticalStackLayout>
+            </Border>
+            <Border Grid.Column="1" Grid.Row="0">
+                <Editor
+
+            x:Name="outputText"
+            Text="query results..."
+            VerticalOptions="Fill"
+            HorizontalOptions="Fill"
+            IsReadOnly="True"
+            />
+            </Border>
+
+        </Grid>
+    </ScrollView>
+
+</ContentPage>
+
+
