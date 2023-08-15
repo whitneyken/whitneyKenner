@@ -1,4 +1,4 @@
-#include "mainwidget.h"
+a#include "mainwidget.h"
 
 mainWidget::mainWidget(QWidget *parent)
     : QWidget{parent}

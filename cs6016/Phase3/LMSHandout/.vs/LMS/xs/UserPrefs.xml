@@ -1,0 +1,63 @@
+﻿<Properties StartupConfiguration="{F7779DCA-6458-4556-ABC4-E8D6A159851E}|Default">
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.ItemProperties.LMS PreferredExecutionTarget="/Applications/Google Chrome.app" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="LMS/Controllers/ProfessorController.cs">
+    <Files>
+      <File FileName="../../../../DataSpike/M+A/csvToXml.py" />
+      <File FileName="LMS/Areas/Identity/Pages/Account/Register.cshtml.cs" />
+      <File FileName="LMS/Controllers/AdministratorController.cs" />
+      <File FileName="LMS/Controllers/CommonController.cs" Line="142" Column="33" />
+      <File FileName="LMS/Models/ApplicationUser.cs" />
+      <File FileName="LMS/Models/ErrorViewModel.cs" />
+      <File FileName="LMS/Program.cs" />
+      <File FileName="LMS/Controllers/HomeController.cs" />
+      <File FileName="LMS/Areas/Identity/Pages/Account/Login.cshtml" />
+      <File FileName="LMS/Controllers/ProfessorController.cs" Line="560" Column="44" />
+      <File FileName="LMS/Controllers/StudentController.cs" Line="273" Column="20" />
+      <File FileName="LMS/Models/LMSModels/LMSContext.cs" Line="1" Column="1" />
+      <File FileName="LMS/Models/LMSModels/Course.cs" />
+      <File FileName="LMS/Models/LMSModels/Assignment.cs" />
+      <File FileName="LMS/Models/LMSModels/Professor.cs" Line="1" Column="1" />
+      <File FileName="LMS/Models/LMSModels/Administrator.cs" />
+      <File FileName="LMS/Models/LMSModels/Class.cs" />
+      <File FileName="LMS/Models/LMSModels/AssignmentCategory.cs" />
+      <File FileName="LMS/Models/LMSModels/Department.cs" />
+      <File FileName="LMS/Models/LMSModels/Student.cs" />
+      <File FileName="LMS/Models/LMSModels/Enrolled.cs" />
+      <File FileName="LMS/Models/LMSModels/Submission.cs" />
+      <File FileName="LMS/Areas/Identity/Pages/Account/Login.cshtml.cs" />
+      <File FileName="LMS/Views/Student/Index.cshtml" />
+      <File FileName="LMS/Views/Student/ClassListings.cshtml" />
+      <File FileName="LMS/Views/Student/Catalog.cshtml" />
+      <File FileName="LMS/Views/Student/Class.cshtml" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="LMS" expanded="True">
+            <Node name="LMS">
+              <Node name="Controllers" expanded="True">
+                <Node name="ProfessorController.cs" selected="True" />
+              </Node>
+              <Node name="Models" expanded="True">
+                <Node name="LMSModels" expanded="True" />
+              </Node>
+              <Node name="Views" expanded="True">
+                <Node name="Student" expanded="True" />
+              </Node>
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+      <Pad Id="MonoDevelop.Debugger.WatchPad">
+        <State />
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <Xamarin.Addins.Core.Project ActiveDebugTarget="MyAppleMacCatalystID" />
+</Properties>

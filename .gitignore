@@ -74,3 +74,7 @@ bin/
 build/
 /bin1/
 java/build/**
+
+
+#csvs
+*. csv 
