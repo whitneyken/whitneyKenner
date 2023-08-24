@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Hello Android Studio</string>
+    <string name="brandon">Brandon</string>
+    <string name="randi">Randi</string>
+    <string name="whitney">Whitney</string>
+    <string name="mack">Mack</string>
+    <string name="who_is_your_favorite_msd_student">Who is your favorite MSD student?</string>
+    <string name="felix">Felix</string>
+    <string name="You_have_selected">You have selected:</string>
+    <string name="back">Back</string>
+</resources>
