@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:context=".DrawFragment">
+
+    <com.example.lab_2.CustomView
+            android:id="@+id/customView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    <Button
+            android:id="@+id/backButton"
+            android:layout_width="match_parent"
+            android:layout_gravity="bottom"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#E91E63"
+            android:text="Back" />
+
+    <Button
+            android:text="Change Color"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#F44336"
+            android:id="@+id/changeColorButton" />
+
+</FrameLayout>
