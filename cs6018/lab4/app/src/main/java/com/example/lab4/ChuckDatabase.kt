@@ -12,6 +12,7 @@ import androidx.room.TypeConverters
 import kotlinx.coroutines.flow.Flow
 
 @Database(entities= [JokeData::class], version = 1, exportSchema = false)
+@TypeConverters(Converters::class)
 abstract class ChuckDatabase : RoomDatabase(){
     abstract fun chuckDao(): ChuckDAO
 
@@ -46,9 +47,11 @@ interface ChuckDAO {
     suspend fun addJokeData(data: JokeData)
 
 
-    @Query("SELECT * from jokes")
+    @Query("SELECT * from jokes ORDER BY timestamp DESC")
     fun allJokes() : Flow<List<JokeData>>
 
+    @Query("SELECT * from jokes ORDER BY timestamp DESC LIMIT 1")
+    fun currentJoke() : Flow<JokeData>
 
 
 }

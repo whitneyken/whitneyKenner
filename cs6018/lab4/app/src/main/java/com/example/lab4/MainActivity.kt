@@ -8,20 +8,24 @@ import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.Button
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.em
 import com.example.lab4.ui.theme.Lab4Theme
 import com.google.gson.Gson
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.io.InputStreamReader
@@ -32,68 +36,74 @@ import java.net.URL
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        val vm: ChuckView by viewModels { ChuckViewFactory((application as ChuckApplication).chuckRepository) }
 
 
         setContent {
             Lab4Theme {
                 // A surface container using the 'background' color from the theme
-                Surface{
+                Surface {
+                    val currentJoke by vm.currentJoke.observeAsState()
                     Column {
-                        val vm: ChuckView by viewModels{  ChuckViewFactory((application as ChuckApplication).chuckRepository)}
                         val scope = rememberCoroutineScope()
-                        var job: Job? by remember { mutableStateOf((null)) }
 
-                        //val job: State<Job?> = remember {Job()}
+                        DisplayJoke(currentJoke)
+                        Spacer(modifier = Modifier.padding(32.dp))
+
                         Row {
+
                             Button(onClick = {
-                                job = scope.launch {
+                                scope.launch {
                                     val response = getChuckJokeCoroutine()
 
-                                    vm.addJoke(response.joke)
+                                    vm.addJoke(response)
                                 }
                             }) {
                                 Text("Make Joke")
                             }
                         }
+                        Spacer(modifier = Modifier.padding(16.dp))
+                        Text(
+                            "Old jokes",
+                            fontSize = 12.em,
+                            lineHeight = 1.em
+                        )
+                        Spacer(modifier = Modifier.padding(16.dp))
 
-
-                        val allJokes = vm.allJokes.observeAsState()
+                        val allJokes by vm.allJokes.observeAsState()
                         LazyColumn {
-                            for (entry in (allJokes.value ?: listOf()).asReversed()) {
-                                Log.e("data!", "yeah")
-//                                item {
-//                                    //Log.e("joke!", entry.joke)
-////                                    Text(
-////                                        "Joke: ${entry.joke}"
-////                                    )
-//                                }
+                            for (joke in allJokes ?: listOf()){
+                            item {
+                                DisplayJoke(data = joke)
+                                }
                             }
-
                         }
                     }
                 }
             }
-
-
         }
     }
 }
 
-//class ChuckView : ViewModel() {
-//    private val _data = MutableLiveData<List<ChuckData>>(listOf())
-//    val data = _data as LiveData<List<ChuckData>>
-//    fun addData(newVal: ChuckData) {
-//        _data.value = _data.value?.plus(newVal)
-//        Log.e("UPDATE", "${data.value?.size}")
-//    }
-//}
 
-//data class ChuckData(var joke: String)
+data class ChuckData(var value: String)
 
+@Composable
+fun DisplayJoke(data: JokeData?) {
+    Surface(color = MaterialTheme.colorScheme.surface) {
+        if (data != null){
+            Text(
+                "Joke:  ${data.joke}"
+            )
+        }else
+            Text(text = "NO JOKES YET",
+            )
 
-suspend fun getChuckJokeCoroutine(): JokeData {
+    }
+}
+
+suspend fun getChuckJokeCoroutine(): ChuckData {
     return withContext(Dispatchers.IO) {
-        Log.e("data!", "inside chuck coroutine")
 
         val url: Uri = Uri.Builder().scheme("https")
             .authority("api.chucknorris.io")
@@ -105,7 +115,7 @@ suspend fun getChuckJokeCoroutine(): JokeData {
         val gson = Gson()
         val result = gson.fromJson(
             InputStreamReader(conn.inputStream, "UTF-8"),
-            JokeData::class.java
+            ChuckData::class.java
         )
         Log.e("data!", gson.toJson(result).toString())
         result

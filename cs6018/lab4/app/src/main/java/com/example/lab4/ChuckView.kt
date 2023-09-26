@@ -3,14 +3,19 @@ package com.example.lab4
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.launch
 
 
 class ChuckView (private val repository: ChuckRepository) : ViewModel() {
-    //val currentJoke: LiveData<JokeData> = repository.currentJoke
+    val currentJoke: LiveData<JokeData> = repository.currentJoke
     val allJokes: LiveData<List<JokeData>> = repository.allJokes
 
-    fun addJoke (joke: String){
-        repository.addJoke(joke)
+    fun addJoke (joke: ChuckData){
+        viewModelScope.launch {
+            repository.addJoke(joke.value)
+        }
+
     }
 }
 

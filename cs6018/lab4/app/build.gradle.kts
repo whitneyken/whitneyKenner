@@ -10,7 +10,7 @@ android {
 
     defaultConfig {
         applicationId = "com.example.lab4"
-        minSdk = 34
+        minSdk = 33
 
         versionCode = 1
         versionName = "1.0"
@@ -67,9 +67,7 @@ dependencies {
     implementation("androidx.compose.ui:ui:1.5.1")
     implementation("androidx.compose.ui:ui-graphics:1.5.1")
     implementation("androidx.compose.ui:ui-tooling-preview")
-    implementation("androidx.compose.material3:material3:1.1.2")
-    //implementation("androidx.databinding:adapters:3.2.0-alpha11")
-    implementation("androidx.databinding:databinding-adapters:8.1.1")
+    implementation("androidx.compose.material3:material3:1.1.1")
     ksp("androidx.room:room-compiler:2.5.2")
     implementation("androidx.room:room-common:2.5.2")
     implementation("androidx.room:room-ktx:2.5.2")
@@ -81,9 +79,6 @@ dependencies {
     androidTestImplementation("androidx.compose.ui:ui-test-junit4")
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest:1.5.1")
-
-
-
 }
 
 
