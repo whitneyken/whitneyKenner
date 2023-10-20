@@ -1,0 +1,33 @@
+POST http://127.0.0.1:8080/posts
+Content-Type: application/json
+
+{
+  "text" : "I am mad and this is my mad post"
+}
+
+###
+
+POST http://127.0.0.1:8080/posts
+Content-Type: application/json
+
+{
+  "text" : "A good day to post a post"
+}
+
+####
+
+GET  http://127.0.0.1:8080/posts
+
+####
+
+GET  http://127.0.0.1:8080/posts/2/id
+
+####
+
+GET  http://127.0.0.1:8080/posts/0/time
+
+####
+
+DELETE  http://127.0.0.1:8080/posts/1/delete
+
+####
